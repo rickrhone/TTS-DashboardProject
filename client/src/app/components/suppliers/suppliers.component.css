@@ -1,0 +1,14 @@
+h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#addBtnDiv {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.centerAlignText {
+  text-align: center;
+}

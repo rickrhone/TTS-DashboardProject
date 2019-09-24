@@ -1,0 +1,50 @@
+<!--Form that appears when the edit button or add Product button is clicked-->
+<div class="modal fade" id="addProductForm" tabindex="-1" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/products"><span aria-hidden="true">&times;</span></button>
+        <!-- display the word "Edit" in the title if the name of th car is clicked otherwise display the word "Add" -->
+        <h4 class="modal-title">{{product.productId ? 'Edit' : 'Add'}} Product</h4>
+      </div>
+      <div class="modal-body">
+        <form #productForm="ngForm" (ngSubmit)="save(productForm.value)">
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+<!--            <input type="hidden" name="href" [(ngModel)]="product.href">-->
+            <input type="text" class="form-control" id="productName" placeholder="Product Name" [(ngModel)]="product.productName" required name="name" #name >
+          </div>
+          <div class="form-group">
+            <label for="productCategory">Product Category</label>
+            <select class="form-control" id="productCategory" *ngFor="let category of categories">
+              <option [routerLink]="['/categories', category.category]">{{category.categoryName}}</option>
+<!--              <option>2</option>-->
+<!--              <option>3</option>-->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="productSupplier">Product Supplier</label>
+            <input type="text" class="form-control" id="productSupplier" placeholder="Supplier" [(ngModel)]="product.supplier.supplierName">
+          </div>
+          <div class="form-group">
+            <label for="productPrice">Full Price: </label>
+            <input type="number" id="productPrice">
+          </div>
+          <div class="form-group">
+            <label for="productSalePrice">Sale Price: </label>
+            <input type="number" id="productSalePrice">
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Available
+            </label>
+          </div>
+          <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" routerLink="/products">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

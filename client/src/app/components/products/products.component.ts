@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductsServiceService} from '../../services/products-service.service';
+import {ActivatedRoute, Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-products',
@@ -9,13 +11,27 @@ import {ProductsServiceService} from '../../services/products-service.service';
 export class ProductsComponent implements OnInit {
   products: Array<any>; // defines an array to store all products in
 
-  constructor(private productsService: ProductsServiceService) { }
+
+  // Constructor that takes in the route,  router and the product services
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private productsService: ProductsServiceService) { }
 
   ngOnInit() {
     // on init get all the products and store them in the products array
     this.productsService.getAll().subscribe(data => {
       this.products = data;
     });
+  }
+
+  gotoProducts() {
+    this.router.navigate(['/products']);
+  }
+
+  remove(href) {
+    this.productsService.remove(href).subscribe(result => {
+      this.gotoProducts();
+    }, error => console.error(error));
   }
 
 }

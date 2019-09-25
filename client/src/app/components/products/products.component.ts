@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductsServiceService} from '../../services/products-service.service';
+import {ProductsService} from '../../services/products.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 
@@ -15,7 +15,7 @@ export class ProductsComponent implements OnInit {
   // Constructor that takes in the route,  router and the product services
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private productsService: ProductsServiceService) { }
+              private productsService: ProductsService) { }
 
   ngOnInit() {
     // on init get all the products and store them in the products array

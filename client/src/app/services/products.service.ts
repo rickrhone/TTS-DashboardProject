@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsServiceService {
+export class ProductsService {
   public API = '//localhost:8080'; // saves the base URL to a variable
   public PRODUCTS_API = this.API + '/products'; // saves the endpoint for products to a variable
 

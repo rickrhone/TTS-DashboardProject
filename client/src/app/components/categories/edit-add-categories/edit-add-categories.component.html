@@ -1,0 +1,26 @@
+<!--Form that appears when the edit button or add Categories button is clicked-->
+<div class="modal fade" id="addCategoryForm" tabindex="-1" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/categories"><span aria-hidden="true">&times;</span></button>
+        <!-- display the word "Edit" in the title if the name of th car is clicked otherwise display the word "Add" -->
+        <h4 class="modal-title">{{category.categoryId ? 'Edit' : 'Add'}} Category</h4>
+      </div>
+      <div class="modal-body">
+        <form #categoryForm="ngForm" (ngSubmit)="save(categoryForm.value)">
+          <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <!--            <input type="hidden" name="href" [(ngModel)]="product.href">-->
+            <input type="text" class="form-control" id="categoryName" placeholder="Category Name" [(ngModel)]="category.categoryName" required >
+          </div>
+
+          <button type="submit" class="btn btn-success" [disabled]="!categoryForm.form.valid">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" routerLink="/categories">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

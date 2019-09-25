@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ProductsServiceService} from '../../services/products-service.service';
+import {ProductsService} from '../../../services/products.service';
 import {NgForm} from '@angular/forms';
-import {CategoriesService} from '../../services/categories.service';
-import {SuppliersService} from '../../services/suppliers.service';
+import {CategoriesService} from '../../../services/categories.service';
+import {SuppliersService} from '../../../services/suppliers.service';
 
 @Component({
   selector: 'app-edit-add-products',
@@ -22,7 +22,7 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
   // Constructor that takes in the route,  router and the product services
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private productsService: ProductsServiceService,
+              private productsService: ProductsService,
               private categoriesService: CategoriesService,
               private suppliersService: SuppliersService) { }
 

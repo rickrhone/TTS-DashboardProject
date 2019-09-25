@@ -20,6 +20,7 @@
 
       <h2 class="sub-header">Categories Table</h2>
 
+      <!-- Add Category Button -->
       <div id="addBtnDiv">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryForm" routerLink="/category-add">Add Category</button>
       </div>
@@ -49,9 +50,12 @@
             <td [routerLink]="['/categories', category.categoryName]">{{category.categoryName}}</td> <!-- load the category name in the category name column -->
             <td class="text-right" id="tableDataBtns">
               <div class="btn-group" role="group">
+                      <input type="hidden" name="href" [(ngModel)]="category.href">
+                <!-- Edit Button -->
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addCategoryForm" [routerLink]="['/category-edit', category.categoryId]"><i class="far fa-edit"></i></button>
-
-                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                <!-- Delete Button -->
+                <button type="button" class="btn btn-danger" (click)="remove(category.href)"
+                        *ngIf="category.href"><i class="far fa-trash-alt"></i></button>
               </div>
             </td>
           </tr>

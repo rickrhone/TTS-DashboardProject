@@ -1,5 +1,5 @@
 <!--Form that appears when the edit button or add Categories button is clicked-->
-<div class="modal fade" id="addCategoryForm" tabindex="-1" >
+<div class="modal fade" id="addCategoryForm" tabindex="-1" (click)="categoriesService.populateForm(category)">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,14 +8,21 @@
         <h4 class="modal-title">{{category.categoryId ? 'Edit' : 'Add'}} Category</h4>
       </div>
       <div class="modal-body">
-        <form #categoryForm="ngForm" (ngSubmit)="save(categoryForm.value)">
+        <form #categoryForm="ngForm" (submit)="onSubmit(categoryForm)" autocomplete="off">
           <div class="form-group">
+            <!-- Hidden input field for Category Id-->
+            <label for="categoryId">Category ID</label>
+            <input  class="form-control" id="categoryId" placeholder="Category Id"
+                    name="categoryId" #categoryId="ngModel" [(ngModel)]="categoriesService.formData.categoryId" >
+            <!-- Category Name Input Field-->
             <label for="categoryName">Category Name</label>
-            <!--            <input type="hidden" name="href" [(ngModel)]="product.href">-->
-            <input type="text" class="form-control" id="categoryName" placeholder="Category Name" [(ngModel)]="category.categoryName" required >
+            <input type="text" class="form-control" id="categoryName" placeholder="Category Name"
+                   name="categoryName" #categoryName="ngModel" [(ngModel)]="categoriesService.formData.categoryName"  required >
+            <!-- Validation Div -->
+            <div class="validation-error" *ngIf="categoryName.invalid && categoryName.touched"> This field is required. </div>
           </div>
-
-          <button type="submit" class="btn btn-success" [disabled]="!categoryForm.form.valid">Submit</button>
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-success" [disabled]="categoryForm.invalid" data-dismiss="modal" routerLink="/categories">Submit</button>
         </form>
       </div>
       <div class="modal-footer">

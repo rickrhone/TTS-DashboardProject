@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+/* Styling of a dirty form input fields*/
+input.ng-touched.ng-invalid {
+  border-color: #dc3545;
+}
+
+div.validation-error {
+  width: 100%;
+  margin-top: .25em;
+  font-size: 80%;
+  color: #dc3545;
+}

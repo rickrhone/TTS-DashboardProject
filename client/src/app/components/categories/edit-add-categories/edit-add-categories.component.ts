@@ -3,24 +3,32 @@ import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoriesService} from '../../../services/categories.service';
 import {NgForm} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Categories} from '../categories.model';
 
 @Component({
   selector: 'app-edit-add-categories',
   templateUrl: './edit-add-categories.component.html',
   styleUrls: ['./edit-add-categories.component.css']
 })
+
+// Component for inserting/creating and editing/updating categories
 export class EditAddCategoriesComponent implements OnInit, OnDestroy {
 
   category: any = {}; // declares and initializes an empty array of categories
   sub: Subscription;  // declares a variable name sub of type Subscription
 
 
-  // Constructor that takes in the route,  router and the catrgories services
+  // Constructor that takes in the route,  router, the categories services and the ToastrService for CRUD Ops success messages
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private categoriesService: CategoriesService) { }
+              private categoriesService: CategoriesService,
+              private toastr: ToastrService) {}
 
   ngOnInit() {
+
+    // Reset the form
+    this.resetForm();
 
     // on initialization check to see if category with IDs exists if so
     // call the get() category by id method in the service and for each category
@@ -35,12 +43,16 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
             this.category.href = category._links.self.href;
           } else {
             console.log(`Category with id '${id}' not found, returning to categories table`);
-            this.gotoCategories();
+            // this.gotoCategories();
+            this.resetForm();
           }
         });
       }
     });
   }
+
+  // ------------------- METHODS -------------------
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
@@ -49,10 +61,54 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/categories']);
   }
 
-  save(form: NgForm) {
-    this.categoriesService.save(form).subscribe(result => {
-      this.gotoCategories();
+
+  // ----------------------------------------NEW METHODS ------------------------------------------
+
+  // Method to reset the form
+  resetForm(form?: NgForm) { // form can be nullable
+    if (form != null) { form.resetForm(); } // if the form is not null then call the reset function
+    this.categoriesService.formData = {
+      categoryId : null,  // default id is null
+      categoryName : '' // default name is empty string
+    };
+  }
+
+  // What happens when form is submitted
+  onSubmit(form: NgForm) {
+    // if the id is null perform a post/create new category
+    if (form.value.categoryId == null) {
+      this.insertRecord(form);
+    } else {
+      // otherwise perform a put/update category
+      this.updateRecord(form);
+      this.categoriesService.refreshList();
+    }
+  }
+
+  // Method to insert a new category
+  insertRecord(form: NgForm) {
+    this.categoriesService.postCategory(form.value).subscribe(result => {
+      // this.newCategory = result; // stores what is returned from the post
+      this.toastr.success('Category inserted successfully', 'Category Table'); // display this message on success
+      // this.gotoCategories();
+      this.resetForm(form);
     }, error => console.error(error));
   }
+
+  // Method to update an existing category
+  updateRecord(form: NgForm) {
+    this.categoriesService.putCategory(form.value).subscribe(result => {
+      this.toastr.info('Category updated successfully', 'Category Table'); // display this message on success
+      // this.gotoCategories();
+      // this.resetForm(form);
+      // this.categoriesService.refreshList();
+    }, error => console.error(error));
+  }
+
+  // Method to populate form with pre-existing data when the edit button is clicked
+  // populateForm(category: Categories) {
+  //   //   this.categoriesService.formData = Object.assign({}, category);
+  //   // }
+
 
 }

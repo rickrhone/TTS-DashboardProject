@@ -1,29 +1,83 @@
 package com.tts.ttsdashboardproject.controllers;
 
-
 import com.tts.ttsdashboardproject.dao.entities.Categories;
-import com.tts.ttsdashboardproject.dao.repositories.CategoriesRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.tts.ttsdashboardproject.services.CategoriesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 @RestController // communicates that this is a REST controller
 public class CategoriesController {
-    private CategoriesRepository categoriesRepository; // declares the repo to be controlled
+    @Autowired
+    private final CategoriesService categoriesService;
 
-    public CategoriesController(CategoriesRepository categoriesRepository) {
-        this.categoriesRepository = categoriesRepository; // assigns that repo to an instance of categories repository
+    public CategoriesController(CategoriesService categoriesService) {
+        this.categoriesService = categoriesService;
     }
 
-    // Endpoint to Retrieve All Categories
+
+    // Endpoint to Get All Categories
     @GetMapping("/categories")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-    public Collection<Categories> listOfAllCategories() {
-        return categoriesRepository.findAll().stream().collect(Collectors.toList()); // displays JASON data for everything in the table at the /categories endpoint
+    public ResponseEntity<List<Categories>> findAll() {
+        return ResponseEntity.ok(categoriesService.findAll());
     }
 
+    // Endpoint to CREATE a new category
+    @PostMapping("/postcategory")
+    //TODO : change origin link after hosting front end on Github
+    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+    public ResponseEntity create( Categories category) {
+        return ResponseEntity.ok(categoriesService.save(category));
+    }
+//    public Categories create(@Valid @RequestBody Categories category) {
+//        return categoriesService.save(category);
+//    }
+
+    // Endpoint to GET a specific category by ID
+    @GetMapping("/categories/{id}")
+    //TODO : change origin link after hosting front end on Github
+    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+    public ResponseEntity<Categories> findById(@PathVariable Long id) {
+        Optional<Categories> category = categoriesService.findById(id);
+        if (!category.isPresent()) {
+            //            log.error("Id " + id + " does not exist");
+            System.out.println("Id " + id + " does not exist");
+            ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(category.get());
+    }
+
+    // Endpoint to UPDATE a category by ID
+    @PutMapping("/putcategories/{id}")
+    //TODO : change origin link after hosting front end on Github
+    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+    public ResponseEntity<Categories> update(@PathVariable Long id, @Valid @RequestBody Categories category) {
+        if (!categoriesService.findById(id).isPresent()) {
+//            log.error("Id " + id + " does not exist");
+            System.out.println("Id " + id + " does not exist");
+            ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(categoriesService.save(category));
+    }
+
+    // Endpoint to DELETE a category by ID
+    @DeleteMapping("/deletecategories/{id}")
+    //TODO : change origin link after hosting front end on Github
+    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+    public ResponseEntity delete(@PathVariable Long id) {
+        if (!categoriesService.findById(id).isPresent()) {
+//            log.error("Id " + id + " does not exist");
+            System.out.println("Id " + id + " does not exist");
+            ResponseEntity.badRequest().build();
+        }
+
+        categoriesService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

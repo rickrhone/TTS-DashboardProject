@@ -45,17 +45,18 @@
           </thead>
           <tbody>
           <!-- Table Rows -->
-          <tr *ngFor="let category of categories"> <!-- for each category in the catgeories table do the following -->
+          <tr *ngFor="let category of categoriesService.list"> <!-- for each category in the categories table do the following -->
             <td class="centerAlignText" [routerLink]="['/categories', category.categoryId]">{{category.categoryId}}</td> <!-- load the category id in the ID column -->
             <td [routerLink]="['/categories', category.categoryName]">{{category.categoryName}}</td> <!-- load the category name in the category name column -->
             <td class="text-right" id="tableDataBtns">
               <div class="btn-group" role="group">
-                      <input type="hidden" name="href" [(ngModel)]="category.href">
+<!--                      <input type="hidden" name="href" [(ngModel)]="category.href">-->
                 <!-- Edit Button -->
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addCategoryForm" [routerLink]="['/category-edit', category.categoryId]"><i class="far fa-edit"></i></button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addCategoryForm"
+                        [routerLink]="['/category-edit', category.categoryId]"
+                        (click)="categoriesService.populateForm(category)"><i class="far fa-edit"></i></button>
                 <!-- Delete Button -->
-                <button type="button" class="btn btn-danger" (click)="remove(category.href)"
-                        *ngIf="category.href"><i class="far fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-danger" (click)="onDelete(category.categoryId)"><i class="far fa-trash-alt"></i></button>
               </div>
             </td>
           </tr>

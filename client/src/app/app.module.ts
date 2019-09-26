@@ -13,6 +13,13 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { EditAddSuppliersComponent } from './components/suppliers/edit-add-suppliers/edit-add-suppliers.component';
 import { EditAddCategoriesComponent } from './components/categories/edit-add-categories/edit-add-categories.component';
+import {CategoriesService} from './services/categories.service';
+import {ProductsService} from './services/products.service';
+import {SuppliersService} from './services/suppliers.service';
+
+// To get CRUD operation alerts
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,9 +35,11 @@ import { EditAddCategoriesComponent } from './components/categories/edit-add-cat
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [CategoriesService, ProductsService, SuppliersService], // so multiple components can share the same service
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -32,12 +32,12 @@ public class CategoriesController {
     @PostMapping("/postcategory")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-//    public ResponseEntity create( Categories category) {
-//        return ResponseEntity.ok(categoriesService.save(category));
-//    }
-    public Categories create(Categories category) {
-        return categoriesService.save(category);
+    public ResponseEntity create( @Valid @RequestBody Categories category) {
+        return ResponseEntity.ok(categoriesService.save(category));
     }
+//    public Categories create(Categories category) {
+//        return categoriesService.save(category);
+//    }
 
     // Endpoint to GET a specific category by ID
     @GetMapping("/categories/{id}")

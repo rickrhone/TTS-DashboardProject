@@ -8,7 +8,7 @@
         <h4 class="modal-title">{{category.categoryId ? 'Edit' : 'Add'}} Category</h4>
       </div>
       <div class="modal-body">
-        <form #categoryForm="ngForm" (submit)="onSubmit(categoryForm)" autocomplete="off">
+        <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" autocomplete="off">
           <div class="form-group">
             <!-- Hidden input field for Category Id-->
             <label for="categoryId">Category ID</label>
@@ -22,7 +22,7 @@
             <div class="validation-error" *ngIf="categoryName.invalid && categoryName.touched"> This field is required. </div>
           </div>
           <!-- Submit Button -->
-          <button type="button" class="btn btn-success" [disabled]="categoryForm.invalid" data-dismiss="modal" routerLink="/categories" (click)="onSubmit(categoryForm)" >Submit</button>
+          <button type="submit" class="btn btn-success" [disabled]="categoryForm.invalid" data-dismiss="modal" routerLink="/categories" (click)="onSubmit(categoryForm)">Submit</button>
         </form>
       </div>
       <div class="modal-footer">

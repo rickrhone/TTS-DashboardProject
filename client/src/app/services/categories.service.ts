@@ -22,7 +22,7 @@ export class CategoriesService {
   public DELETE_CATEGORY = this.API + '/deletecategories/'; // API to delete a category
 
 
-  constructor(private http: HttpClient) { } // allows the app to take in a http address
+  constructor(private http: HttpClient) {} // allows the app to take in a http address
 
   // ------------------- METHODS -------------------
 
@@ -37,8 +37,9 @@ export class CategoriesService {
   }
 
   // Method to save to the database
-  postCategory(formData: Categories): Observable<any>  {
+  postCategory(formData: Categories) {
         console.log('I am in the postCategory Method');
+        console.log(formData);
         return this.http.post(this.CREATE_CATEGORY, formData);
   }
 
@@ -49,6 +50,7 @@ export class CategoriesService {
 
   // Method to update a category in the database
   putCategory(formData: Categories): Observable<any>  {
+    console.log(formData);
     return this.http.put(this.UPDATE_CATEGORY + formData.categoryId, formData);
   }
 

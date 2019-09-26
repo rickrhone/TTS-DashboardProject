@@ -27,6 +27,7 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    console.log('Edit-Add Categories Form is Open');
     // Reset the form
     this.resetForm();
 
@@ -40,7 +41,7 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
         this.categoriesService.get(id).subscribe((category: any) => {
           if (category) {
             this.category = category;
-            this.category.href = category._links.self.href;
+            // this.category.href = category._links.self.href;
           } else {
             console.log(`Category with id '${id}' not found, returning to categories table`);
             // this.gotoCategories();
@@ -75,10 +76,13 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
 
   // What happens when form is submitted
   onSubmit(form: NgForm) {
+    console.log('I am in the onSubmit Method');
     // if the id is null perform a post/create new category
     if (form.value.categoryId == null) {
+      console.log('I am in the onSubmit Method and I am inserting a new record');
       this.insertRecord(form);
     } else {
+      console.log('I am in the onSubmit Method and I am updating an existing record');
       // otherwise perform a put/update category
       this.updateRecord(form);
       this.categoriesService.refreshList();

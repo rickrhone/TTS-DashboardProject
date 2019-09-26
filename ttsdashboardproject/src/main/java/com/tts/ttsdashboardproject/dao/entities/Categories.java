@@ -11,8 +11,9 @@ public class Categories {
     // Column Declaration
         // Column 1
         @Id
-        @GeneratedValue(generator = "generator")
-        @GenericGenerator(name = "generator", strategy = "increment") // used to autoincrement from the last id number in the table
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+//        @GeneratedValue(generator = "generator")
+//        @GenericGenerator(name = "generator", strategy = "increment") // used to autoincrement from the last id number in the table
         @Column(name = "category_id")
         private long categoryId;
 

@@ -38,6 +38,7 @@ export class CategoriesService {
 
   // Method to save to the database
   postCategory(formData: Categories): Observable<any>  {
+        console.log('I am in the postCategory Method');
         return this.http.post(this.CREATE_CATEGORY, formData);
   }
 

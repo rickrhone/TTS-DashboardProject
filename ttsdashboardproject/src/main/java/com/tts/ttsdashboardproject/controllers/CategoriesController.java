@@ -3,6 +3,7 @@ package com.tts.ttsdashboardproject.controllers;
 import com.tts.ttsdashboardproject.dao.entities.Categories;
 import com.tts.ttsdashboardproject.services.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -27,6 +28,17 @@ public class CategoriesController {
     public ResponseEntity<List<Categories>> findAll() {
         return ResponseEntity.ok(categoriesService.findAll());
     }
+
+    // Pageable Categories
+//    @GetMapping("/categories")
+//    //TODO : change origin link after hosting front end on Github
+//    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+//    public Page<Categories> findAllpages( @RequestParam Optional<Integer> pageNum,
+//                                          @RequestParam Optional<Integer> numCatPerPage,
+//                                          @RequestParam Optional<String> sortBy) {
+//        return categoriesService.findAllPages(pageNum,numCatPerPage,sortBy);
+//    }
+
 
     // Endpoint to CREATE a new category
     @PostMapping("/postcategory")

@@ -11,8 +11,8 @@
         <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" autocomplete="off">
           <div class="form-group">
             <!-- Hidden input field for Category Id-->
-            <label for="categoryId">Category ID</label>
-            <input  class="form-control" id="categoryId" placeholder="Category Id"
+<!--            <label for="categoryId">Category ID</label>-->
+            <input type="hidden" class="form-control" id="categoryId" placeholder="Category Id"
                     name="categoryId" #categoryId="ngModel" [(ngModel)]="categoriesService.formData.categoryId" >
             <!-- Category Name Input Field-->
             <label for="categoryName">Category Name</label>

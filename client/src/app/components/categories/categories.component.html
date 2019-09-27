@@ -14,7 +14,7 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid centerAlignDiv">
   <div class="row">
     <div class="col-sm main">
 
@@ -25,22 +25,17 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryForm" routerLink="/category-add">Add Category</button>
       </div>
 
-      <!-- Alerts -->
-      <div class="alert-group">
-        <div class="alert alert-success " role="alert">...</div>
-        <div class="alert alert-info d-none" role="alert">...</div>
-        <div class="alert alert-warning d-none" role="alert">...</div>
-        <div class="alert alert-danger d-none" role="alert">...</div>
-      </div>
+
 
       <!-- Table -->
-      <div class="table-responsive">
+      <div class="table-responsive tableWidth">
         <table class="table table-bordered table-striped">
           <thead>
           <tr>
             <!-- Column Headings -->
             <th class="centerAlignText">#</th>
             <th>Category Name</th>
+
           </tr>
           </thead>
           <tbody>
@@ -50,7 +45,6 @@
             <td [routerLink]="['/categories', category.categoryName]">{{category.categoryName}}</td> <!-- load the category name in the category name column -->
             <td class="text-right" id="tableDataBtns">
               <div class="btn-group" role="group">
-<!--                      <input type="hidden" name="href" [(ngModel)]="category.href">-->
                 <!-- Edit Button -->
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addCategoryForm"
                         [routerLink]="['/category-edit', category.categoryId]"

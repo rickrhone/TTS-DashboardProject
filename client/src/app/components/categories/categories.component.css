@@ -1,14 +1,30 @@
+
 h2 {
+  font-weight: 500;
   text-align: center;
   margin-top: 20px;
+  text-transform: uppercase;
+  font-family: Recoleta, Georgia, "Times New Roman", Times, serif;
 }
 
 #addBtnDiv {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-family: Recoleta, Georgia, "Times New Roman", Times, serif;
 }
 
 .centerAlignText {
   text-align: center;
+}
+
+.tableWidth {
+
+  width: 400px;
+}
+
+.centerAlignDiv {
+  display: flex;
+  justify-content: center;
 }

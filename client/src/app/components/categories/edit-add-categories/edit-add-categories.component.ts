@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CategoriesService} from '../../../services/categories.service';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {Categories} from '../categories.model';
 
 @Component({
   selector: 'app-edit-add-categories',
@@ -15,7 +14,6 @@ import {Categories} from '../categories.model';
 // Component for inserting/creating and editing/updating categories
 export class EditAddCategoriesComponent implements OnInit, OnDestroy {
 
-  formData: Categories;
   category: any = {}; // declares and initializes an empty array of categories
   sub: Subscription;  // declares a variable name sub of type Subscription
 
@@ -32,6 +30,7 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
     // Reset the form
     this.resetForm();
 
+    // Method to store data for auto populating form
     // on initialization check to see if category with IDs exists if so
     // call the get() category by id method in the service and for each category
     // store that category in the category array along with it's href (URI containing id)
@@ -42,10 +41,8 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
         this.categoriesService.get(id).subscribe((category: any) => {
           if (category) {
             this.category = category;
-            this.category.href = category._links.self.href;
           } else {
             console.log(`Category with id '${id}' not found, returning to categories table`);
-            // this.gotoCategories();
             this.resetForm();
           }
         });
@@ -53,18 +50,11 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
     });
   }
 
-  // ------------------- METHODS -------------------
+  // ---------------------------------------- METHODS ------------------------------------------
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
-  gotoCategories() {
-    this.router.navigate(['/categories']);
-  }
-
-
-  // ----------------------------------------NEW METHODS ------------------------------------------
 
   // Method to reset the form
   resetForm(form?: NgForm) { // form can be nullable
@@ -82,11 +72,12 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
     if (form.value.categoryId == null) {
       console.log('I am in the onSubmit Method and I am inserting a new record');
       this.insertRecord(form);
+      this.categoriesService.refreshList(); // Refresh the categories table
     } else {
       console.log('I am in the onSubmit Method and I am updating an existing record');
       // otherwise perform a put/update category
       this.updateRecord(form);
-      this.categoriesService.refreshList();
+      this.categoriesService.refreshList(); // Refresh the categories table
     }
   }
 
@@ -94,10 +85,9 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
   insertRecord(form: NgForm) {
     console.log('I am in the insertRecord method');
     this.categoriesService.postCategory(form.value).subscribe(result => {
-      // this.newCategory = result; // stores what is returned from the post
       this.toastr.success('Category inserted successfully', 'Category Table'); // display this message on success
-      // this.gotoCategories();
-      // this.resetForm(form);
+      this.resetForm(form);
+      this.categoriesService.refreshList(); // Refresh the categories table
     }, error => console.error(error));
   }
 
@@ -106,16 +96,9 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
     console.log('I am in the updateRecord method');
     this.categoriesService.putCategory(form.value).subscribe(result => {
       this.toastr.info('Category updated successfully', 'Category Table'); // display this message on success
-      // this.gotoCategories();
       this.resetForm(form);
-      this.categoriesService.refreshList();
+      this.categoriesService.refreshList(); // Refresh the categories table
     }, error => console.error(error));
   }
-
-  // Method to populate form with pre-existing data when the edit button is clicked
-  // populateForm(category: Categories) {
-  //   //   this.categoriesService.formData = Object.assign({}, category);
-  //   // }
-
 
 }

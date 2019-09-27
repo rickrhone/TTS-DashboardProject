@@ -21,22 +21,13 @@ export class CategoriesComponent implements OnInit {
               private categoriesService: CategoriesService,
               private toastr: ToastrService) { }
 
-  ngOnInit() {
-    // on init get all the categories and store them in the categories array
-    // this.categoriesService.getAll().subscribe(data => {
-    //   this.categories = data;
-    // });
 
-    // ----- new method -------
+  // ---------------------------------------- METHODS ------------------------------------------
+
+  ngOnInit() {
+    //  Get all categories and store them in a list
     this.categoriesService.refreshList();
   }
-
-  // ------------------- METHODS -------------------
-
-  // gotoCategories() {
-  //   this.router.navigate(['/categories']);
-  // }
-
 
   // Method to delete a category
   onDelete(id: number) {
@@ -47,6 +38,5 @@ export class CategoriesComponent implements OnInit {
       });
     }
   }
-
 
 }

@@ -24,7 +24,7 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) {} // allows the app to take in a http address
 
-  // ------------------- METHODS -------------------
+  // ---------------------------------------- METHODS ------------------------------------------
 
   // Method to get all the categories made available by the API
   getAll(): Observable<any> {

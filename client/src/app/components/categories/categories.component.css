@@ -15,16 +15,28 @@ h2 {
   font-family: Recoleta, Georgia, "Times New Roman", Times, serif;
 }
 
+#totalCats {
+  font-size: 12px;
+  color: darkcyan;
+  text-align: center;
+
+}
+
 .centerAlignText {
   text-align: center;
 }
 
 .tableWidth {
-
   width: 400px;
 }
 
 .centerAlignDiv {
   display: flex;
   justify-content: center;
+}
+
+#paginationNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

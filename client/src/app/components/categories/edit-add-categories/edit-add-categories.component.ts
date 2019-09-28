@@ -73,6 +73,7 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
       console.log('I am in the onSubmit Method and I am inserting a new record');
       this.insertRecord(form);
       this.categoriesService.refreshList(); // Refresh the categories table
+      this.categoriesService.getTotalNumCategories(); // updated category count data/etc.
     } else {
       console.log('I am in the onSubmit Method and I am updating an existing record');
       // otherwise perform a put/update category

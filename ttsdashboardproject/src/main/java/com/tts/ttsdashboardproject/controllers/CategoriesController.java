@@ -30,14 +30,14 @@ public class CategoriesController {
     }
 
     // Pageable Categories
-//    @GetMapping("/categories")
-//    //TODO : change origin link after hosting front end on Github
-//    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-//    public Page<Categories> findAllpages( @RequestParam Optional<Integer> pageNum,
-//                                          @RequestParam Optional<Integer> numCatPerPage,
-//                                          @RequestParam Optional<String> sortBy) {
-//        return categoriesService.findAllPages(pageNum,numCatPerPage,sortBy);
-//    }
+    @GetMapping("/categoriesByPage")
+    //TODO : change origin link after hosting front end on Github
+    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+    public Page<Categories> findAllpages( @RequestParam Optional<Integer> pageNum,
+                                          @RequestParam Optional<Integer> numCatPerPage,
+                                          @RequestParam Optional<String> sortBy) {
+        return categoriesService.findAllPages(pageNum,numCatPerPage,sortBy);
+    }
 
 
     // Endpoint to CREATE a new category

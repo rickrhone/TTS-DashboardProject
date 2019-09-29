@@ -42,7 +42,6 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
         this.categoriesService.get(id).subscribe((category: any) => {
           if (category) {
             this.category = category;
-            this.category.href = category._links.self.href;
           } else {
             console.log(`Category with id '${id}' not found, returning to categories table`);
             this.resetForm();

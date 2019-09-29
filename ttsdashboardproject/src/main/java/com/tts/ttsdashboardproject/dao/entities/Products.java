@@ -1,7 +1,5 @@
 package com.tts.ttsdashboardproject.dao.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +9,7 @@ public class Products {
     // Column Declaration
         // Column 1
         @Id
-        @GeneratedValue(generator = "generator")
-        @GenericGenerator(name = "generator", strategy = "increment") // used to autoincrement from the last id number in the table
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "product_id")
         private long productId;
 

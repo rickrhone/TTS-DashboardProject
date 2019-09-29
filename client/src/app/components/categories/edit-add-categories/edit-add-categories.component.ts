@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CategoriesService} from '../../../services/categories.service';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
+import {Categories} from '../categories.model';
 
 @Component({
   selector: 'app-edit-add-categories',
@@ -41,6 +42,7 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
         this.categoriesService.get(id).subscribe((category: any) => {
           if (category) {
             this.category = category;
+            this.category.href = category._links.self.href;
           } else {
             console.log(`Category with id '${id}' not found, returning to categories table`);
             this.resetForm();
@@ -67,10 +69,8 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
 
   // What happens when form is submitted
   onSubmit(form: NgForm) {
-    console.log('I am in the onSubmit Method');
     // if the id is null perform a post/create new category
     if (form.value.categoryId == null) {
-      console.log('I am in the onSubmit Method and I am inserting a new record');
       this.insertRecord(form);
       this.categoriesService.refreshList(); // Refresh the categories table
       this.categoriesService.getTotalNumCategories(); // updated category count data/etc.
@@ -84,7 +84,6 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
 
   // Method to insert a new category
   insertRecord(form: NgForm) {
-    console.log('I am in the insertRecord method');
     this.categoriesService.postCategory(form.value).subscribe(result => {
       this.toastr.success('Category inserted successfully', 'Category Table'); // display this message on success
       this.resetForm(form);

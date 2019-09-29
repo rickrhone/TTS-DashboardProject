@@ -17,10 +17,6 @@ export class CategoriesComponent implements OnInit {
 
   // Attributes for Pagination
   pageNumToNavigateTo: number;
-  numCatPerPageToSet: number;
-  sortByWhatColumn: string;
-
-
 
   // Constructor that takes in the route,  router, the categories services and the ToastrService for CRUD Ops success messages
   constructor(private route: ActivatedRoute,
@@ -55,6 +51,7 @@ export class CategoriesComponent implements OnInit {
     if (confirm('Are you sure you want to delete this category')) {
       this.categoriesService.deleteCategory(id).subscribe(result => {
         this.categoriesService.refreshList();
+        this.categoriesService.getTotalNumCategories(); // updated category count data/etc.
         this.toastr.warning('Category deleted successfully', 'Category Table'); // display this message on success
       });
     }

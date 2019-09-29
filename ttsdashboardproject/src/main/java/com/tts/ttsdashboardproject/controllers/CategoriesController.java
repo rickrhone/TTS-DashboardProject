@@ -39,6 +39,19 @@ public class CategoriesController {
         return categoriesService.findAllPages(pageNum,numCatPerPage,sortBy);
     }
 
+    // Endpoint to GET a specific category by ID
+    @GetMapping("/categoriesByPage/{id}")
+    //TODO : change origin link after hosting front end on Github
+    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+    public ResponseEntity<Categories> findAllpages( @PathVariable Long id) {
+        Optional<Categories> category = categoriesService.findById(id);
+        if (!category.isPresent()) {
+            System.out.println("Id " + id + " does not exist");
+            ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(category.get());
+    }
+
 
     // Endpoint to CREATE a new category
     @PostMapping("/postcategory")
@@ -47,23 +60,19 @@ public class CategoriesController {
     public ResponseEntity create( @Valid @RequestBody Categories category) {
         return ResponseEntity.ok(categoriesService.save(category));
     }
-//    public Categories create(Categories category) {
-//        return categoriesService.save(category);
-//    }
 
     // Endpoint to GET a specific category by ID
-    @GetMapping("/categories/{id}")
-    //TODO : change origin link after hosting front end on Github
-    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-    public ResponseEntity<Categories> findById(@PathVariable Long id) {
-        Optional<Categories> category = categoriesService.findById(id);
-        if (!category.isPresent()) {
-            //            log.error("Id " + id + " does not exist");
-            System.out.println("Id " + id + " does not exist");
-            ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(category.get());
-    }
+//    @GetMapping("/categories/{id}")
+//    //TODO : change origin link after hosting front end on Github
+//    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+//    public ResponseEntity<Categories> findById(@PathVariable Long id) {
+//        Optional<Categories> category = categoriesService.findById(id);
+//        if (!category.isPresent()) {
+//            System.out.println("Id " + id + " does not exist");
+//            ResponseEntity.badRequest().build();
+//        }
+//        return ResponseEntity.ok(category.get());
+//    }
 
     // Endpoint to UPDATE a category by ID
     @PutMapping("/putcategories/{id}")
@@ -71,7 +80,6 @@ public class CategoriesController {
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
     public ResponseEntity<Categories> update(@PathVariable Long id, @Valid @RequestBody Categories category) {
         if (!categoriesService.findById(id).isPresent()) {
-//            log.error("Id " + id + " does not exist");
             System.out.println("Id " + id + " does not exist");
             ResponseEntity.badRequest().build();
         }
@@ -84,11 +92,9 @@ public class CategoriesController {
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
     public ResponseEntity delete(@PathVariable Long id) {
         if (!categoriesService.findById(id).isPresent()) {
-//            log.error("Id " + id + " does not exist");
             System.out.println("Id " + id + " does not exist");
             ResponseEntity.badRequest().build();
         }
-
         categoriesService.deleteById(id);
         return ResponseEntity.ok().build();
     }

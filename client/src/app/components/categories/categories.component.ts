@@ -16,8 +16,8 @@ export class CategoriesComponent implements OnInit {
   categories: Array<any>; // defines an array to store all categories
 
   // Attributes for Pagination
-  pageNumToNavigateTo: string;
-  numCatPerPageToSet: string;
+  pageNumToNavigateTo: number;
+  numCatPerPageToSet: number;
   sortByWhatColumn: string;
 
 
@@ -45,6 +45,9 @@ export class CategoriesComponent implements OnInit {
 
     // Method to get the current Page number
     this.categoriesService.getCurrentPage();
+
+    // Method to get the Current number of elements to display per page
+    this.categoriesService.getCurrentNumOfElementsPerPage();
   }
 
   // Method to delete a category
@@ -61,40 +64,74 @@ export class CategoriesComponent implements OnInit {
 
   // On the click of the NEXT PAGE Button
   nextPage() {
-    // if the max page has not been reached increment the current Page by 1 and assign it to the pageNumToNavigateTo
+    // if the max page has not been reached
     if (this.categoriesService.currentPageNum < this.categoriesService.totalNumOfPages) {
-      this.pageNumToNavigateTo = (this.categoriesService.currentPageNum + 1).toString();
-      this.numCatPerPageToSet = '10'; // default value
-      this.sortByWhatColumn = 'categoryId';
-      // attribute to store the Parameters(page#, size, sort by) of the get method
-      const params = new HttpParams()
-        .set('pageNum', this.pageNumToNavigateTo)
-        .set('numCatPerPage', this.numCatPerPageToSet)
-        .set('sortBy', this.sortByWhatColumn);
 
-      console.log(this.pageNumToNavigateTo);
-      console.log('I am inside the nextPage() method right before the refreshList(withParam) executes');
-      console.log(params.toString());
+      // Increment the current Page by 1 and assign it to the pageNumToNavigateTo
+      this.pageNumToNavigateTo = (this.categoriesService.currentPageNum + 1);
+
+      // Set the page number parameter to the next page
+      const params = new HttpParams().set('pageNum', this.pageNumToNavigateTo.toString());
+
+      // Get the content from the the next page
       this.categoriesService.refreshList(params);
-      console.log('refreshList(withParam) has executed');
-      console.log(params.toString());
-      console.log(this.pageNumToNavigateTo);
+
+      // get the Total Number of Pages
+      this.categoriesService.getTotalNumPages(params);
+
+      // increment the page number
+      this.categoriesService.currentPageNum = this.categoriesService.currentPageNum + 1;
+
+      // get the current Page number
+      this.categoriesService.getCurrentPage(params);
     }
   }
 
   // On the click of the PREVIOUS Button
   previousPage() {
-    // if current page is not 0 decrement the current Page by 1 and assign it to the page to be called
     if (this.categoriesService.currentPageNum > 0) {
-      this.pageNumToNavigateTo = (this.categoriesService.currentPageNum - 1).toString();
-      console.log('I am inside the previousPage() method right before the refreshList(withParam) executes');
+      // Increment the current Page by 1 and assign it to the pageNumToNavigateTo
+      this.pageNumToNavigateTo = (this.categoriesService.currentPageNum - 1);
 
-      // this.categoriesService.refreshList(params);
-      console.log('refreshList(withParam) has executed');
+      // Set the page number parameter to the next page
+      const params = new HttpParams().set('pageNum', this.pageNumToNavigateTo.toString());
 
+      // Get the content from the the next page
+      this.categoriesService.refreshList(params);
+
+      // get the Total Number of Pages
+      this.categoriesService.getTotalNumPages(params);
+
+      // increment the page number
+      this.categoriesService.currentPageNum = this.categoriesService.currentPageNum + 1;
+
+      // get the current Page number
+      this.categoriesService.getCurrentPage(params);
     }
   }
 
+  sortByCategoryName() {
+    // store the current page so it can be displayed after sorting
+    const currentPage = this.categoriesService.currentPageNum;
 
+    // Set the sortBy parameter to the categoryName and the keep the page as is
+    const params = new HttpParams().set('sortBy', 'categoryName')
+      .set('pageNum', currentPage.toString());
+
+    // Get the content sorted by category name
+    this.categoriesService.refreshList(params);
+  }
+
+  sortByCategoryId() {
+    // store the current page so it can be displayed after sorting
+    const currentPage = this.categoriesService.currentPageNum;
+
+    // Set the sortBy parameter to the categoryId and the keep the page as i
+    const params = new HttpParams().set('sortBy', 'categoryId')
+      .set('pageNum', currentPage.toString());
+
+    // Get the content sorted by category Id
+    this.categoriesService.refreshList(params);
+  }
 
 }

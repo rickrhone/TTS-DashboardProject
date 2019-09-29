@@ -27,7 +27,7 @@ h2 {
 }
 
 .tableWidth {
-  width: 400px;
+  width: 450px;
 }
 
 .centerAlignDiv {
@@ -39,4 +39,9 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.sortIcon {
+  margin-left: 10px;
+  cursor: pointer;
 }

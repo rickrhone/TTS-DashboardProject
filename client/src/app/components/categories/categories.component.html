@@ -31,8 +31,8 @@
           <thead>
           <tr>
             <!-- Column Headings -->
-            <th class="centerAlignText">#</th>
-            <th>Category Name</th>
+            <th class="centerAlignText"># <i class="fas fa-sort sortIcon" (click)="sortByCategoryId()"></i></th>
+            <th>Category Name <i class="fas fa-sort sortIcon" (click)="sortByCategoryName()"></i></th>
             <!-- Category Count -->
             <th id="totalCats"> Total # of Categories: {{categoriesService.numOfCategories}} </th>
 
@@ -42,8 +42,8 @@
           <tbody>
           <!-- Table Rows -->
           <tr *ngFor="let category of categoriesService.list"> <!-- for each category in the categories table do the following -->
-            <td class="centerAlignText" [routerLink]="['/categories', category.categoryId]">{{category.categoryId}}</td> <!-- load the category id in the ID column -->
-            <td [routerLink]="['/categories', category.categoryName]">{{category.categoryName}}</td> <!-- load the category name in the category name column -->
+            <td class="centerAlignText">{{category.categoryId}}</td> <!-- load the category id in the ID column -->
+            <td>{{category.categoryName}}</td> <!-- load the category name in the category name column -->
             <td class="text-right" id="tableDataBtns">
               <div class="btn-group" role="group">
                 <!-- Edit Button -->
@@ -63,8 +63,8 @@
         <ul class="pagination">
 <!--          Need a on click function that moves to the next page or the previous page-->
 <!--          Todo: figure out how to disable buttons at page 0 or max page -->
-          <li class="page-item"><button class="page-link" type="button" (click)="previousPage()"><i class="fas fa-angle-double-left"></i> Previous </button></li>
-          <li class="page-item"><button class="page-link" type="button" (click)="nextPage()">Next <i class="fas fa-angle-double-right"></i></button></li>
+          <li class="page-item"><button class="page-link" type="button" [disabled]="categoriesService.currentPageNum === 0"(click)="previousPage()"><i class="fas fa-angle-double-left"></i> Previous </button></li>
+          <li class="page-item"><button class="page-link" type="button" [disabled]="categoriesService.currentPageNum + 1 === categoriesService.totalNumOfPages" (click)="nextPage()">Next <i class="fas fa-angle-double-right"></i></button></li>
         </ul>
         <div>
           <p>  page {{categoriesService.currentPageNum + 1}} of {{categoriesService.totalNumOfPages}} </p>

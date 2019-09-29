@@ -17,6 +17,7 @@ export class CategoriesService {
   numOfCategories: number; // variable to store the number of categories in the database
   totalNumOfPages: number; // variable to store the number of pages the data from the database is split among
   currentPageNum: number; // variable to store the current page number
+  currentNumOfElements: number; // variable to store the current number of elements to display per page.
 
 
   public API = '//localhost:8080'; // saves the base URL to a variable
@@ -62,26 +63,32 @@ export class CategoriesService {
   }
 
   // Method to get the Total Number of categories
-  getTotalNumCategories() {
-    this.http.get<any>(this.GET_CATEGORIES).subscribe(result => {
+  getTotalNumCategories(params?: HttpParams) {
+    this.http.get<any>(this.GET_CATEGORIES, {params}).subscribe(result => {
       return this.numOfCategories = result.totalElements;
     });
   }
 
   // Method to get the Total Number of Pages the data is split among
-  getTotalNumPages() {
-    this.http.get<any>(this.GET_CATEGORIES).subscribe(result => {
+  getTotalNumPages(params?: HttpParams) {
+    this.http.get<any>(this.GET_CATEGORIES, {params}).subscribe(result => {
       return this.totalNumOfPages = result.totalPages;
     });
   }
 
   // Method to get the Current Page Number
-  getCurrentPage() {
-    this.http.get<any>(this.GET_CATEGORIES).subscribe(result => {
+  getCurrentPage(params?: HttpParams) {
+    this.http.get<any>(this.GET_CATEGORIES, {params}).subscribe(result => {
       return this.currentPageNum = result.number;
     });
   }
 
+  // Method to get the Current number of elements to display per page
+  getCurrentNumOfElementsPerPage(params?: HttpParams) {
+    this.http.get<any>(this.GET_CATEGORIES, {params}).subscribe(result => {
+      return this.currentNumOfElements = result.size;
+    });
+  }
 
 
   // ************* END OF GET METHODS ****************

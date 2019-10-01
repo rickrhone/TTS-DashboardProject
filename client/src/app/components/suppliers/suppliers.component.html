@@ -14,44 +14,44 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid centerAlignDiv">
   <div class="row">
     <div class="col-sm main">
 
       <h2 class="sub-header">Suppliers Table</h2>
 
+      <!-- Add Supplier Button -->
       <div id="addBtnDiv">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSupplierForm" routerLink="/supplier-add">Add Supplier</button>
       </div>
 
-      <!-- Alerts -->
-      <div class="alert-group">
-        <div class="alert alert-success " role="alert">...</div>
-        <div class="alert alert-info d-none" role="alert">...</div>
-        <div class="alert alert-warning d-none" role="alert">...</div>
-        <div class="alert alert-danger d-none" role="alert">...</div>
-      </div>
-
       <!-- Table -->
-      <div class="table-responsive">
+      <div class="table-responsive tableWidth">
         <table class="table table-bordered table-striped">
           <thead>
           <tr>
             <!-- Column Headings -->
-            <th class="centerAlignText">#</th>
-            <th>Supplier Name</th>
+            <th class="centerAlignText"># <i class="fas fa-sort sortIcon" (click)="sortBySupplierId()"></i></th>
+            <th>Supplier Name <i class="fas fa-sort sortIcon" (click)="sortBySupplierName()"></i></th>
+            <!-- Supplier Count -->
+            <th id="totalSups"> Total # of Suppliers: {{suppliersService.numOfSuppliers}} </th>
+
+
           </tr>
           </thead>
           <tbody>
           <!-- Table Rows -->
-          <tr *ngFor="let supplier of suppliers"> <!-- for each supplierin the suppliers table do the following -->
-            <td class="centerAlignText" [routerLink]="['/suppliers', supplier.supplierId]">{{supplier.supplierId}}</td> <!-- load the supplier id in the ID column -->
-            <td [routerLink]="['/suppliers', supplier.supplierName]">{{supplier.supplierName}}</td> <!-- load the supplier name in the supplier name column -->
+          <tr *ngFor="let supplier of suppliersService.list"> <!-- for each supplier in the suppliers table do the following -->
+            <td class="centerAlignText">{{supplier.supplierId}}</td> <!-- load the supplier id in the ID column -->
+            <td>{{supplier.supplierName}}</td> <!-- load the supplier name in the supplier name column -->
             <td class="text-right" id="tableDataBtns">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addCategoryForm" [routerLink]="['/supplier-edit', supplier.supplierId]"><i class="far fa-edit"></i></button>
-
-                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                <!-- Edit Button -->
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addSupplierForm"
+                        [routerLink]="['/supplier-edit', supplier.supplierId]"
+                        (click)="suppliersService.populateForm(supplier)"><i class="far fa-edit"></i></button>
+                <!-- Delete Button -->
+                <button type="button" class="btn btn-danger" (click)="onDelete(supplier.supplierId)"><i class="far fa-trash-alt"></i></button>
               </div>
             </td>
           </tr>
@@ -59,16 +59,17 @@
           </tbody>
         </table>
       </div>
-      <nav aria-label="Table Navigation">
+      <nav aria-label="Table Navigation" id="paginationNav">
         <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          <li class="page-item"><button class="page-link" type="button" [disabled]="suppliersService.currentPageNum === 0"(click)="previousPage()"><i class="fas fa-angle-double-left"></i> Previous </button></li>
+          <li class="page-item"><button class="page-link" type="button" [disabled]="suppliersService.currentPageNum + 1 === suppliersService.totalNumOfPages" (click)="nextPage()">Next <i class="fas fa-angle-double-right"></i></button></li>
         </ul>
+        <div>
+          <p>  page {{suppliersService.currentPageNum + 1}} of {{suppliersService.totalNumOfPages}} </p>
+        </div>
       </nav>
     </div>
   </div>
 
 </div>
+

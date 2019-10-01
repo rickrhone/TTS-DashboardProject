@@ -1,1 +1,32 @@
-<p>edit-add-suppliers works!</p>
+<!--Form that appears when the edit button or add Suppliers button is clicked-->
+<div class="modal fade" id="addSupplierForm" tabindex="-1" (click)="suppliersService.populateForm(supplier)">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/suppliers"><span aria-hidden="true">&times;</span></button>
+        <!-- display the word "Edit" in the title if the when the edit button is clicked -->
+        <h4 class="modal-title">{{supplier.supplierId ? 'Edit' : 'Add'}} Supplier</h4>
+      </div>
+      <div class="modal-body">
+        <form #supplierForm="ngForm" (ngSubmit)="onSubmit(supplierForm)" autocomplete="off">
+          <div class="form-group">
+            <!-- Hidden input field for Supplier Id-->
+            <input type="hidden" class="form-control" id="supplierId" placeholder="Supplier Id"
+                   name="supplierId" #supplierId="ngModel" [(ngModel)]="suppliersService.formData.supplierId" >
+            <!-- Supplier Name Input Field-->
+            <label for="supplierName">Supplier Name</label>
+            <input type="text" class="form-control" id="supplierName" placeholder="Supplier Name"
+                   name="supplierName" #supplierName="ngModel" [(ngModel)]="suppliersService.formData.supplierName"  required >
+            <!-- Validation Div -->
+            <div class="validation-error" *ngIf="supplierName.invalid && supplierName.touched"> This field is required. </div>
+          </div>
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-success" [disabled]="supplierForm.invalid" data-dismiss="modal" routerLink="/suppliers" (click)="onSubmit(supplierForm)">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" routerLink="/suppliers">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -4,14 +4,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/categories"><span aria-hidden="true">&times;</span></button>
-        <!-- display the word "Edit" in the title if the name of th car is clicked otherwise display the word "Add" -->
+        <!-- display the word "Edit" in the title if the when the edit button is clicked -->
         <h4 class="modal-title">{{category.categoryId ? 'Edit' : 'Add'}} Category</h4>
       </div>
       <div class="modal-body">
         <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" autocomplete="off">
           <div class="form-group">
             <!-- Hidden input field for Category Id-->
-<!--            <label for="categoryId">Category ID</label>-->
             <input type="hidden" class="form-control" id="categoryId" placeholder="Category Id"
                     name="categoryId" #categoryId="ngModel" [(ngModel)]="categoriesService.formData.categoryId" >
             <!-- Category Name Input Field-->

@@ -4,9 +4,9 @@ import com.tts.ttsdashboardproject.dao.entities.Suppliers;
 import com.tts.ttsdashboardproject.dao.repositories.SuppliersRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,13 +25,15 @@ public class SuppliersService {
     }
 
     // Find All method - returns a list of everything --PAGINATION
-    public Page<Suppliers> findAllPages(@RequestParam Optional<Integer> pageNum,
-                                         @RequestParam Optional<Integer> numSupPerPage,
-                                         @RequestParam Optional<String> sortBy) {
-        return suppliersRepository.findAll(PageRequest.of(pageNum.orElse(0),
-                numSupPerPage.orElse(20),
-                Sort.by(sortBy.orElse("supplierId")).ascending()));
+    public Page<Suppliers> findAllPages(int pageNum,
+                                         int numSupPerPage,
+                                         String direction,
+                                         String sortBy) {
+        Pageable page = PageRequest.of(pageNum,
+                numSupPerPage, Sort.Direction.fromString(direction), sortBy);
+        return suppliersRepository.findAll(page);
     }
+
 
     // Find by ID method
     public Optional<Suppliers> findById(Long id) {

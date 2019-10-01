@@ -14,54 +14,56 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid centerAlignDiv">
   <div class="row">
     <div class="col-sm main">
 
       <h2 class="sub-header">Products Table</h2>
 
+      <!-- Add Product Button -->
       <div id="addBtnDiv">
-         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductForm" routerLink="/product-add">Add Product</button>
-      </div>
-
-      <!-- Alerts -->
-      <div class="alert-group">
-        <div class="alert alert-success " role="alert">...</div>
-        <div class="alert alert-info d-none" role="alert">...</div>
-        <div class="alert alert-warning d-none" role="alert">...</div>
-        <div class="alert alert-danger d-none" role="alert">...</div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductForm" routerLink="/product-add">Add Product</button>
       </div>
 
       <!-- Table -->
-      <div class="table-responsive">
+      <div class="table-responsive tableWidth">
         <table class="table table-bordered table-striped">
           <thead>
           <tr>
             <!-- Column Headings -->
-            <th class="centerAlignText">#</th>
-            <th>Product Name</th>
-            <th class="centerAlignText">Category</th>
-            <th class="centerAlignText">Full Price</th>
-            <th class="centerAlignText">Sale Price</th>
-            <th class="centerAlignText">Available</th>
-            <th>Supplier</th>
+            <th class="centerAlignText"># <i class="fas fa-sort sortIcon" (click)="sortByProductId()"></i></th>
+            <th>Product Name <i class="fas fa-sort sortIcon" (click)="sortByProductName()"></i></th>
+            <th>Full Price <i class="fas fa-sort sortIcon" (click)="sortByFullPrice()"></i></th>
+            <th>Sale Price <i class="fas fa-sort sortIcon" (click)="sortBySalePrice()"></i></th>
+            <th>Discount <i class="fas fa-sort sortIcon" (click)="sortByDiscount()"></i></th>
+            <th>Supplier <i class="fas fa-sort sortIcon" (click)="sortBySupplier()"></i></th>
+            <th>Category <i class="fas fa-sort sortIcon" (click)="sortByCategory()"></i></th>
+            <th>Availability <i class="fas fa-sort sortIcon" (click)="sortByAvailability()"></i></th>
+            <!-- Category Count -->
+            <th id="totalCats"> Total # of Products: {{productsService.numOfProducts}} </th>
+
+
           </tr>
           </thead>
           <tbody>
           <!-- Table Rows -->
-          <tr *ngFor="let product of products"> <!-- for each product in the products table do the following -->
-            <td class="centerAlignText" [routerLink]="['/products', product.productId]">{{product.productId}}</td> <!-- load the product id in the ID column -->
-            <td [routerLink]="['/products', product.productName]">{{product.productName}}</td> <!-- load the product name in the product name column -->
-            <td class="centerAlignText" [routerLink]="['/products', product.category]">{{product.category.categoryName}}</td> <!-- load the product category name in the category column -->
-            <td class="centerAlignText" [routerLink]="['/products', product.fullPrice]">${{product.fullPrice}}</td> <!-- load the products full price in the full price column -->
-            <td class="centerAlignText" [routerLink]="['/products', product.salePrice]">${{product.salePrice}}</td> <!-- load the products sale price in the sale price column -->
-            <td class="centerAlignText" [routerLink]="['/products', product.availability]">{{product.availability}}</td> <!-- load the products availability status in the availablecolumn -->
-            <td [routerLink]="['/products', product.supplier]">{{product.supplier.supplierName}}</td> <!-- load the product supplier name in the supplier column -->
+          <tr *ngFor="let product of productsService.list"> <!-- for each product in the products table do the following -->
+            <td class="centerAlignText">{{product.productId}}</td> <!-- load the product id in the ID column -->
+            <td>{{product.productName}}</td> <!-- load the product name in the product name column -->
+            <td class="centerAlignText">{{product.fullPrice | currency: 'USD'}}</td> <!-- load the full price in the product full price column -->
+            <td class="centerAlignText">{{product.salePrice | currency: 'USD'}}</td> <!-- load the sale price in the product sale price column -->
+            <td class="centerAlignText">{{product.discount | percent:'.0-1'}}</td> <!-- load the discount in the product discount column -->
+            <td>{{product.supplier.supplierName}}</td> <!-- load the product supplier in the supplier name column -->
+            <td>{{product.category.categoryName}}</td> <!-- load the product category in the category name column -->
+            <td>{{product.availability}}</td> <!-- load the product availability in the availability column -->
             <td class="text-right" id="tableDataBtns">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addProductForm" [routerLink]="['/product-edit', product.productId]"><i class="far fa-edit"></i></button>
-
-                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                <!-- Edit Button -->
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addProductForm"
+                        [routerLink]="['/product-edit', product.productId]"
+                        (click)="productsService.populateForm(product)"><i class="far fa-edit"></i></button>
+                <!-- Delete Button -->
+                <button type="button" class="btn btn-danger" (click)="onDelete(product.productId)"><i class="far fa-trash-alt"></i></button>
               </div>
             </td>
           </tr>
@@ -69,16 +71,17 @@
           </tbody>
         </table>
       </div>
-      <nav aria-label="Table Navigation">
+      <nav aria-label="Table Navigation" id="paginationNav">
         <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          <li class="page-item"><button class="page-link" type="button" [disabled]="productsService.currentPageNum === 0"(click)="previousPage()"><i class="fas fa-angle-double-left"></i> Previous </button></li>
+          <li class="page-item"><button class="page-link" type="button" [disabled]="productsService.currentPageNum + 1 === productsService.totalNumOfPages" (click)="nextPage()">Next <i class="fas fa-angle-double-right"></i></button></li>
         </ul>
+        <div>
+          <p>  page {{productsService.currentPageNum + 1}} of {{productsService.totalNumOfPages}} </p>
+        </div>
       </nav>
     </div>
   </div>
 
 </div>
+

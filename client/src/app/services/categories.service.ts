@@ -16,15 +16,15 @@ export class CategoriesService {
   list: Categories[]; // list to store categories
   numOfCategories: number; // variable to store the number of categories in the database
   totalNumOfPages: number; // variable to store the number of pages the data from the database is split among
-  currentPageNum: number; // variable to store the current page number
+  currentPageNum: number; // variable to store the current page
   currentNumOfElements: number; // variable to store the current number of elements to display per page.
 
 
   public API = '//localhost:8080'; // saves the base URL to a variable
   public GET_CATEGORIES = this.API + '/categoriesByPage'; // API to get all categories
-  public UPDATE_CATEGORY = this.API + '/putcategories/'; // API to update a category
+  public UPDATE_CATEGORY = this.API + '/putcategory/'; // API to update a category
   public CREATE_CATEGORY = this.API + '/postcategory'; // API to post (add) a new category
-  public DELETE_CATEGORY = this.API + '/deletecategories/'; // API to delete a category
+  public DELETE_CATEGORY = this.API + '/deletecategory/'; // API to delete a category
 
 
   constructor(private http: HttpClient) {} // allows the app to take in a http address
@@ -56,10 +56,14 @@ export class CategoriesService {
   // }
 
   // Method to get all categories and store them in a list - Pageable with Parameters
-  refreshList(params?: HttpParams) {
+   refreshList(params?: HttpParams) {
+    console.log('------Inside refreshList()----');
+    console.log('refreshList Page Num at the start:' + this.currentPageNum);
+
     this.http.get<any>(this.GET_CATEGORIES, {params}).subscribe(result => {
       return this.list = result.content;
     });
+    console.log('refreshList Page Num at the End:' + this.currentPageNum);
   }
 
   // Method to get the Total Number of categories
@@ -95,15 +99,12 @@ export class CategoriesService {
 
   // Method to save to the database
   postCategory(formData: Categories) {
-    console.log('I am in the postCategory Method');
-    console.log(formData);
     return this.http.post(this.CREATE_CATEGORY, formData);
   }
 
 
   // Method to update a category in the database
   putCategory(formData: Categories): Observable<any>  {
-    console.log(formData);
     return this.http.put(this.UPDATE_CATEGORY + formData.categoryId, formData);
   }
 

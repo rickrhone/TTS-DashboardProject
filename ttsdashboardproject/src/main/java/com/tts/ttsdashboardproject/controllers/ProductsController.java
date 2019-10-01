@@ -32,12 +32,12 @@ public class ProductsController {
     @GetMapping("/productsByPage")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-    public Page<Products> findAllpages(@RequestParam Optional<Integer> pageNum,
-                                        @RequestParam Optional<Integer> numProdPerPage,
-                                        @RequestParam Optional<String> sortBy) {
-        return productsService.findAllPages(pageNum,numProdPerPage,sortBy);
+    public Page<Products> findAllpages(@RequestParam (defaultValue = "0", required = false) int pageNum,
+                                         @RequestParam (defaultValue = "50", required = false) int numProdPerPage,
+                                         @RequestParam (defaultValue = "ASC", required = false) String direction,
+                                         @RequestParam (defaultValue = "productId", required = false) String sortBy) {
+        return productsService.findAllPages(pageNum,numProdPerPage,direction,sortBy);
     }
-
 
     // Endpoint to GET a specific product by ID
     @GetMapping("/productsByPage/{id}")
@@ -74,7 +74,7 @@ public class ProductsController {
 //    }
 
     // Endpoint to UPDATE a product by ID
-    @PutMapping("/putproducts/{id}")
+    @PutMapping("/putproduct/{id}")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
     public ResponseEntity<Products> update(@PathVariable Long id, @Valid @RequestBody Products product) {
@@ -86,7 +86,7 @@ public class ProductsController {
     }
 
     // Endpoint to DELETE a product by ID
-    @DeleteMapping("/deleteproducts/{id}")
+    @DeleteMapping("/deleteproduct/{id}")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
     public ResponseEntity delete(@PathVariable Long id) {

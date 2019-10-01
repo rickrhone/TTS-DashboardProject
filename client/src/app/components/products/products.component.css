@@ -12,3 +12,7 @@ h2 {
 .centerAlignText {
   text-align: center;
 }
+
+th {
+  white-space: nowrap;
+}

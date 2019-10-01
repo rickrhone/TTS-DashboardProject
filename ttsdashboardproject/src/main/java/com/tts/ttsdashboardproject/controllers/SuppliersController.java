@@ -1,6 +1,7 @@
 package com.tts.ttsdashboardproject.controllers;
 
 
+import com.tts.ttsdashboardproject.dao.entities.Categories;
 import com.tts.ttsdashboardproject.dao.entities.Suppliers;
 import com.tts.ttsdashboardproject.services.SuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,11 @@ public class SuppliersController {
     @GetMapping("/suppliersByPage")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-    public Page<Suppliers> findAllpages(@RequestParam Optional<Integer> pageNum,
-                                         @RequestParam Optional<Integer> numSupPerPage,
-                                         @RequestParam Optional<String> sortBy) {
-        return suppliersService.findAllPages(pageNum,numSupPerPage,sortBy);
+    public Page<Suppliers> findAllpages(@RequestParam (defaultValue = "0", required = false) int pageNum,
+                                         @RequestParam (defaultValue = "20", required = false) int numSupPerPage,
+                                         @RequestParam (defaultValue = "ASC", required = false) String direction,
+                                         @RequestParam (defaultValue = "supplierId", required = false) String sortBy) {
+        return suppliersService.findAllPages(pageNum,numSupPerPage,direction,sortBy);
     }
 
     // Endpoint to GET a specific supplier by ID
@@ -60,21 +62,9 @@ public class SuppliersController {
         return ResponseEntity.ok(suppliersService.save(supplier));
     }
 
-    // Endpoint to GET a specific supplier by ID
-//    @GetMapping("/suppliers/{id}")
-//    //TODO : change origin link after hosting front end on Github
-//    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-//    public ResponseEntity<Suppliers> findById(@PathVariable Long id) {
-//        Optional<Suppliers> supplier = suppliersService.findById(id);
-//        if (!supplier.isPresent()) {
-//            System.out.println("Id " + id + " does not exist");
-//            ResponseEntity.badRequest().build();
-//        }
-//        return ResponseEntity.ok(supplier.get());
-//    }
 
     // Endpoint to UPDATE a supplier by ID
-    @PutMapping("/putsuppliers/{id}")
+    @PutMapping("/putsupplier/{id}")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
     public ResponseEntity<Suppliers> update(@PathVariable Long id, @Valid @RequestBody Suppliers supplier) {
@@ -86,7 +76,7 @@ public class SuppliersController {
     }
 
     // Endpoint to DELETE a supplier by ID
-    @DeleteMapping("/deletesuppliers/{id}")
+    @DeleteMapping("/deletesupplier/{id}")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
     public ResponseEntity delete(@PathVariable Long id) {

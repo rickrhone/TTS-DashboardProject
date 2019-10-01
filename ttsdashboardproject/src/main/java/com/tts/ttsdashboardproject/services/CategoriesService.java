@@ -4,9 +4,9 @@ import com.tts.ttsdashboardproject.dao.entities.Categories;
 import com.tts.ttsdashboardproject.dao.repositories.CategoriesRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +14,7 @@ import java.util.Optional;
 @Service
 public class CategoriesService {
     private final CategoriesRepository categoriesRepository; // allows only one instance of the categories repository
+
 
     public CategoriesService(CategoriesRepository categoriesRepository) {
         this.categoriesRepository = categoriesRepository;
@@ -24,14 +25,29 @@ public class CategoriesService {
         return categoriesRepository.findAll();
     }
 
+
     // Find All method - returns a list of everything --PAGINATION
-    public Page<Categories> findAllPages(@RequestParam Optional<Integer> pageNum,
-                                         @RequestParam Optional<Integer> numCatPerPage,
-                                         @RequestParam Optional<String> sortBy) {
-        return categoriesRepository.findAll(PageRequest.of(pageNum.orElse(0),
-                numCatPerPage.orElse(10),
-                Sort.by(sortBy.orElse("categoryId")).ascending()));
+    public Page<Categories> findAllPages(int pageNum,
+                                         int numCatPerPage,
+                                         String direction,
+                                         String sortBy) {
+        Pageable page = PageRequest.of(pageNum,
+                numCatPerPage, Sort.Direction.fromString(direction), sortBy);
+        return categoriesRepository.findAll(page);
     }
+
+
+    // Find All method - returns a list of everything --PAGINATION - DESC
+//    public Page<Categories> findAllPages(@RequestParam Optional<Integer> pageNum,
+//                                         @RequestParam Optional<Integer> numCatPerPage,
+//                                         @RequestParam Optional<String> sortBy) {
+//        return categoriesRepository.findAll(PageRequest.of(pageNum.orElse(0),
+//                numCatPerPage.orElse(10),
+//                Sort.by(sortBy.orElse("categoryId")).descending()));
+//    }
+
+
+
 
     // Find by ID method
     public Optional<Categories> findById(Long id) {

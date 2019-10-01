@@ -1,5 +1,7 @@
 package com.tts.ttsdashboardproject.dao.entities;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 
 @Entity
@@ -30,11 +32,15 @@ public class Products {
         @Column(name = "sale_price", precision = 2) // nullable because a product does not have to go on sale
         private double salePrice;
 
-        // Column 6
+        // Column 6 - not in database
+        @Formula(value = "(full_price - sale_price) / full_price")
+        private double discount;
+
+        // Column 7
         @Column(name = "availability", nullable = false)
         private boolean availability;
 
-        // Column 7
+        // Column 8
         @ManyToOne // there can be many products associated with one supplier
         @JoinColumn(name = "supplier", nullable = false)
         private Suppliers supplier;
@@ -44,12 +50,13 @@ public class Products {
         public Products() {};
 
         // full parameter list constructor
-        public Products(long productId, String productName, Categories category, double fullPrice, double salePrice, boolean availability, Suppliers supplier ) {
+        public Products(long productId, String productName, Categories category, double fullPrice, double salePrice, double discount, boolean availability, Suppliers supplier) {
             this.productId = productId;
             this.productName = productName;
             this.category = category;
             this.fullPrice = fullPrice;
             this.salePrice = salePrice;
+            this.discount = discount;
             this.availability = availability;
             this.supplier = supplier;
         }
@@ -94,6 +101,8 @@ public class Products {
         public void setSalePrice(double salePrice) {
             this.salePrice = salePrice;
         }
+
+        public double getDiscount() { return discount; }
 
         public boolean isAvailability() {
             return availability;

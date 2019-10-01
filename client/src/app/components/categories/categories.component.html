@@ -61,8 +61,6 @@
       </div>
       <nav aria-label="Table Navigation" id="paginationNav">
         <ul class="pagination">
-<!--          Need a on click function that moves to the next page or the previous page-->
-<!--          Todo: figure out how to disable buttons at page 0 or max page -->
           <li class="page-item"><button class="page-link" type="button" [disabled]="categoriesService.currentPageNum === 0"(click)="previousPage()"><i class="fas fa-angle-double-left"></i> Previous </button></li>
           <li class="page-item"><button class="page-link" type="button" [disabled]="categoriesService.currentPageNum + 1 === categoriesService.totalNumOfPages" (click)="nextPage()">Next <i class="fas fa-angle-double-right"></i></button></li>
         </ul>

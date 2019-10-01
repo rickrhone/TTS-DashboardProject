@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CategoriesService} from '../../../services/categories.service';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {Categories} from '../categories.model';
+import {HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-add-categories',
@@ -31,11 +31,12 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
     // Reset the form
     this.resetForm();
 
+
     // Method to store data for auto populating form
     // on initialization check to see if category with IDs exists if so
     // call the get() category by id method in the service and for each category
     // store that category in the category array along with it's href (URI containing id)
-    // if not (no category with id) then log to the console the message below and navigate to category table via the gotoCategories method
+    // if not (no category with id) then log to the console the message below and  and reset the form
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
@@ -43,7 +44,7 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
           if (category) {
             this.category = category;
           } else {
-            console.log(`Category with id '${id}' not found, returning to categories table`);
+            console.log(`Category with id '${id}' not found, returning to the categories table`);
             this.resetForm();
           }
         });
@@ -71,32 +72,48 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
     // if the id is null perform a post/create new category
     if (form.value.categoryId == null) {
       this.insertRecord(form);
-      this.categoriesService.refreshList(); // Refresh the categories table
-      this.categoriesService.getTotalNumCategories(); // updated category count data/etc.
     } else {
-      console.log('I am in the onSubmit Method and I am updating an existing record');
       // otherwise perform a put/update category
       this.updateRecord(form);
-      this.categoriesService.refreshList(); // Refresh the categories table
     }
   }
 
   // Method to insert a new category
   insertRecord(form: NgForm) {
+    console.log('Inside insertRecord()');
+    console.log('insertRecord Page Num at the start:' + this.categoriesService.currentPageNum);
+    // store the last page
+    const lastPage = this.categoriesService.totalNumOfPages - 1;
+
+    // Post the changes from the form and navigate to the last page
     this.categoriesService.postCategory(form.value).subscribe(result => {
       this.toastr.success('Category inserted successfully', 'Category Table'); // display this message on success
       this.resetForm(form);
-      this.categoriesService.refreshList(); // Refresh the categories table
+      // assign the last page as a parameter for the get request
+      const params = new HttpParams().set('pageNum', lastPage.toString());
+      this.categoriesService.getCurrentPage(params); // updates the current page to the last page
+      this.categoriesService.currentPageNum = lastPage; // set the page to the last page
+      this.categoriesService.refreshList(params); // Refresh the categories table
+      this.categoriesService.currentPageNum = lastPage; // set the page to the last page
+      console.log('insertRecord Page Num at the End:' + this.categoriesService.currentPageNum);
     }, error => console.error(error));
   }
 
   // Method to update an existing category
   updateRecord(form: NgForm) {
-    console.log('I am in the updateRecord method');
+    // store the current page so it can be displayed after inserting
+    const currentPage = this.categoriesService.currentPageNum;
+
+    // put the changes from the form
     this.categoriesService.putCategory(form.value).subscribe(result => {
       this.toastr.info('Category updated successfully', 'Category Table'); // display this message on success
-      this.resetForm(form);
-      this.categoriesService.refreshList(); // Refresh the categories table
+      this.resetForm(form); // reset the form
+      // assign the current page as a parameter for the get request
+      const params = new HttpParams().set('pageNum', currentPage.toString());
+      this.categoriesService.refreshList(params); // Refresh the categories table
+      this.categoriesService.getCurrentPage(params); // updates the current page
+      this.categoriesService.currentPageNum = currentPage; // sets the current page to the page the insert was initiated from
+
     }, error => console.error(error));
   }
 

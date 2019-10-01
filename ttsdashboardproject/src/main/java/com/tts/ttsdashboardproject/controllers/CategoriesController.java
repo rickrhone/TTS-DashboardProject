@@ -29,14 +29,25 @@ public class CategoriesController {
         return ResponseEntity.ok(categoriesService.findAll());
     }
 
+    // Pageable Categories - ASC
+//    @GetMapping("/categoriesByPage")
+//    //TODO : change origin link after hosting front end on Github
+//    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
+//    public Page<Categories> findAllpages( @RequestParam Optional<Integer> pageNum,
+//                                          @RequestParam Optional<Integer> numCatPerPage,
+//                                          @RequestParam Optional<String> sortBy) {
+//        return categoriesService.findAllPages(pageNum,numCatPerPage,sortBy);
+//    }
+
     // Pageable Categories
     @GetMapping("/categoriesByPage")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-    public Page<Categories> findAllpages( @RequestParam Optional<Integer> pageNum,
-                                          @RequestParam Optional<Integer> numCatPerPage,
-                                          @RequestParam Optional<String> sortBy) {
-        return categoriesService.findAllPages(pageNum,numCatPerPage,sortBy);
+    public Page<Categories> findAllpages(@RequestParam (defaultValue = "0", required = false) int pageNum,
+                                             @RequestParam (defaultValue = "10", required = false) int numCatPerPage,
+                                             @RequestParam (defaultValue = "ASC", required = false) String direction,
+                                             @RequestParam (defaultValue = "categoryId", required = false) String sortBy) {
+        return categoriesService.findAllPages(pageNum,numCatPerPage,direction,sortBy);
     }
 
     // Endpoint to GET a specific category by ID
@@ -51,7 +62,6 @@ public class CategoriesController {
         }
         return ResponseEntity.ok(category.get());
     }
-
 
     // Endpoint to CREATE a new category
     @PostMapping("/postcategory")
@@ -75,7 +85,7 @@ public class CategoriesController {
 //    }
 
     // Endpoint to UPDATE a category by ID
-    @PutMapping("/putcategories/{id}")
+    @PutMapping("/putcategory/{id}")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
     public ResponseEntity<Categories> update(@PathVariable Long id, @Valid @RequestBody Categories category) {
@@ -87,7 +97,7 @@ public class CategoriesController {
     }
 
     // Endpoint to DELETE a category by ID
-    @DeleteMapping("/deletecategories/{id}")
+    @DeleteMapping("/deletecategory/{id}")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
     public ResponseEntity delete(@PathVariable Long id) {

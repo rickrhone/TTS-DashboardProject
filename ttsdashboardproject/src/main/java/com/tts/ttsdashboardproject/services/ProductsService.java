@@ -1,14 +1,12 @@
 package com.tts.ttsdashboardproject.services;
 
 import com.tts.ttsdashboardproject.dao.entities.Products;
-import com.tts.ttsdashboardproject.dao.entities.Suppliers;
 import com.tts.ttsdashboardproject.dao.repositories.ProductsRepository;
-import com.tts.ttsdashboardproject.dao.repositories.SuppliersRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,14 +25,14 @@ public class ProductsService {
     }
 
     // Find All method - returns a list of everything --PAGINATION
-    public Page<Products> findAllPages(@RequestParam Optional<Integer> pageNum,
-                                        @RequestParam Optional<Integer> numProdPerPage,
-                                        @RequestParam Optional<String> sortBy) {
-        return productsRepository.findAll(PageRequest.of(pageNum.orElse(0),
-                numProdPerPage.orElse(60),
-                Sort.by(sortBy.orElse("productId")).ascending()));
+    public Page<Products> findAllPages(int pageNum,
+                                         int numProdPerPage,
+                                         String direction,
+                                         String sortBy) {
+        Pageable page = PageRequest.of(pageNum,
+                numProdPerPage, Sort.Direction.fromString(direction), sortBy);
+        return productsRepository.findAll(page);
     }
-
     // Find by ID method
     public Optional<Products> findById(Long id) {
         return productsRepository.findById(id);

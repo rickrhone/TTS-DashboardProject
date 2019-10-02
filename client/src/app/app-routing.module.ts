@@ -6,10 +6,14 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { EditAddCategoriesComponent } from './components/categories/edit-add-categories/edit-add-categories.component';
 import { EditAddSuppliersComponent } from './components/suppliers/edit-add-suppliers/edit-add-suppliers.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   // TODO: remove the redirect of the homepage fromt the products table to it's owm
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  // { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '',
+    component: DashboardComponent
+  },
 
 // PRODUCT PATHS
   // the /products URI points to the products component

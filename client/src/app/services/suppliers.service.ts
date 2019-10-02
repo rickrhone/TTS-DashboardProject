@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Suppliers} from '../components/suppliers/suppliers.model';
+import {Categories} from '../components/categories/categories.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class SuppliersService {
 
 
   public API = '//localhost:8080'; // saves the base URL to a variable
+  public GET_SUPPLIERS_NON_PAGEABLE = this.API + '/suppliers'; // API to get all suppliers
   public GET_SUPPLIERS = this.API + '/suppliersByPage'; // API to get all suppliers
   public UPDATE_SUPPLIER = this.API + '/putsupplier/'; // API to update a suppliers
   public CREATE_SUPPLIER = this.API + '/postsupplier'; // API to post (add) a new supplier
@@ -30,8 +32,13 @@ export class SuppliersService {
   // ****************** GET METHODS ***************
 
   // Method to get all the suppliers made available by the API
-  getAll(): Observable<any> {
-    return this.http.get(this.GET_SUPPLIERS); // goes to the suppliers API and get everything listed there
+  // getAll(): Observable<any> {
+  //   return this.http.get(this.GET_SUPPLIERS); // goes to the suppliers API and get everything listed there
+  // }
+
+  // Method to get all the suppliers made available by the API without pagination
+  getAll(): Observable<Suppliers[]> { // goes to the suppliers API and get everything listed there
+    return this.http.get<any>(this.GET_SUPPLIERS_NON_PAGEABLE);
   }
 
   // Method to get a supplier by ID and return it

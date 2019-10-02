@@ -20,6 +20,13 @@ import {SuppliersService} from './services/suppliers.service';
 // To get CRUD operation alerts
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardMatComponent } from './components/dashboard-mat/dashboard-mat.component';
+
+// Angular Material
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTableModule, MatSortModule, MatPaginatorModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +36,9 @@ import { ToastrModule } from 'ngx-toastr';
     CategoriesComponent,
     SuppliersComponent,
     EditAddSuppliersComponent,
-    EditAddCategoriesComponent
+    EditAddCategoriesComponent,
+    DashboardComponent,
+    DashboardMatComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,11 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatSliderModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [CategoriesService, ProductsService, SuppliersService], // so multiple components can share the same service
   bootstrap: [AppComponent]

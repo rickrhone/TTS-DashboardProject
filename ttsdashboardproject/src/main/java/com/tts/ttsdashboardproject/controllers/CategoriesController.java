@@ -21,7 +21,7 @@ public class CategoriesController {
     }
 
 
-    // Endpoint to Get All Categories
+    // Endpoint to Get All Categories no Pagination
     @GetMapping("/categories")
     //TODO : change origin link after hosting front end on Github
     @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed

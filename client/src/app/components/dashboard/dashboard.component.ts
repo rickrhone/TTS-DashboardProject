@@ -1,15 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {ProductsService} from '../../services/products.service';
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {ProductsService} from '../../services/products.service';
+import {ToastrService} from 'ngx-toastr';
+import {SuppliersService} from '../../services/suppliers.service';
+import {CategoriesService} from '../../services/categories.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class DashboardComponent implements OnInit {
+
   products: Array<any>; // defines an array to store all products in
   direction: string = 'ASC'; // Stores the sorting direction
 
@@ -21,6 +24,8 @@ export class ProductsComponent implements OnInit {
               private router: Router,
               private http: HttpClient,
               private productsService: ProductsService,
+              private suppliersService: SuppliersService,
+              private categoriesService: CategoriesService,
               private toastr: ToastrService) { }
 
   // ---------------------------------------- METHODS ------------------------------------------
@@ -28,6 +33,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     // Method to get the current Page number
     this.productsService.getCurrentPage();
+
+    console.log('OnInit Page Num at the start:' + this.productsService.currentPageNum);
 
     // Method to get Total Number of Products in the database
     this.productsService.getTotalNumProducts();
@@ -279,4 +286,5 @@ export class ProductsComponent implements OnInit {
     // Get the content sorted by availability
     this.productsService.refreshList(params);
   }
+
 }

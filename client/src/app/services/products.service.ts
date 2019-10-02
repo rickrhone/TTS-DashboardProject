@@ -16,6 +16,25 @@ export class ProductsService {
   totalNumOfPages: number; // variable to store the number of pages the data from the database is split among
   currentPageNum: number; // variable to store the current page
   currentNumOfElements: number; // variable to store the current number of elements to display per page.
+  enableForm: boolean = false; // variable to store whether or not to enable the editProducts form
+
+  // Object used to store form data
+  addProdFormData = {
+    productId: null,
+    productName: '',
+    category: {
+      categoryId: null,
+      categoryName: ''
+    },
+    fullPrice: null,
+    salePrice: null,
+    availability: false,
+    supplier: {
+      supplierId: null,
+      supplierName: ''
+    }
+
+  }
 
   public API = '//localhost:8080'; // saves the base URL to a variable
   public GET_PRODUCTS = this.API + '/productsByPage'; // API to get all products
@@ -41,13 +60,9 @@ export class ProductsService {
 
   // Method to get all products and store them in a list - Pageable with Parameters
   refreshList(params?: HttpParams) {
-    console.log('------Inside refreshList()----');
-    console.log('refreshList Page Num at the start:' + this.currentPageNum);
-
     this.http.get<any>(this.GET_PRODUCTS, {params}).subscribe(result => {
       return this.list = result.content;
     });
-    console.log('refreshList Page Num at the End:' + this.currentPageNum);
   }
 
   // Method to get the Total Number of products
@@ -87,8 +102,28 @@ export class ProductsService {
   }
 
   // Method to update a product in the database
-  putProduct(formData: Products): Observable<any>  {
-    return this.http.put(this.UPDATE_PRODUCT + formData.productId, formData);
+  putProduct(formData: any): Observable<any>  {
+    console.log('Start of putProduct()');
+    console.log(formData);
+    console.log('Inside of Put Method Start - CatId: ' + formData.categoryId);
+
+    // formatted form date
+    const formattedFormData = {
+      productId: formData.productId,
+      productName: formData.productName,
+      category: {
+        categoryId: formData.categoryId,
+        categoryName: formData.categoryName
+      },
+      fullPrice: formData.fullPrice,
+      salePrice: formData.salePrice,
+      availability: formData.availability,
+      supplier: {
+        supplierId: formData.supplierId,
+        supplierName: formData.supplierName
+      }
+    }
+    return this.http.put(this.UPDATE_PRODUCT + formData.productId, formattedFormData);
   }
 
   // Method to delete a product from the database
@@ -98,6 +133,9 @@ export class ProductsService {
 
   // Method to populate form with pre-existing data when the edit button is clicked
   populateForm(product: Products) {
+    if (product.productId != null) {
+      this.enableForm = true;
+    }
     this.formData = Object.assign({}, product);
   }
 

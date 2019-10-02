@@ -9,6 +9,7 @@ import {Categories} from '../../categories/categories.model';
 import {Suppliers} from '../../suppliers/suppliers.model';
 import {SuppliersService} from '../../../services/suppliers.service';
 import {CategoriesService} from '../../../services/categories.service';
+import {Products} from '../products.model';
 
 @Component({
   selector: 'app-edit-add-products',
@@ -20,11 +21,14 @@ import {CategoriesService} from '../../../services/categories.service';
 export class EditAddProductsComponent implements OnInit, OnDestroy {
   product: any = {}; // declares and initializes an empty array of products
   sub: Subscription;  // declares a variable name sub of type Subscription
+  AllCategories: Categories[]; // stores all the categories
+  AllSuppliers: Suppliers[]; // stores all the suppliers
+  formData: Products; // creates and object from the products model
 
   // attribute to store a blank category for FormReset.
   blankCategory: Categories = {
     categoryId: null,
-    categoryName: ''
+    categoryName: 'hi'
   };
 
   // attribute to store a blank supplier for FormReset.
@@ -42,14 +46,16 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
               private toastr: ToastrService) { }
 
   ngOnInit() {
-    // this.categoriesService.getTotalNumCategories();
-    // const currentNumOfElements = this.categoriesService.currentNumOfElements;
-    // const params = new HttpParams().set('numCatPerPage', currentNumOfElements.toString());
-    // console.log(currentNumOfElements);
 
-    this.categoriesService.refreshList(); // gets the current list of categories
+    // Method to get all the categories and assign it to the array of categories called AllCategories
+    this.categoriesService.getAll().subscribe(result => { // gets the current list of all categories non-pageable
+      this.AllCategories = result;
+    });
 
-    this.suppliersService.refreshList(); // gets the current list of suppliers
+    // Method to get all the suppliers and assign it to the array of suppliers called AllSuppliers
+    this.suppliersService.getAll().subscribe(result => { // gets the current list of all suppliers non-pageable
+      this.AllSuppliers = result;
+    });
 
     // Reset the form
     this.resetForm();
@@ -71,6 +77,7 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
         });
       }
     });
+
   }
 
   // ---------------------------------------- METHODS ------------------------------------------
@@ -88,7 +95,7 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
       category: this.blankCategory, // default category is empty object
       fullPrice: null, // default full price is null
       salePrice: null, // default sale price is null
-      discount: null, // default discount is null
+      // discount: null, // default discount is null
       availability: false, // default availability is false
       supplier: this.blankSupplier // default supplier is empty object
     };
@@ -102,6 +109,7 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
     } else {
       // otherwise perform a put/update product
       this.updateRecord(form);
+      this.productsService.enableForm = false; // rest enable form status
     }
   }
 
@@ -111,9 +119,46 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
     console.log('insertRecord Page Num at the start:' + this.productsService.currentPageNum);
     // store the last page
     const lastPage = this.productsService.totalNumOfPages - 1;
+    const CategoryKeyValue: any = {};
+    this.AllCategories.forEach( cat => {
+      // add a key value pair to the CategoryKeyValue Array
+      CategoryKeyValue[cat.categoryName] = cat.categoryId;
+      // console.log(cat)
+    });
+
+    const SupplierKeyValue: any = {};
+    this.AllSuppliers.forEach( sup => {
+      // add a key value pair to the supplierKeyValue Array
+      SupplierKeyValue[sup.supplierName] = sup.supplierId;
+    });
+
+
+    // formatted form date
+    const formattedFormData = {
+      productId: this.productsService.addProdFormData.productId,
+      productName: this.productsService.addProdFormData.productName,
+      category: {
+        categoryId: CategoryKeyValue[this.productsService.addProdFormData.category.categoryName],
+        categoryName: this.productsService.addProdFormData.category.categoryName
+      },
+      fullPrice: this.productsService.addProdFormData.fullPrice,
+      salePrice: this.productsService.addProdFormData.salePrice,
+      availability: this.productsService.addProdFormData.availability,
+      supplier: {
+        supplierId: SupplierKeyValue[this.productsService.addProdFormData.supplier.supplierName],
+        supplierName: this.productsService.addProdFormData.supplier.supplierName
+      }
+    }
+
+console.log(formattedFormData);
+
+    // convert the form.value to a product
+    // const newProd: Products = form.value;
+
+    // console.log('Inside of insertRecord Method Start - CatId: ' + form.value.categoryId);
 
     // Post the changes from the form and navigate to the last page
-    this.productsService.postProduct(form.value).subscribe(result => {
+    this.productsService.postProduct(formattedFormData).subscribe(result => {
       this.toastr.success('Product inserted successfully', 'Product Table'); // display this message on success
       this.resetForm(form);
       // assign the last page as a parameter for the get request
@@ -123,6 +168,9 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
       this.productsService.refreshList(params); // Refresh the products table
       this.productsService.currentPageNum = lastPage; // set the page to the last page
       console.log('insertRecord Page Num at the End:' + this.productsService.currentPageNum);
+
+      // console.log('Inside of insertRecord Method End - CatId: ' +  this.productsService.formData.category.categoryId);
+
     }, error => console.error(error));
   }
 

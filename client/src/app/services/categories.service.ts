@@ -14,6 +14,7 @@ export class CategoriesService {
   // creating a attribute to store the data to be shared between the categories edit form and table
   formData: Categories; // creates and object from the Categories model
   list: Categories[]; // list to store categories
+  listAll: Categories[]; // list to store all categories non pageable
   numOfCategories: number; // variable to store the number of categories in the database
   totalNumOfPages: number; // variable to store the number of pages the data from the database is split among
   currentPageNum: number; // variable to store the current page
@@ -21,6 +22,7 @@ export class CategoriesService {
 
 
   public API = '//localhost:8080'; // saves the base URL to a variable
+  public GET_CATEGORIES_NON_PAGEABLE = this.API + '/categories'; // API to get all categories non pageable
   public GET_CATEGORIES = this.API + '/categoriesByPage'; // API to get all categories
   public UPDATE_CATEGORY = this.API + '/putcategory/'; // API to update a category
   public CREATE_CATEGORY = this.API + '/postcategory'; // API to post (add) a new category
@@ -34,8 +36,15 @@ export class CategoriesService {
   // ****************** GET METHODS ***************
 
   // Method to get all the categories made available by the API
-  getAll(): Observable<any> {
-    return this.http.get(this.GET_CATEGORIES); // goes to the categories API and get everything listed there
+  // getAll() { // goes to the categories API and get everything listed there
+  //  this.http.get<any>(this.GET_CATEGORIES).subscribe(result => {
+  //     return this.listAll = result.content;
+  //   });
+  // }
+
+  // Method to get all the categories made available by the API without pagination
+  getAll(): Observable<Categories[]> { // goes to the categories API and get everything listed there
+    return this.http.get<any>(this.GET_CATEGORIES_NON_PAGEABLE);
   }
 
   // Method to get a category by ID and return it

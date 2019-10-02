@@ -35,7 +35,7 @@
             <th>Product Name <i class="fas fa-sort sortIcon" (click)="sortByProductName()"></i></th>
             <th>Full Price <i class="fas fa-sort sortIcon" (click)="sortByFullPrice()"></i></th>
             <th>Sale Price <i class="fas fa-sort sortIcon" (click)="sortBySalePrice()"></i></th>
-<!--            <th>Discount <i class="fas fa-sort sortIcon" (click)="sortByDiscount()"></i></th>-->
+            <th>Discount <i class="fas fa-sort sortIcon" (click)="sortByDiscount()"></i></th>
             <th>Supplier <i class="fas fa-sort sortIcon" (click)="sortBySupplier()"></i></th>
             <th>Category <i class="fas fa-sort sortIcon" (click)="sortByCategory()"></i></th>
             <th>Availability <i class="fas fa-sort sortIcon" (click)="sortByAvailability()"></i></th>
@@ -52,14 +52,14 @@
             <td>{{product.productName}}</td> <!-- load the product name in the product name column -->
             <td class="centerAlignText">{{product.fullPrice | currency: 'USD'}}</td> <!-- load the full price in the product full price column -->
             <td class="centerAlignText">{{product.salePrice | currency: 'USD'}}</td> <!-- load the sale price in the product sale price column -->
-<!--            <td class="centerAlignText">{{product.discount | percent:'.0-1'}}</td> &lt;!&ndash; load the discount in the product discount column &ndash;&gt;-->
+            <td class="centerAlignText">{{product.discount | percent:'.0-1'}}</td> <!-- load the discount in the product discount column -->
             <td>{{product.supplier.supplierName}}</td> <!-- load the product supplier in the supplier name column -->
             <td>{{product.category.categoryName}}</td> <!-- load the product category in the category name column -->
             <td class="centerAlignText">{{product.availability}}</td> <!-- load the product availability in the availability column -->
             <td class="text-right" id="tableDataBtns">
               <div class="btn-group" role="group">
                 <!-- Edit Button -->
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editProductForm"
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addProductForm"
                         [routerLink]="['/product-edit', product.productId]"
                         (click)="productsService.populateForm(product)"><i class="far fa-edit"></i></button>
                 <!-- Delete Button -->
@@ -84,4 +84,5 @@
   </div>
 
 </div>
+
 

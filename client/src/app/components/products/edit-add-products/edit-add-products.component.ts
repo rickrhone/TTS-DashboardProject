@@ -7,6 +7,8 @@ import {ToastrService} from 'ngx-toastr';
 import {HttpParams} from '@angular/common/http';
 import {Categories} from '../../categories/categories.model';
 import {Suppliers} from '../../suppliers/suppliers.model';
+import {SuppliersService} from '../../../services/suppliers.service';
+import {CategoriesService} from '../../../services/categories.service';
 
 @Component({
   selector: 'app-edit-add-products',
@@ -31,13 +33,24 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
     supplierName: ''
   };
 
-  // Constructor that takes in the route,  router and the product services
+  // Constructor that takes in the route,  router and the product/supplier/category services
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productsService: ProductsService,
+              private suppliersService: SuppliersService,
+              private categoriesService: CategoriesService,
               private toastr: ToastrService) { }
 
   ngOnInit() {
+    // this.categoriesService.getTotalNumCategories();
+    // const currentNumOfElements = this.categoriesService.currentNumOfElements;
+    // const params = new HttpParams().set('numCatPerPage', currentNumOfElements.toString());
+    // console.log(currentNumOfElements);
+
+    this.categoriesService.refreshList(); // gets the current list of categories
+
+    this.suppliersService.refreshList(); // gets the current list of suppliers
+
     // Reset the form
     this.resetForm();
 

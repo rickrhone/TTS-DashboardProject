@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Products} from '../components/products/products.model';
+import {Allproducts} from '../components/products/allproducts.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,7 @@ export class ProductsService {
   }
 
   public API = '//localhost:8080'; // saves the base URL to a variable
+  public GET_PRODUCTS_NON_PAGEABLE = this.API + '/products'; // API to get all products
   public GET_PRODUCTS = this.API + '/productsByPage'; // API to get all products
   public UPDATE_PRODUCT = this.API + '/putproduct/'; // API to update a product
   public CREATE_PRODUCT = this.API + '/postproduct'; // API to post (add) a new product
@@ -49,8 +51,8 @@ export class ProductsService {
   // ****************** GET METHODS ***************
 
   // Method to get all the products made available by the API
-  getAll(): Observable<any> {
-    return this.http.get(this.GET_PRODUCTS); // goes to the products API and get everything listed there
+  getAll(): Observable<Allproducts[]> {
+    return this.http.get<any>(this.GET_PRODUCTS_NON_PAGEABLE); // goes to the products API and get everything listed there
   }
 
   // Method to get a product by ID and return it

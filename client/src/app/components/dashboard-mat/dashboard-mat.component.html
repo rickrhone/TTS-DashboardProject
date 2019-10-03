@@ -1,1 +1,57 @@
-<p>dashboard-mat works!</p>
+<div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort>
+
+  <!-- productId Column -->
+  <ng-container matColumnDef="productId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+    <td mat-cell *matCellDef="let product"> {{product.productId}} </td>
+  </ng-container>
+
+  <!-- productName Column -->
+  <ng-container matColumnDef="productName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+    <td mat-cell *matCellDef="let product"> {{product.productName}} </td>
+  </ng-container>
+
+  <!-- fullPrice Column -->
+  <ng-container matColumnDef="fullPrice">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Price </th>
+    <td mat-cell *matCellDef="let product"> {{product.fullPrice | currency:  'USD'}} </td>
+  </ng-container>
+
+  <!-- salePrice Column -->
+  <ng-container matColumnDef="salePrice">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sale Price </th>
+    <td mat-cell *matCellDef="let product"> {{product.salePrice | currency:  'USD'}} </td>
+  </ng-container>
+
+  <!-- discount Column -->
+  <ng-container matColumnDef="discount">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+    <td mat-cell *matCellDef="let product"> {{product.discount | percent: '.0-1'}} </td>
+  </ng-container>
+
+  <!-- supplier Column -->
+  <ng-container matColumnDef="supplier">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
+    <td mat-cell *matCellDef="let product"> {{product.supplier.supplierName}} </td>
+  </ng-container>
+
+  <!-- category Column -->
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+    <td mat-cell *matCellDef="let product"> {{product.category.categoryName}} </td>
+  </ng-container>
+
+  <!-- availability Column -->
+  <ng-container matColumnDef="availability">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Availability </th>
+    <td mat-cell *matCellDef="let product"> {{product.availability}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

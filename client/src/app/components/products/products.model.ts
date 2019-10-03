@@ -17,13 +17,13 @@ export class Products {
   category: {
     categoryId: number,
     categoryName: string
-};
+  };
   fullPrice: number;
   salePrice: number;
   // discount: number;
   availability: boolean;
   supplier: {
     supplierId: number,
-  supplierName: string
-};
+    supplierName: string
+  };
 }

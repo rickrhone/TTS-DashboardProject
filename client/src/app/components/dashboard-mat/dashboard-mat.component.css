@@ -1,8 +1,13 @@
 .mainDiv {
- background-color: #ecf0f1;
+  background-color: #ecf0f1;
 }
+
 table {
   width: 100%;
+}
+
+th {
+  text-transform: uppercase;
 }
 
 .mat-form-field {
@@ -57,11 +62,14 @@ table {
   display: flex;
   align-items: center;
 }
+
 #customFilter {
-  background-color: lightgray;
+  background-color: #bdc3c7;
+  border: 1px #dc3545 dashed;
   padding: 20px;
-  width: 80%;
+  width: 100%;
   margin-bottom: 20px;
+  color: white;
 }
 
 .valueSelection {

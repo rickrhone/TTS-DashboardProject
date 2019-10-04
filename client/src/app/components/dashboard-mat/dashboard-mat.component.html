@@ -258,43 +258,43 @@
 
         <!-- productName Column -->
         <ng-container matColumnDef="productName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> PRODUCT NAME </th>
           <td mat-cell *matCellDef="let product"> {{product.productName}} </td>
         </ng-container>
 
         <!-- fullPrice Column -->
         <ng-container matColumnDef="fullPrice">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Price </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> FULL PRICE </th>
           <td mat-cell *matCellDef="let product"> {{product.fullPrice | currency:  'USD'}} </td>
         </ng-container>
 
         <!-- salePrice Column -->
         <ng-container matColumnDef="salePrice">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sale Price </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> SALE PRICE </th>
           <td mat-cell *matCellDef="let product"> {{product.salePrice | currency:  'USD'}} </td>
         </ng-container>
 
         <!-- discount Column -->
         <ng-container matColumnDef="discount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> DISCOUNT </th>
           <td mat-cell *matCellDef="let product"> {{product.discount | percent: '.0-1'}} </td>
         </ng-container>
 
         <!-- supplier Column -->
         <ng-container matColumnDef="supplier">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> SUPPLIER </th>
           <td mat-cell *matCellDef="let product"> {{product.supplier.supplierName}} </td>
         </ng-container>
 
         <!-- category Column -->
         <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> CATEGORY </th>
           <td mat-cell *matCellDef="let product"> {{product.category.categoryName}} </td>
         </ng-container>
 
         <!-- availability Column -->
         <ng-container matColumnDef="availability">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Availability </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> AVAILABILITY </th>
           <td mat-cell *matCellDef="let product"> {{product.availability}} </td>
         </ng-container>
 

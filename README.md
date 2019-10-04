@@ -13,7 +13,7 @@
  > - Sort products by full price, sale price, and the percentage of discount - ***COMPLETE + MORE***
 
 - **MY SOLUTION:** 
-
+ >  - Angular, Bootstrap and Chart.js front end with Spring/Spring boot/ Spring Data, hibernate and MySQL on the backend. 
  >   - [Front-End](https://github.com/rickrhone/TTS-DashboardProject/tree/master/client/src)
  >   - [Back-End](https://github.com/rickrhone/TTS-DashboardProject/tree/master/ttsdashboardproject/src/main/java/com/tts/ttsdashboardproject)
 

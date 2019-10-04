@@ -45,6 +45,27 @@ export class DashboardMatComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+
+  public barChartLabels = ['# of Categories', '# of Suppliers', '# of Products'];
+  public barChartType = 'bar';
+  public barChartLegend = false;
+  public barChartData = [
+    {data: [65, 59, 80]}, // default values replaced on init
+  ];
+
+  public doughnutChartLabels = ['# of Categories', '# of Suppliers', '# of Product'];
+  public doughnutChartData = [120, 150, 180]; // default values replaced on init
+  public doughnutChartType = 'doughnut';
+
+
+  public pieChartLabels1 = [];
+  public pieChartData1 = [];
+  public pieChartType1 = 'pie';
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productsService: ProductsService,
@@ -59,6 +80,8 @@ export class DashboardMatComponent implements OnInit {
     this.productsService.getAll().subscribe(result => { // gets the current list of all products non-pageable
       this.AllProducts = result;
       this.dataSource.data = this.AllProducts;
+      this.barChartData[0].data[2] = this.AllProducts.length; // adds the number of products to the bar chart
+      this.doughnutChartData[2] = this.AllProducts.length; // adds the number of products to the doughnut chart
     });
 
     // Apply pagination on initialization
@@ -70,14 +93,26 @@ export class DashboardMatComponent implements OnInit {
     // Method to get all the categories and assign it to the array of categories called AllCategories
     this.categoriesService.getAll().subscribe(result => { // gets the current list of all categories non-pageable
       this.AllCategories = result;
+      this.pieChartLabels1 = [...new Set(this.AllCategories.map(x => x.categoryName))]; // obtains a set of unique categorNames
+      this.barChartData[0].data[0] = this.AllCategories.length; // adds the number of categories to the bar chart
+      this.doughnutChartData[0] = this.AllCategories.length; // adds the number of categories to the doughnutChart
+      console.log(this.pieChartLabels1);
     });
+
 
     // Method to get all the suppliers and assign it to the array of suppliers called AllSuppliers
     this.suppliersService.getAll().subscribe(result => { // gets the current list of all suppliers non-pageable
       this.AllSuppliers = result;
+      this.barChartData[0].data[1] = this.AllSuppliers.length; // adds the number of suppliers to the bar chart
+      this.doughnutChartData[1] = this.AllSuppliers.length; // adds the number of suppliers to the doughnut chart
     });
+
   }
 
+// Method to filter out only unique items in an array
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
 
   toggleGeneralFilter() {
     if (this.genFilterVisible === false) {

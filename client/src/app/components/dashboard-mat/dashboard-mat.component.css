@@ -120,8 +120,6 @@ th {
   margin-right: 10px;
 }
 
-
-
 .valueSelection {
   margin-left: 20px;
   width: 200px;
@@ -133,4 +131,13 @@ th {
 
 .resultsColor {
   color: #27ae60;
+}
+
+#chartContainer {
+  display: flex;
+  justify-content: left;
+  height: 100px;
+  width: 30%;
+  margin-bottom: 40px;
+  margin-top: 20px;
 }

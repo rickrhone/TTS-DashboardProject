@@ -15,9 +15,31 @@
   </div>
 </nav>
 
+
+
+
 <div class="container-fluid centerAlignDiv mat-elevation-z8 mainDiv">
   <div class="row">
     <div class="col-sm main">
+      <!--  Bar Chart -->
+      <div id="chartContainer">
+        <!--  Doughnut Chart -->
+        <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType">
+        </canvas>
+        <!--  Bar Chart -->
+        <canvas baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+        </canvas>
+
+      </div>
+
 
       <!-- Filter Buttons -->
 

@@ -29,15 +29,6 @@ public class CategoriesController {
         return ResponseEntity.ok(categoriesService.findAll());
     }
 
-    // Pageable Categories - ASC
-//    @GetMapping("/categoriesByPage")
-//    //TODO : change origin link after hosting front end on Github
-//    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-//    public Page<Categories> findAllpages( @RequestParam Optional<Integer> pageNum,
-//                                          @RequestParam Optional<Integer> numCatPerPage,
-//                                          @RequestParam Optional<String> sortBy) {
-//        return categoriesService.findAllPages(pageNum,numCatPerPage,sortBy);
-//    }
 
     // Pageable Categories
     @GetMapping("/categoriesByPage")
@@ -70,19 +61,6 @@ public class CategoriesController {
     public ResponseEntity create( @Valid @RequestBody Categories category) {
         return ResponseEntity.ok(categoriesService.save(category));
     }
-
-    // Endpoint to GET a specific category by ID
-//    @GetMapping("/categories/{id}")
-//    //TODO : change origin link after hosting front end on Github
-//    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-//    public ResponseEntity<Categories> findById(@PathVariable Long id) {
-//        Optional<Categories> category = categoriesService.findById(id);
-//        if (!category.isPresent()) {
-//            System.out.println("Id " + id + " does not exist");
-//            ResponseEntity.badRequest().build();
-//        }
-//        return ResponseEntity.ok(category.get());
-//    }
 
     // Endpoint to UPDATE a category by ID
     @PutMapping("/putcategory/{id}")

@@ -60,18 +60,6 @@ public class ProductsController {
         return ResponseEntity.ok(productsService.save(product));
     }
 
-    // Endpoint to GET a specific product by ID
-//    @GetMapping("/products/{id}")
-//    //TODO : change origin link after hosting front end on Github
-//    @CrossOrigin(origins = "http://localhost:4200") //points the front end / presentation layer where the data will be displayed
-//    public ResponseEntity<Products> findById(@PathVariable Long id) {
-//        Optional<Products> product = productsService.findById(id);
-//        if (!product.isPresent()) {
-//            System.out.println("Id " + id + " does not exist");
-//            ResponseEntity.badRequest().build();
-//        }
-//        return ResponseEntity.ok(product.get());
-//    }
 
     // Endpoint to UPDATE a product by ID
     @PutMapping("/putproduct/{id}")

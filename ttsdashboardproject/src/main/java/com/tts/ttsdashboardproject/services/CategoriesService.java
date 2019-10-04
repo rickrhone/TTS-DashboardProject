@@ -37,18 +37,6 @@ public class CategoriesService {
     }
 
 
-    // Find All method - returns a list of everything --PAGINATION - DESC
-//    public Page<Categories> findAllPages(@RequestParam Optional<Integer> pageNum,
-//                                         @RequestParam Optional<Integer> numCatPerPage,
-//                                         @RequestParam Optional<String> sortBy) {
-//        return categoriesRepository.findAll(PageRequest.of(pageNum.orElse(0),
-//                numCatPerPage.orElse(10),
-//                Sort.by(sortBy.orElse("categoryId")).descending()));
-//    }
-
-
-
-
     // Find by ID method
     public Optional<Categories> findById(Long id) {
         return categoriesRepository.findById(id);

@@ -1,7 +1,5 @@
 package com.tts.ttsdashboardproject.controllers;
 
-
-import com.tts.ttsdashboardproject.dao.entities.Categories;
 import com.tts.ttsdashboardproject.dao.entities.Suppliers;
 import com.tts.ttsdashboardproject.services.SuppliersService;
 import org.springframework.beans.factory.annotation.Autowired;

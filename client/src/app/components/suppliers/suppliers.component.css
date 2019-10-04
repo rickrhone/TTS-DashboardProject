@@ -33,6 +33,7 @@ h2 {
 .centerAlignDiv {
   display: flex;
   justify-content: center;
+  background-color: #ecf0f1;
 }
 
 #paginationNav {
@@ -47,5 +48,11 @@ h2 {
 }
 
 th {
+  background-color: #ecf0f1;
   white-space: nowrap;
+}
+
+
+tr:nth-child(even) {
+  background-color: #ffffff;
 }

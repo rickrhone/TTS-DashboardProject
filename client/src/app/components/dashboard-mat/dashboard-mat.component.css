@@ -1,3 +1,4 @@
+
 .mainDiv {
   background-color: #ecf0f1;
 }
@@ -14,8 +15,8 @@ th {
   font-size: 14px;
 }
 
-#filter {
-  background-color: bisque;
+#genfilter {
+  width: 100%;
 }
 
 #filterOptionsDiv {
@@ -23,9 +24,54 @@ th {
   align-items: center;
 }
 
-.customFilter {
-  /*background-color: darkcyan;*/
+#customFilter {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   text-align: center;
+  padding: 0;
+  margin-bottom: 20px;
+  box-shadow: 5px 1px 8px 5px #888888;
+}
+
+
+#leftBody {
+  background-color: #d5dbdf;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 20px;
+}
+
+#rightBody {
+  background-color: #fff;
+  color: #dc3545;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: left;
+  width: 30%;
+  padding: 10px;
+}
+
+#BtnDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.filterBtns {
+  width: 100px;
+}
+
+#phaseDiv {
+  display: flex;
+  align-items: center;
+}
+
+.phaseHeading {
+  margin-left: 20px;
+  width: 200px;
 }
 
 .labelDiv {
@@ -43,6 +89,7 @@ th {
 
 #criteriaOptionsDiv {
   display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -74,14 +121,7 @@ th {
   margin-right: 10px;
 }
 
-#customFilter {
-  background-color: #bdc3c7;
-  border: 1px #dc3545 dashed;
-  padding: 20px;
-  width: 100%;
-  margin-bottom: 20px;
-  color: white;
-}
+
 
 .valueSelection {
   margin-left: 20px;
@@ -90,4 +130,8 @@ th {
 
 #unFilterBtn {
   margin-left: 20px;
+}
+
+.resultsColor {
+  color: #27ae60;
 }

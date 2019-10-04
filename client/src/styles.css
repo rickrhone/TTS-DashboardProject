@@ -6,6 +6,10 @@ input.ng-touched.ng-invalid {
   border-color: #dc3545;
 }
 
+.modal-title {
+  padding-left: 10px;
+}
+
 div.validation-error {
   width: 100%;
   margin-top: .25em;
@@ -29,5 +33,9 @@ nav a {
 
 .dashIcon {
   font-size: 50px;
+  color: #dc3545;
+}
+
+.totalDisplay {
   color: #dc3545;
 }

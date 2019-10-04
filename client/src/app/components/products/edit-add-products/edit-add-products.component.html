@@ -3,64 +3,82 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/products"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/products"><span
+            aria-hidden="true">&times;</span></button>
         <h4 class="modal-title"> Edit Product</h4>
       </div>
       <div class="modal-body">
         <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" autocomplete="off">
           <div class="form-group">
+
             <!-- Hidden input field for Product Id-->
-            <input type="hidden" class="form-control" id="editproductId" placeholder="Product Id"
-                   name="productId" #productId="ngModel" [(ngModel)]="productsService.formData.productId" >
+            <input type="hidden" class="form-control" id="editproductId" placeholder="Product Id" name="productId"
+              #productId="ngModel" [(ngModel)]="productsService.formData.productId">
+
             <!-- Product Name Input Field-->
             <label for="productName">Product Name</label>
-            <input type="text" class="form-control" id="editproductName" placeholder="Product Name"
-                   name="productName" #productName="ngModel" [(ngModel)]="productsService.formData.productName"  (click)="productsService.populateForm(product)" required >
+            <input type="text" class="form-control" id="editproductName" placeholder="Product Name" name="productName"
+              #productName="ngModel" [(ngModel)]="productsService.formData.productName"
+              (click)="productsService.populateForm(product)" required>
+
             <!-- Validation Div -->
-            <div class="validation-error" *ngIf="productName.invalid && productName.touched"> This field is required. </div>
+            <div class="validation-error" *ngIf="productName.invalid && productName.touched"> This field is required.
+            </div>
           </div>
           <div class="form-group">
+
             <!-- Product Category Input Field-->
-            <input type="hidden" class="form-control" id="editcategoryId" placeholder="Category Id"
-                   name="categoryId" #categoryId="ngModel" [(ngModel)]="productsService.formData.category.categoryId" >
+            <input type="hidden" class="form-control" id="editcategoryId" placeholder="Category Id" name="categoryId"
+              #categoryId="ngModel" [(ngModel)]="productsService.formData.category.categoryId">
             <label for="categoryName">Product Category</label>
-            <select class="form-control" name="categoryName" id="editcategoryName" #category="ngModel" [(ngModel)]="productsService.formData.category.categoryName">
-<!--              <option value="0">&#45;&#45;All&#45;&#45;</option>-->
-              <option *ngFor="let category of AllCategories" value="{{category.categoryName}}">{{category.categoryName}}</option>
+            <select class="form-control" name="categoryName" id="editcategoryName" #category="ngModel"
+              [(ngModel)]="productsService.formData.category.categoryName">
+
+              <!--              <option value="0">&#45;&#45;All&#45;&#45;</option>-->
+              <option *ngFor="let category of AllCategories" value="{{category.categoryName}}">{{category.categoryName}}
+              </option>
             </select>
           </div>
           <div class="form-group">
+
             <!-- Product Supplier Input Field-->
-            <input type="hidden" class="form-control" id="editsupplierId" placeholder="Supplier Id"
-                   name="supplierId" #supplierId="ngModel" [(ngModel)]="productsService.formData.supplier.supplierId" >
+            <input type="hidden" class="form-control" id="editsupplierId" placeholder="Supplier Id" name="supplierId"
+              #supplierId="ngModel" [(ngModel)]="productsService.formData.supplier.supplierId">
             <label for="supplierName">Product Supplier</label>
-            <select class="form-control" name="supplierName" id="editsupplierName" #supplier="ngModel" [(ngModel)]="productsService.formData.supplier.supplierName">
-<!--              <option value="0">&#45;&#45;All&#45;&#45;</option>-->
-              <option *ngFor="let supplier of AllSuppliers" value="{{supplier.supplierName}}">{{supplier.supplierName}}</option>
+            <select class="form-control" name="supplierName" id="editsupplierName" #supplier="ngModel"
+              [(ngModel)]="productsService.formData.supplier.supplierName">
+              <option *ngFor="let supplier of AllSuppliers" value="{{supplier.supplierName}}">{{supplier.supplierName}}
+              </option>
             </select>
           </div>
           <div class="form-group">
+
             <!-- Full Price Input Field-->
             <label for="fullPrice">Full Price </label>
-            <input type="number" class="form-control" id="editfullPrice" placeholder="-"
-                   name="fullPrice" #fullPrice="ngModel" [(ngModel)]="productsService.formData.fullPrice"  required >
+            <input type="number" class="form-control" id="editfullPrice" placeholder="-" name="fullPrice"
+              #fullPrice="ngModel" [(ngModel)]="productsService.formData.fullPrice" required>
+
             <!-- Validation Div -->
             <div class="validation-error" *ngIf="fullPrice.invalid && fullPrice.touched"> This field is required. </div>
           </div>
           <div class="form-group">
+
             <!-- Sale Price Input Field-->
             <label for="salePrice">Sale Price </label>
-            <input type="number" class="form-control" id="editsalePrice" placeholder="-"
-                   name="salePrice" #salePrice="ngModel" [(ngModel)]="productsService.formData.salePrice"  required >
+            <input type="number" class="form-control" id="editsalePrice" placeholder="-" name="salePrice"
+              #salePrice="ngModel" [(ngModel)]="productsService.formData.salePrice" required>
+
             <!-- Validation Div -->
             <div class="validation-error" *ngIf="salePrice.invalid && salePrice.touched"> This field is required. </div>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="availability" #availability="ngModel" [(ngModel)]="productsService.formData.availability" [checked]="availability"> Available
+              <input type="checkbox" name="availability" #availability="ngModel"
+                [(ngModel)]="productsService.formData.availability" [checked]="availability"> Available
             </label>
           </div>
-          <button type="submit" class="btn btn-success" [disabled]="productForm.invalid" data-dismiss="modal" routerLink="/products" (click)="onSubmit(productForm)">Submit</button>
+          <button type="submit" class="btn btn-success" [disabled]="productForm.invalid" data-dismiss="modal"
+            routerLink="/products" (click)="onSubmit(productForm)">Submit</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -76,64 +94,80 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/products"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/products"><span
+            aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Add Product</h4>
       </div>
       <div class="modal-body">
         <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" autocomplete="off">
           <div class="form-group">
+
             <!-- Hidden input field for Product Id-->
-            <input type="hidden" class="form-control" id="productId" placeholder="Product Id"
-                   name="productId" #productId="ngModel" [(ngModel)]="productsService.addProdFormData.productId" >
+            <input type="hidden" class="form-control" id="productId" placeholder="Product Id" name="productId"
+              #productId="ngModel" [(ngModel)]="productsService.addProdFormData.productId">
+
             <!-- Product Name Input Field-->
             <label for="productName">Product Name</label>
-            <input type="text" class="form-control" id="productName" placeholder="Product Name"
-                   name="productName" #productName="ngModel" [(ngModel)]="productsService.addProdFormData.productName"  (click)="productsService.populateForm(product)" required >
+            <input type="text" class="form-control" id="productName" placeholder="Product Name" name="productName"
+              #productName="ngModel" [(ngModel)]="productsService.addProdFormData.productName"
+              (click)="productsService.populateForm(product)" required>
+
             <!-- Validation Div -->
-            <div class="validation-error" *ngIf="productName.invalid && productName.touched"> This field is required. </div>
+            <div class="validation-error" *ngIf="productName.invalid && productName.touched"> This field is required.
+            </div>
           </div>
           <div class="form-group">
+
             <!-- Product Category Input Field-->
-            <input type="hidden" class="form-control" id="categoryId" placeholder="Category Id"
-                    name="categoryId" #categoryId="ngModel" [(ngModel)]="productsService.addProdFormData.category.categoryId" >
+            <input type="hidden" class="form-control" id="categoryId" placeholder="Category Id" name="categoryId"
+              #categoryId="ngModel" [(ngModel)]="productsService.addProdFormData.category.categoryId">
             <label for="categoryName">Product Category</label>
-            <select class="form-control" name="categoryName" id="categoryName" #category="ngModel" [(ngModel)]="productsService.addProdFormData.category.categoryName">
-              <!--              <option value="0">&#45;&#45;All&#45;&#45;</option>-->
-              <option *ngFor="let category of AllCategories" value="{{category.categoryName}}">{{category.categoryName}}</option>
+            <select class="form-control" name="categoryName" id="categoryName" #category="ngModel"
+              [(ngModel)]="productsService.addProdFormData.category.categoryName">
+              <option *ngFor="let category of AllCategories" value="{{category.categoryName}}">{{category.categoryName}}
+              </option>
             </select>
           </div>
           <div class="form-group">
+
             <!-- Product Supplier Input Field-->
-            <input type="hidden" class="form-control" id="supplierId" placeholder="Supplier Id"
-                   name="supplierId" #supplierId="ngModel" [(ngModel)]="productsService.addProdFormData.supplier.supplierId" >
+            <input type="hidden" class="form-control" id="supplierId" placeholder="Supplier Id" name="supplierId"
+              #supplierId="ngModel" [(ngModel)]="productsService.addProdFormData.supplier.supplierId">
             <label for="supplierName">Product Supplier</label>
-            <select class="form-control" name="supplierName" id="supplierName" #supplier="ngModel" [(ngModel)]="productsService.addProdFormData.supplier.supplierName">
-              <!--              <option value="0">&#45;&#45;All&#45;&#45;</option>-->
-              <option *ngFor="let supplier of AllSuppliers" value="{{supplier.supplierName}}">{{supplier.supplierName}}</option>
+            <select class="form-control" name="supplierName" id="supplierName" #supplier="ngModel"
+              [(ngModel)]="productsService.addProdFormData.supplier.supplierName">
+              <option *ngFor="let supplier of AllSuppliers" value="{{supplier.supplierName}}">{{supplier.supplierName}}
+              </option>
             </select>
           </div>
           <div class="form-group">
+
             <!-- Full Price Input Field-->
             <label for="fullPrice">Full Price </label>
-            <input type="number" class="form-control" id="fullPrice" placeholder="-"
-                   name="fullPrice" #fullPrice="ngModel" [(ngModel)]="productsService.addProdFormData.fullPrice"  required >
+            <input type="number" class="form-control" id="fullPrice" placeholder="-" name="fullPrice"
+              #fullPrice="ngModel" [(ngModel)]="productsService.addProdFormData.fullPrice" required>
+
             <!-- Validation Div -->
             <div class="validation-error" *ngIf="fullPrice.invalid && fullPrice.touched"> This field is required. </div>
           </div>
           <div class="form-group">
+
             <!-- Sale Price Input Field-->
             <label for="salePrice">Sale Price </label>
-            <input type="number" class="form-control" id="salePrice" placeholder="-"
-                   name="salePrice" #salePrice="ngModel" [(ngModel)]="productsService.addProdFormData.salePrice"  required >
+            <input type="number" class="form-control" id="salePrice" placeholder="-" name="salePrice"
+              #salePrice="ngModel" [(ngModel)]="productsService.addProdFormData.salePrice" required>
+
             <!-- Validation Div -->
             <div class="validation-error" *ngIf="salePrice.invalid && salePrice.touched"> This field is required. </div>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="availability" #availability="ngModel" [(ngModel)]="productsService.addProdFormData.availability" [checked]="availability"> Available
+              <input type="checkbox" name="availability" #availability="ngModel"
+                [(ngModel)]="productsService.addProdFormData.availability" [checked]="availability"> Available
             </label>
           </div>
-          <button type="submit" class="btn btn-success" [disabled]="productForm.invalid" data-dismiss="modal" routerLink="/products" (click)="onSubmit(productForm)">Submit</button>
+          <button type="submit" class="btn btn-success" [disabled]="productForm.invalid" data-dismiss="modal"
+            routerLink="/products" (click)="onSubmit(productForm)">Submit</button>
         </form>
       </div>
       <div class="modal-footer">

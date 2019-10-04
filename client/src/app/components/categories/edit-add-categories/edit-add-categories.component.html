@@ -3,25 +3,33 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/categories"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/categories"><span
+            aria-hidden="true">&times;</span></button>
+
         <!-- display the word "Edit" in the title if the when the edit button is clicked -->
         <h4 class="modal-title">{{category.categoryId ? 'Edit' : 'Add'}} Category</h4>
       </div>
       <div class="modal-body">
         <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" autocomplete="off">
           <div class="form-group">
+
             <!-- Hidden input field for Category Id-->
-            <input type="hidden" class="form-control" id="categoryId" placeholder="Category Id"
-                    name="categoryId" #categoryId="ngModel" [(ngModel)]="categoriesService.formData.categoryId" >
+            <input type="hidden" class="form-control" id="categoryId" placeholder="Category Id" name="categoryId"
+              #categoryId="ngModel" [(ngModel)]="categoriesService.formData.categoryId">
+
             <!-- Category Name Input Field-->
             <label for="categoryName">Category Name</label>
-            <input type="text" class="form-control" id="categoryName" placeholder="Category Name"
-                   name="categoryName" #categoryName="ngModel" [(ngModel)]="categoriesService.formData.categoryName"  required >
+            <input type="text" class="form-control" id="categoryName" placeholder="Category Name" name="categoryName"
+              #categoryName="ngModel" [(ngModel)]="categoriesService.formData.categoryName" required>
+
             <!-- Validation Div -->
-            <div class="validation-error" *ngIf="categoryName.invalid && categoryName.touched"> This field is required. </div>
+            <div class="validation-error" *ngIf="categoryName.invalid && categoryName.touched"> This field is required.
+            </div>
           </div>
+
           <!-- Submit Button -->
-          <button type="submit" class="btn btn-success" [disabled]="categoryForm.invalid" data-dismiss="modal" routerLink="/categories" (click)="onSubmit(categoryForm)">Submit</button>
+          <button type="submit" class="btn btn-success" [disabled]="categoryForm.invalid" data-dismiss="modal"
+            routerLink="/categories" (click)="onSubmit(categoryForm)">Submit</button>
         </form>
       </div>
       <div class="modal-footer">

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink=""> <i class="fas fa-tachometer-alt dashIcon"></i> </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -23,54 +23,64 @@
 
       <!-- Add Category Button -->
       <div id="addBtnDiv">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryForm" routerLink="/category-add">Add Category</button>
+        <button mat-raised-button color="primary" type="button" class="btn btn-primary" data-toggle="modal"
+          data-target="#addCategoryForm" routerLink="/category-add">Add Category</button>
       </div>
 
       <!-- Table -->
       <div class="table-responsive tableWidth">
         <table class="table table-bordered table-striped">
           <thead>
-          <tr>
-            <!-- Column Headings -->
-            <th class="centerAlignText"># <i class="fas fa-sort sortIcon" (click)="sortByCategoryId()"></i></th>
-            <th>Category Name <i class="fas fa-sort sortIcon" (click)="sortByCategoryName()"></i></th>
-            <!-- Category Count -->
-            <th id="totalCats"> Total # of Categories: {{categoriesService.numOfCategories}} </th>
+            <tr>
+              <!-- Column Headings -->
+              <th class="centerAlignText"># <i class="fas fa-sort sortIcon" (click)="sortByCategoryId()"></i></th>
+              <th>Category Name <i class="fas fa-sort sortIcon" (click)="sortByCategoryName()"></i></th>
+              <!-- Category Count -->
+              <th id="totalCats"> Total # of Categories: <span class="totalDisplay">
+                  {{categoriesService.numOfCategories}} </span></th>
 
 
-          </tr>
+            </tr>
           </thead>
           <tbody>
-          <!-- Table Rows -->
-          <tr *ngFor="let category of categoriesService.list"> <!-- for each category in the categories table do the following -->
-            <td class="centerAlignText">{{category.categoryId}}</td> <!-- load the category id in the ID column -->
-            <td>{{category.categoryName}}</td> <!-- load the category name in the category name column -->
-            <td class="text-right" id="tableDataBtns">
-              <div class="btn-group" role="group">
-                <!-- Edit Button -->
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addCategoryForm"
-                        [routerLink]="['/category-edit', category.categoryId]"
-                        (click)="categoriesService.populateForm(category)"><i class="far fa-edit"></i></button>
-                <!-- Delete Button -->
-                <button type="button" class="btn btn-danger" (click)="onDelete(category.categoryId)"><i class="far fa-trash-alt"></i></button>
-              </div>
-            </td>
-          </tr>
+            <!-- Table Rows -->
+            <tr *ngFor="let category of categoriesService.list">
+
+              <!-- for each category in the categories table do the following -->
+              <td class="centerAlignText">{{category.categoryId}}</td> <!-- load the category id in the ID column -->
+              <td>{{category.categoryName}}</td> <!-- load the category name in the category name column -->
+              <td class="text-right" id="tableDataBtns">
+                <div class="btn-group" role="group">
+
+                  <!-- Edit Button -->
+                  <button mat-raised-button color="accent" type="button" class="btn btn-secondary" data-toggle="modal"
+                    data-target="#addCategoryForm" [routerLink]="['/category-edit', category.categoryId]"
+                    (click)="categoriesService.populateForm(category)"><i class="far fa-edit"></i></button>
+
+                  <!-- Delete Button -->
+                  <button mat-raised-button color="warn" type="button" class="btn btn-danger"
+                    (click)="onDelete(category.categoryId)"><i class="far fa-trash-alt"></i></button>
+                </div>
+              </td>
+            </tr>
 
           </tbody>
         </table>
       </div>
       <nav aria-label="Table Navigation" id="paginationNav">
         <ul class="pagination">
-          <li class="page-item"><button class="page-link" type="button" [disabled]="categoriesService.currentPageNum === 0"(click)="previousPage()"><i class="fas fa-angle-double-left"></i> Previous </button></li>
-          <li class="page-item"><button class="page-link" type="button" [disabled]="categoriesService.currentPageNum + 1 === categoriesService.totalNumOfPages" (click)="nextPage()">Next <i class="fas fa-angle-double-right"></i></button></li>
+          <li class="page-item"><button class="page-link" type="button"
+              [disabled]="categoriesService.currentPageNum === 0" (click)="previousPage()"><i
+                class="fas fa-angle-double-left"></i> Previous </button></li>
+          <li class="page-item"><button class="page-link" type="button"
+              [disabled]="categoriesService.currentPageNum + 1 === categoriesService.totalNumOfPages"
+              (click)="nextPage()">Next <i class="fas fa-angle-double-right"></i></button></li>
         </ul>
         <div>
-          <p>  page {{categoriesService.currentPageNum + 1}} of {{categoriesService.totalNumOfPages}} </p>
+          <p> page {{categoriesService.currentPageNum + 1}} of {{categoriesService.totalNumOfPages}} </p>
         </div>
       </nav>
     </div>
   </div>
 
 </div>
-

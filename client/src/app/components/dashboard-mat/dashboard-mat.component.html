@@ -260,7 +260,8 @@
 
           <div id="BtnDiv">
             <!-- Filter Button  -->
-            <button class="filterBtns" mat-raised-button (click)="filterData(filter)" color="primary" [disabled]="filter.filterValue1 == ''"> Filter </button>
+            <button class="filterBtns" mat-raised-button (click)="filterData(filter)" color="primary"
+              [disabled]="filter.filterValue1 == ''"> Filter </button>
             <!-- Un-Filter Button  -->
             <button class="filterBtns" id="unFilterBtn" mat-raised-button (click)="unfilterData()" color="secondary">
               Un-Filter </button>
@@ -270,17 +271,27 @@
         <!-- Filter Display Messages  -->
         <div id="rightBody">
           <div>
-            <h5 *ngIf="this.filteredData1.length != 0">Phase 1 Results: <span class="resultsColor"> {{this.filteredData1.length}} products</span></h5>
-            <h5 *ngIf="filter.option1 != '' && filter.filterValue1 != '' && this.filteredData1.length == 0 && this.filterBtnClick == true">Phase 1 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>
+            <h5 *ngIf="this.filteredData1.length != 0">Phase 1 Results: <span class="resultsColor">
+                {{this.filteredData1.length}} products</span></h5>
+            <h5
+              *ngIf="filter.option1 != '' && filter.filterValue1 != '' && this.filteredData1.length == 0 && this.filterBtnClick == true">
+              Phase 1 Results: <span class="resultsColor"> there are no products matching your search criteria</span>
+            </h5>
           </div>
           <div>
-            <h5 *ngIf="this.filteredData2.length != 0">Phase 2 Results: <span class="resultsColor"> {{this.filteredData2.length}} products</span></h5>
-<!--            <h5 *ngIf="filter.option2 != '' && filter.filterValue2 != '' && this.filteredData2.length == 0 && this.filterBtnClick == true">Phase 2 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>-->
-            <h5 *ngIf="this.filterBtnClick == true && filter.filterValue2 != '' && this.filteredData2.length == 0">Phase 2 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>
+            <h5 *ngIf="this.filteredData2.length != 0">Phase 2 Results: <span class="resultsColor">
+                {{this.filteredData2.length}} products</span></h5>
+            <!--            <h5 *ngIf="filter.option2 != '' && filter.filterValue2 != '' && this.filteredData2.length == 0 && this.filterBtnClick == true">Phase 2 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>-->
+            <h5 *ngIf="this.filterBtnClick == true && filter.filterValue2 != '' && this.filteredData2.length == 0">Phase
+              2 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>
           </div>
           <div>
-            <h5 *ngIf="this.filteredData3.length != 0">Phase 3 Results: <span class="resultsColor"> {{this.filteredData3.length}} products</span></h5>
-            <h5 *ngIf="filter.option3 != '' && filter.filterValue3 != '' && this.filteredData3.length == 0 && this.filterBtnClick == true">Phase 3 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>
+            <h5 *ngIf="this.filteredData3.length != 0">Phase 3 Results: <span class="resultsColor">
+                {{this.filteredData3.length}} products</span></h5>
+            <h5
+              *ngIf="filter.option3 != '' && filter.filterValue3 != '' && this.filteredData3.length == 0 && this.filterBtnClick == true">
+              Phase 3 Results: <span class="resultsColor"> there are no products matching your search criteria</span>
+            </h5>
           </div>
         </div>
 

@@ -273,16 +273,21 @@
           <div>
             <h5 *ngIf="this.filteredData1.length != 0">Phase 1 Results: <span class="resultsColor">
                 {{this.filteredData1.length}} products</span></h5>
+<!--            <h5-->
+<!--              *ngIf="filter.option1 != '' && filter.filterValue1 != '' && this.filteredData1.length == 0 && this.filterBtnClick == true">-->
+<!--              Phase 1 Results: <span class="resultsColor"> there are no products matching your search criteria</span>-->
+<!--            </h5>-->
             <h5
-              *ngIf="filter.option1 != '' && filter.filterValue1 != '' && this.filteredData1.length == 0 && this.filterBtnClick == true">
+              *ngIf="filter.filterValue1 != '' && this.filteredDataFinal.length == 0 && this.filterBtnClick == true">
               Phase 1 Results: <span class="resultsColor"> there are no products matching your search criteria</span>
             </h5>
+
           </div>
           <div>
             <h5 *ngIf="this.filteredData2.length != 0">Phase 2 Results: <span class="resultsColor">
                 {{this.filteredData2.length}} products</span></h5>
             <!--            <h5 *ngIf="filter.option2 != '' && filter.filterValue2 != '' && this.filteredData2.length == 0 && this.filterBtnClick == true">Phase 2 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>-->
-            <h5 *ngIf="this.filterBtnClick == true && filter.filterValue2 != '' && this.filteredData2.length == 0">Phase
+            <h5 *ngIf="this.filterBtnClick == true && filter.filterValue2 != '' && this.filteredDataFinal.length != 0">Phase
               2 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>
           </div>
           <div>
@@ -328,7 +333,7 @@
         <!-- discount Column -->
         <ng-container matColumnDef="discount">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> DISCOUNT </th>
-          <td mat-cell *matCellDef="let product"> {{product.discount | percent: '.0-1'}} </td>
+          <td mat-cell *matCellDef="let product"> {{product.discount | percent: '.0-2'}} </td>
         </ng-container>
 
         <!-- supplier Column -->

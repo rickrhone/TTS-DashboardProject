@@ -22,7 +22,7 @@ export class DashboardMatComponent implements OnInit {
   AllSuppliers: Suppliers[]; // stores all the suppliers
   genFilterVisible = false; // stores the state of the general filter
   customFilterVisible = false; // stores the state of the custom filter
-  filteredDataFinal; // variable to store the filtered data and the end of the filtering process
+  filteredDataFinal: Allproducts[] = []; // variable to store the filtered data and the end of the filtering process
   filteredData1: Allproducts[] = []; // Variable to store the first filtering of the Data
   filteredData2: Allproducts[] = []; // Variable to store the second filtering of the Data
   filteredData3: Allproducts[] = []; // Variable to store the third filtering of the Data
@@ -119,8 +119,10 @@ export class DashboardMatComponent implements OnInit {
       this.filterBtnClick = true;
     }
 
+
     console.log(filter.filterValue1);
     console.log(this.filterBtnClick);
+
 
     // What to do if all three options are chosen
     if (filter.option1 !== '' && filter.option2 !== '' && filter.option3 !== '') {
@@ -134,7 +136,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.productId < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.productId === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.productId === parseInt(filter.filterValue1, 10));
         } else {
           console.log('Error in ProductId Filtering');
         } // Product Name
@@ -147,7 +149,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.fullPrice < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.fullPrice === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.fullPrice === parseFloat(filter.filterValue1));
         } else {
           console.log('Error in fullPrice Filtering');
         } // Sale Price
@@ -157,17 +159,18 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.salePrice < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.salePrice === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.salePrice === parseFloat(filter.filterValue1));
         } else {
           console.log('Error in salePrice Filtering');
         } // Discount
       } else if (filter.option1 === 'discount') {
         if (filter.criteria1 === '>') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount > filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => (product.discount * 100) > filter.filterValue1);
         } else if (filter.criteria1 === '<') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount < filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => (product.discount * 100) < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(
+            product => parseFloat((product.discount * 100).toPrecision(4))  ===  parseFloat(filter.filterValue1));
         } else {
           console.log('Error in Discount Filtering');
         } // Supplier Name
@@ -196,7 +199,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria2 === '<') {
           this.filteredData2 = this.filteredData1.filter(product => product.productId < filter.filterValue2);
         } else if (filter.criteria2 === '==') {
-          this.filteredData2 = this.filteredData1.filter(product => product.productId === filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => product.productId === parseInt(filter.filterValue2, 10));
         } else {
           console.log('Error in ProductId Filtering');
         } // Product Name
@@ -209,7 +212,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria2 === '<') {
           this.filteredData2 = this.filteredData1.filter(product => product.fullPrice < filter.filterValue2);
         } else if (filter.criteria2 === '==') {
-          this.filteredData2 = this.filteredData1.filter(product => product.fullPrice === filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => product.fullPrice === parseFloat(filter.filterValue2));
         } else {
           console.log('Error in fullPrice Filtering');
         } // Sale Price
@@ -219,17 +222,18 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria2 === '<') {
           this.filteredData2 = this.filteredData1.filter(product => product.salePrice < filter.filterValue2);
         } else if (filter.criteria2 === '==') {
-          this.filteredData2 = this.filteredData1.filter(product => product.salePrice === filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => product.salePrice === parseFloat(filter.filterValue2));
         } else {
           console.log('Error in salePrice Filtering');
         } // Discount
       } else if (filter.option2 === 'discount') {
         if (filter.criteria2 === '>') {
-          this.filteredData2 = this.filteredData1.filter(product => product.discount > filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => (product.discount * 100) > filter.filterValue2);
         } else if (filter.criteria2 === '<') {
-          this.filteredData2 = this.filteredData1.filter(product => product.discount < filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => (product.discount * 100) < filter.filterValue2);
         } else if (filter.criteria2 === '==') {
-          this.filteredData2 = this.filteredData1.filter(product => product.discount === filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(
+            product => parseFloat((product.discount * 100).toPrecision(4))  ===  parseFloat(filter.filterValue2));
         } else {
           console.log('Error in Discount Filtering');
         } // Supplier Name
@@ -259,7 +263,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria3 === '<') {
           this.filteredData3 = this.filteredData2.filter(product => product.productId < filter.filterValue3);
         } else if (filter.criteria3 === '==') {
-          this.filteredData3 = this.filteredData2.filter(product => product.productId === filter.filterValue3);
+          this.filteredData3 = this.filteredData2.filter(product => product.productId === parseInt(filter.filterValue3, 10));
         } else {
           console.log('Error in ProductId Filtering');
         } // Product Name
@@ -272,7 +276,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria3 === '<') {
           this.filteredData3 = this.filteredData2.filter(product => product.fullPrice < filter.filterValue3);
         } else if (filter.criteria3 === '==') {
-          this.filteredData3 = this.filteredData2.filter(product => product.fullPrice === filter.filterValue3);
+          this.filteredData3 = this.filteredData2.filter(product => product.fullPrice === parseFloat(filter.filterValue3));
         } else {
           console.log('Error in fullPrice Filtering');
         } // Sale Price
@@ -282,17 +286,18 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria3 === '<') {
           this.filteredData3 = this.filteredData2.filter(product => product.salePrice < filter.filterValue3);
         } else if (filter.criteria3 === '==') {
-          this.filteredData3 = this.filteredData2.filter(product => product.salePrice === filter.filterValue3);
+          this.filteredData3 = this.filteredData2.filter(product => product.salePrice === parseFloat(filter.filterValue3));
         } else {
           console.log('Error in salePrice Filtering');
         } // Discount
       } else if (filter.option3 === 'discount') {
         if (filter.criteria3 === '>') {
-          this.filteredData3 = this.filteredData2.filter(product => product.discount > filter.filterValue3);
+          this.filteredData3 = this.filteredData2.filter(product => (product.discount * 100) > filter.filterValue3);
         } else if (filter.criteria3 === '<') {
-          this.filteredData3 = this.filteredData2.filter(product => product.discount < filter.filterValue3);
+          this.filteredData3 = this.filteredData2.filter(product => (product.discount * 100) < filter.filterValue3);
         } else if (filter.criteria3 === '==') {
-          this.filteredData3 = this.filteredData2.filter(product => product.discount === filter.filterValue3);
+          this.filteredData3 = this.filteredData2.filter(
+            product => parseFloat((product.discount * 100).toPrecision(4))  ===  parseFloat(filter.filterValue3));
         } else {
           console.log('Error in Discount Filtering');
         } // Supplier Name
@@ -329,7 +334,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.productId < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.productId === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.productId === parseInt(filter.filterValue1, 10));
         } else {
           console.log('Error in ProductId Filtering');
         } // Product Name
@@ -342,7 +347,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.fullPrice < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.fullPrice === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.fullPrice === parseFloat(filter.filterValue1));
         } else {
           console.log('Error in fullPrice Filtering');
         } // Sale Price
@@ -352,17 +357,18 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.salePrice < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.salePrice === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.salePrice === parseFloat(filter.filterValue1));
         } else {
           console.log('Error in salePrice Filtering');
         } // Discount
       } else if (filter.option1 === 'discount') {
         if (filter.criteria1 === '>') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount > filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => (product.discount * 100) > filter.filterValue1);
         } else if (filter.criteria1 === '<') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount < filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => (product.discount * 100)  < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(
+            product => parseFloat((product.discount * 100).toPrecision(4))  ===  parseFloat(filter.filterValue1));
         } else {
           console.log('Error in Discount Filtering');
         } // Supplier Name
@@ -392,7 +398,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria2 === '<') {
           this.filteredData2 = this.filteredData1.filter(product => product.productId < filter.filterValue2);
         } else if (filter.criteria2 === '==') {
-          this.filteredData2 = this.filteredData1.filter(product => product.productId === filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => product.productId === parseInt(filter.filterValue2, 10));
         } else {
           console.log('Error in ProductId Filtering');
         } // Product Name
@@ -405,7 +411,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria2 === '<') {
           this.filteredData2 = this.filteredData1.filter(product => product.fullPrice < filter.filterValue2);
         } else if (filter.criteria2 === '==') {
-          this.filteredData2 = this.filteredData1.filter(product => product.fullPrice === filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => product.fullPrice === parseFloat(filter.filterValue2));
         } else {
           console.log('Error in fullPrice Filtering');
         } // Sale Price
@@ -415,17 +421,18 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria2 === '<') {
           this.filteredData2 = this.filteredData1.filter(product => product.salePrice < filter.filterValue2);
         } else if (filter.criteria2 === '==') {
-          this.filteredData2 = this.filteredData1.filter(product => product.salePrice === filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => product.salePrice === parseFloat(filter.filterValue2));
         } else {
           console.log('Error in salePrice Filtering');
         } // Discount
       } else if (filter.option2 === 'discount') {
         if (filter.criteria2 === '>') {
-          this.filteredData2 = this.filteredData1.filter(product => product.discount > filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => (product.discount * 100) > filter.filterValue2);
         } else if (filter.criteria2 === '<') {
-          this.filteredData2 = this.filteredData1.filter(product => product.discount < filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(product => (product.discount * 100) < filter.filterValue2);
         } else if (filter.criteria2 === '==') {
-          this.filteredData2 = this.filteredData1.filter(product => product.discount === filter.filterValue2);
+          this.filteredData2 = this.filteredData1.filter(
+            product => parseFloat((product.discount * 100).toPrecision(4))  ===  parseFloat(filter.filterValue2));
         } else {
           console.log('Error in Discount Filtering');
         } // Supplier Name
@@ -462,7 +469,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.productId < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.productId === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.productId === parseInt(filter.filterValue1, 10));
         } else {
           console.log('Error in ProductId Filtering');
         } // Product Name
@@ -475,7 +482,7 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.fullPrice < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.fullPrice === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.fullPrice === parseFloat(filter.filterValue1));
         } else {
           console.log('Error in fullPrice Filtering');
         } // Sale Price
@@ -485,17 +492,19 @@ export class DashboardMatComponent implements OnInit {
         } else if (filter.criteria1 === '<') {
           this.filteredData1 = this.AllProducts.filter(product => product.salePrice < filter.filterValue1);
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.salePrice === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => product.salePrice === parseFloat(filter.filterValue1));
         } else {
           console.log('Error in salePrice Filtering');
         } // Discount
       } else if (filter.option1 === 'discount') {
         if (filter.criteria1 === '>') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount > filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => (product.discount * 100) > parseFloat(filter.filterValue1));
         } else if (filter.criteria1 === '<') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount < filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(product => (product.discount * 100) < parseFloat(filter.filterValue1));
         } else if (filter.criteria1 === '==') {
-          this.filteredData1 = this.AllProducts.filter(product => product.discount === filter.filterValue1);
+          this.filteredData1 = this.AllProducts.filter(
+            product => parseFloat((product.discount * 100).toPrecision(4))  ===  parseFloat(filter.filterValue1));
+          console.log('I ran');
         } else {
           console.log('Error in Discount Filtering');
         } // Supplier Name
@@ -521,6 +530,14 @@ export class DashboardMatComponent implements OnInit {
 
     // Assigning the filtered data to the dataSource
     this.dataSource.data = this.filteredDataFinal;
+
+    console.log(this.AllProducts);
+    console.log(filter);
+    console.log(this.filteredData1);
+    console.log(this.filteredData2);
+    console.log(this.filteredData3);
+    console.log(this.filteredDataFinal);
+    console.log(this.dataSource);
   }
 
   // Filter Logic

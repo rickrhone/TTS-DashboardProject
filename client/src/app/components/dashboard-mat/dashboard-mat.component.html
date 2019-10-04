@@ -66,40 +66,43 @@
     <div class="labelDiv"> Criteria: </div>
     <div>
       <!-- Criteria 1 -->
-      <mat-form-field class="CriteriaSelection">
-        <mat-select class="customFilter" [(value)]="filter.criteria1" placeholder="---Select---">
-          <!-- Greater than and less than are only valid choices for columns with numbers -->
-          <mat-option value=">" *ngIf="filter.option1 === 'productId' || filter.option1 === 'fullPrice'
-            || filter.option1 === 'salePrice' || filter.option1 === 'discount'"> Greater than </mat-option>
-          <mat-option value="<" *ngIf="filter.option1 === 'productId' || filter.option1 === 'fullPrice'
-            || filter.option1 === 'salePrice' || filter.option1 === 'discount'"> Less than </mat-option>
-          <mat-option value="=="> Equals </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="CriteriaSelection">
+        <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
+        <mat-form-field  *ngIf="filter.option1 === 'productId' || filter.option1 === 'fullPrice'
+              || filter.option1 === 'salePrice' || filter.option1 === 'discount'">
+          <mat-select class="customFilter" [(value)]="filter.criteria1" placeholder="---Select---">
+            <mat-option value=">"> Greater than </mat-option>
+            <mat-option value="<"> Less than </mat-option>
+            <mat-option value="=="> Equals </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
       <!-- Criteria 2 -->
-      <mat-form-field class="CriteriaSelection">
-        <mat-select class="customFilter" [(value)]="filter.criteria2" placeholder="---Select---">
-          <!-- Greater than and less than are only valid choices for columns with numbers -->
-          <mat-option value=">" *ngIf="filter.option2 === 'productId' || filter.option2 === 'fullPrice'
-            || filter.option2 === 'salePrice' || filter.option2 === 'discount'"> Greater than </mat-option>
-          <mat-option value="<" *ngIf="filter.option2 === 'productId' || filter.option2 === 'fullPrice'
-            || filter.option2 === 'salePrice' || filter.option2 === 'discount'"> Less than </mat-option>
-          <mat-option value="=="> Equals </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="CriteriaSelection">
+        <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
+        <mat-form-field  *ngIf="filter.option2 === 'productId' || filter.option2 === 'fullPrice'
+              || filter.option2 === 'salePrice' || filter.option2 === 'discount'">
+          <mat-select class="customFilter" [(value)]="filter.criteria2" placeholder="---Select---">
+            <mat-option value=">"> Greater than </mat-option>
+            <mat-option value="<"> Less than </mat-option>
+            <mat-option value="=="> Equals </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
       <!-- Criteria 3 -->
-      <mat-form-field class="CriteriaSelection">
-        <mat-select class="customFilter" [(value)]="filter.criteria3" placeholder="---Select---">
-          <!-- Greater than and less than are only valid choices for columns with numbers -->
-          <mat-option value=">" *ngIf="filter.option3 === 'productId' || filter.option3 === 'fullPrice'
-            || filter.option3 === 'salePrice' || filter.option3 === 'discount'"> Greater than </mat-option>
-          <mat-option value="<" *ngIf="filter.option3 === 'productId' || filter.option3 === 'fullPrice'
-            || filter.option3 === 'salePrice' || filter.option3 === 'discount'"> Less than </mat-option>
-          <mat-option value="=="> Equals </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="CriteriaSelection">
+        <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
+        <mat-form-field  *ngIf="filter.option3 === 'productId' || filter.option3 === 'fullPrice'
+              || filter.option3 === 'salePrice' || filter.option3 === 'discount'">
+          <mat-select class="customFilter" [(value)]="filter.criteria3" placeholder="---Select---">
+            <mat-option value=">"> Greater than </mat-option>
+            <mat-option value="<"> Less than </mat-option>
+            <mat-option value="=="> Equals </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
     </div>
   </div>

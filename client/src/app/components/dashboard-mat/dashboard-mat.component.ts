@@ -97,11 +97,8 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in ProductId Filtering');
         } // Product Name
       } else if (filter.option1 === 'productName') {
-        if (filter.criteria1 === '==') {
           filteredData1 = this.AllProducts.filter(product => product.productName === filter.filterValue1);
-        } else  {
-          console.log('Error in ProductName Filtering');
-        } // Full Price
+        // Full Price
       } else if (filter.option1 === 'fullPrice') {
         if (filter.criteria1 === '>') {
           filteredData1 = this.AllProducts.filter(product => product.fullPrice > filter.filterValue1);
@@ -133,25 +130,17 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in Discount Filtering');
         } // Supplier Name
       } else if (filter.option1 === 'supplierName') {
-        if (filter.criteria1 === '==') {
           filteredData1 = this.AllProducts.filter(product => product.supplier.supplierName === filter.filterValue1);
-        } else {
-          console.log('Error in Supplier Filtering');
-        } // Category
+       // Category
       } else if (filter.option1 === 'category') {
-        if (filter.criteria1 === '==') {
           filteredData1 = this.AllProducts.filter(product => product.category.categoryName === filter.filterValue1);
-        } else {
-          console.log('Error in Category Filtering');
-        } // Availability
+         // Availability
       } else if (filter.option1 === 'availability') {
         if (filter.criteria1 === '==') {
-          if (filter.filterValue1 === 'true') {
             filteredData1 = this.AllProducts.filter(product => product.availability === true);
           } else if (filter.filterValue1 === 'false') {
             filteredData1 = this.AllProducts.filter(product => product.availability === false);
-          }
-        } else {
+          } else {
           console.log('Error in Availability Filtering');
         }
       }
@@ -173,11 +162,8 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in ProductId Filtering');
         } // Product Name
       } else if (filter.option2 === 'productName') {
-        if (filter.criteria2 === '==') {
           filteredData2 = filteredData1.filter(product => product.productName === filter.filterValue2);
-        } else  {
-          console.log('Error in ProductName Filtering');
-        } // Full Price
+        // Full Price
       } else if (filter.option2 === 'fullPrice') {
         if (filter.criteria2 === '>') {
           filteredData2 = filteredData1.filter(product => product.fullPrice > filter.filterValue2);
@@ -209,25 +195,17 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in Discount Filtering');
         } // Supplier Name
       } else if (filter.option2 === 'supplierName') {
-        if (filter.criteria2 === '==') {
           filteredData2 = filteredData1.filter(product => product.supplier.supplierName === filter.filterValue2);
-        } else {
-          console.log('Error in Supplier Filtering');
-        } // Category
+        // Category
       } else if (filter.option2 === 'category') {
-        if (filter.criteria2 === '==') {
           filteredData2 = filteredData1.filter(product => product.category.categoryName === filter.filterValue2);
-        } else {
-          console.log('Error in Category Filtering');
-        } // Availability
+        // Availability
       } else if (filter.option2 === 'availability') {
-        if (filter.criteria2 === '==') {
           if (filter.filterValue2 === 'true') {
             filteredData2 = filteredData1.filter(product => product.availability === true);
           } else if (filter.filterValue2 === 'false') {
             filteredData2 = filteredData1.filter(product => product.availability === false);
-          }
-        } else {
+          } else {
           console.log('Error in Availability Filtering');
         }
       }
@@ -249,11 +227,8 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in ProductId Filtering');
         } // Product Name
       } else if (filter.option3 === 'productName') {
-        if (filter.criteria3 === '==') {
           filteredData3 = filteredData2.filter(product => product.productName === filter.filterValue3);
-        } else  {
-          console.log('Error in ProductName Filtering');
-        } // Full Price
+         // Full Price
       } else if (filter.option3 === 'fullPrice') {
         if (filter.criteria3 === '>') {
           filteredData3 = filteredData2.filter(product => product.fullPrice > filter.filterValue3);
@@ -285,25 +260,17 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in Discount Filtering');
         } // Supplier Name
       } else if (filter.option3 === 'supplierName') {
-        if (filter.criteria3 === '==') {
           filteredData3 = filteredData2.filter(product => product.supplier.supplierName === filter.filterValue3);
-        } else {
-          console.log('Error in Supplier Filtering');
-        } // Category
+         // Category
       } else if (filter.option3 === 'category') {
-        if (filter.criteria3 === '==') {
           filteredData3 = filteredData2.filter(product => product.category.categoryName === filter.filterValue3);
-        } else {
-          console.log('Error in Category Filtering');
-        } // Availability
+         // Availability
       } else if (filter.option3 === 'availability') {
-        if (filter.criteria3 === '==') {
           if (filter.filterValue3 === 'true') {
             filteredData3 = filteredData2.filter(product => product.availability === true);
           } else if (filter.filterValue3 === 'false') {
             filteredData3 = filteredData2.filter(product => product.availability === false);
-          }
-        } else {
+          } else {
           console.log('Error in Availability Filtering');
         }
       }
@@ -334,11 +301,8 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in ProductId Filtering');
         } // Product Name
       } else if (filter.option1 === 'productName') {
-        if (filter.criteria1 === '==') {
           filteredData1 = this.AllProducts.filter(product => product.productName === filter.filterValue1);
-        } else  {
-          console.log('Error in ProductName Filtering');
-        } // Full Price
+         // Full Price
       } else if (filter.option1 === 'fullPrice') {
         if (filter.criteria1 === '>') {
           filteredData1 = this.AllProducts.filter(product => product.fullPrice > filter.filterValue1);
@@ -370,25 +334,17 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in Discount Filtering');
         } // Supplier Name
       } else if (filter.option1 === 'supplierName') {
-        if (filter.criteria1 === '==') {
           filteredData1 = this.AllProducts.filter(product => product.supplier.supplierName === filter.filterValue1);
-        } else {
-          console.log('Error in Supplier Filtering');
-        } // Category
+         // Category
       } else if (filter.option1 === 'category') {
-        if (filter.criteria1 === '==') {
           filteredData1 = this.AllProducts.filter(product => product.category.categoryName === filter.filterValue1);
-        } else {
-          console.log('Error in Category Filtering');
-        } // Availability
+         // Availability
       } else if (filter.option1 === 'availability') {
-        if (filter.criteria1 === '==') {
           if (filter.filterValue1 === 'true') {
             filteredData1 = this.AllProducts.filter(product => product.availability === true);
           } else if (filter.filterValue1 === 'false') {
             filteredData1 = this.AllProducts.filter(product => product.availability === false);
-          }
-        } else {
+          } else {
           console.log('Error in Availability Filtering');
         }
       }
@@ -410,11 +366,8 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in ProductId Filtering');
         } // Product Name
       } else if (filter.option2 === 'productName') {
-        if (filter.criteria2 === '==') {
           filteredData2 = filteredData1.filter(product => product.productName === filter.filterValue2);
-        } else  {
-          console.log('Error in ProductName Filtering');
-        } // Full Price
+         // Full Price
       } else if (filter.option2 === 'fullPrice') {
         if (filter.criteria2 === '>') {
           filteredData2 = filteredData1.filter(product => product.fullPrice > filter.filterValue2);
@@ -446,25 +399,17 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in Discount Filtering');
         } // Supplier Name
       } else if (filter.option2 === 'supplierName') {
-        if (filter.criteria2 === '==') {
           filteredData2 = filteredData1.filter(product => product.supplier.supplierName === filter.filterValue2);
-        } else {
-          console.log('Error in Supplier Filtering');
-        } // Category
+         // Category
       } else if (filter.option2 === 'category') {
-        if (filter.criteria2 === '==') {
           filteredData2 = filteredData1.filter(product => product.category.categoryName === filter.filterValue2);
-        } else {
-          console.log('Error in Category Filtering');
-        } // Availability
+        // Availability
       } else if (filter.option2 === 'availability') {
-        if (filter.criteria2 === '==') {
           if (filter.filterValue2 === 'true') {
             filteredData2 = filteredData1.filter(product => product.availability === true);
           } else if (filter.filterValue2 === 'false') {
             filteredData2 = filteredData1.filter(product => product.availability === false);
-          }
-        } else {
+          } else {
           console.log('Error in Availability Filtering');
         }
       }
@@ -497,11 +442,8 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in ProductId Filtering');
         } // Product Name
       } else if (filter.option1 === 'productName') {
-        if (filter.criteria1 === '==') {
-          filteredData1 = this.AllProducts.filter(product => product.productName === filter.filterValue1);
-        } else  {
-          console.log('Error in ProductName Filtering');
-        } // Full Price
+         filteredData1 = this.AllProducts.filter(product => product.productName === filter.filterValue1);
+        // Full Price
       } else if (filter.option1 === 'fullPrice') {
         if (filter.criteria1 === '>') {
           filteredData1 = this.AllProducts.filter(product => product.fullPrice > filter.filterValue1);
@@ -533,17 +475,11 @@ export class DashboardMatComponent implements OnInit {
           console.log('Error in Discount Filtering');
         } // Supplier Name
       } else if (filter.option1 === 'supplierName') {
-        if (filter.criteria1 === '==') {
           filteredData1 = this.AllProducts.filter(product => product.supplier.supplierName === filter.filterValue1);
-        } else {
-          console.log('Error in Supplier Filtering');
-        } // Category
+        // Category
       } else if (filter.option1 === 'category') {
-        if (filter.criteria1 === '==') {
           filteredData1 = this.AllProducts.filter(product => product.category.categoryName === filter.filterValue1);
-        } else {
-          console.log('Error in Category Filtering');
-        } // Availability
+        // Availability
       } else if (filter.option1 === 'availability') {
           if (filter.filterValue1 === 'true') {
             filteredData1 = this.AllProducts.filter(product => product.availability === true);

@@ -26,7 +26,7 @@
           <mat-option value="salePrice"> Sale Price </mat-option>
           <mat-option value="discount"> Discount </mat-option>
           <mat-option value="supplierName"> Supplier Name </mat-option>
-          <mat-option value="categoryName"> Category </mat-option>
+          <mat-option value="category"> Category </mat-option>
           <mat-option value="availability"> Availability </mat-option>
         </mat-select>
       </mat-form-field>
@@ -40,7 +40,7 @@
           <mat-option value="salePrice"> Sale Price </mat-option>
           <mat-option value="discount"> Discount </mat-option>
           <mat-option value="supplierName"> Supplier Name </mat-option>
-          <mat-option value="categoryName"> Category </mat-option>
+          <mat-option value="category"> Category </mat-option>
           <mat-option value="availability"> Availability </mat-option>
         </mat-select>
       </mat-form-field>
@@ -54,7 +54,7 @@
           <mat-option value="salePrice"> Sale Price </mat-option>
           <mat-option value="discount"> Discount </mat-option>
           <mat-option value="supplierName"> Supplier Name </mat-option>
-          <mat-option value="categoryName"> Category </mat-option>
+          <mat-option value="category"> Category </mat-option>
           <mat-option value="availability"> Availability </mat-option>
         </mat-select>
       </mat-form-field>
@@ -116,7 +116,7 @@
       <!-- Value 1 -->
       <div class="valueSelection">
         <!-- Display a dropdown to choose the category if category was chosen as the option-->
-        <mat-form-field *ngIf="filter.option1 === 'categoryName'">
+        <mat-form-field *ngIf="filter.option1 === 'category'">
           <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
             <mat-option name="categoryName" *ngFor="let category of AllCategories" value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
           </mat-select>
@@ -140,7 +140,7 @@
             <mat-option value="false"> False </mat-option>
           </mat-select>
         </mat-form-field>
-        <input matInput *ngIf="filter.option1 != 'categoryName' && filter.option1 != 'supplierName'
+        <input matInput *ngIf="filter.option1 != 'category' && filter.option1 != 'supplierName'
                && filter.option1 != 'productName' && filter.option1 != 'availability'" placeholder="value"
                #filterValue1="ngModel" [(ngModel)]="filter.filterValue1">
       </div>
@@ -148,7 +148,7 @@
       <!-- Value 2 -->
       <div class="valueSelection">
         <!-- Display a dropdown to choose the category if category was chosen as the option-->
-        <mat-form-field *ngIf="filter.option2 === 'categoryName'">
+        <mat-form-field *ngIf="filter.option2 === 'category'">
           <mat-select class="customFilter" [(value)]="filter.filterValue2" placeholder="---Select---">
             <mat-option name="categoryName" *ngFor="let category of AllCategories" value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
           </mat-select>
@@ -172,7 +172,7 @@
             <mat-option value="false"> False </mat-option>
           </mat-select>
         </mat-form-field>
-        <input matInput *ngIf="filter.option2 != 'categoryName' && filter.option2 != 'supplierName'
+        <input matInput *ngIf="filter.option2 != 'category' && filter.option2 != 'supplierName'
                && filter.option2 != 'productName' && filter.option2 != 'availability'" placeholder="value"
                #filterValue2="ngModel" [(ngModel)]="filter.filterValue2">
       </div>
@@ -180,7 +180,7 @@
       <!-- Value 3 -->
       <div class="valueSelection">
         <!-- Display a dropdown to choose the category if category was chosen as the option-->
-        <mat-form-field *ngIf="filter.option3 === 'categoryName'">
+        <mat-form-field *ngIf="filter.option3 === 'category'">
           <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
             <mat-option name="categoryName" *ngFor="let category of AllCategories" value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
           </mat-select>
@@ -204,7 +204,7 @@
             <mat-option value="false"> False </mat-option>
           </mat-select>
         </mat-form-field>
-        <input matInput *ngIf="filter.option3 != 'categoryName' && filter.option3 != 'supplierName'
+        <input matInput *ngIf="filter.option3 != 'category' && filter.option3 != 'supplierName'
                && filter.option3 != 'productName' && filter.option3 != 'availability'" placeholder="value"
                #filterValue3="ngModel" [(ngModel)]="filter.filterValue3">
       </div>

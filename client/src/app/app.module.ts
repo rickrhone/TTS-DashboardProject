@@ -24,8 +24,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardMatComponent } from './components/dashboard-mat/dashboard-mat.component';
 
 // Angular Material
-import { MatSliderModule } from '@angular/material/slider';
-import { MatTableModule, MatSortModule, MatPaginatorModule} from '@angular/material';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule, MatSelectModule} from '@angular/material';
 
 
 @NgModule({
@@ -47,10 +51,13 @@ import { MatTableModule, MatSortModule, MatPaginatorModule} from '@angular/mater
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    MatSliderModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
   ],
   providers: [CategoriesService, ProductsService, SuppliersService], // so multiple components can share the same service
   bootstrap: [AppComponent]

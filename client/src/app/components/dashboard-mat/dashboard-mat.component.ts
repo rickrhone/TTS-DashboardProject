@@ -20,7 +20,10 @@ export class DashboardMatComponent implements OnInit {
   columnsToDisplay = ['productId', 'productName', 'fullPrice', 'salePrice', 'discount', 'supplier', 'category', 'availability'];
   AllCategories: Categories[]; // stores all the categories
   AllSuppliers: Suppliers[]; // stores all the suppliers
+  genFilterVisible = false; // stores the state of the general filter
+  customFilterVisible = false; // stores the state of the custom filter
 
+  // Object to store values from the custom filter
   filter = {
     option1: '', // user can choose at most 3 columns to filter on (ex. category, supplier, and availability)
     option2: '',
@@ -33,7 +36,7 @@ export class DashboardMatComponent implements OnInit {
     filterValue3: ''
   };
 
-
+  // Define the views of the table
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -50,10 +53,8 @@ export class DashboardMatComponent implements OnInit {
     // Method to get all the products and assign it to the array of products called AllProducts
     this.productsService.getAll().subscribe(result => { // gets the current list of all products non-pageable
       this.AllProducts = result;
-      console.log(this.AllProducts); // TODO: Delete
       this.dataSource.data = this.AllProducts;
     });
-
 
     // Apply pagination on initialization
     this.dataSource.paginator = this.paginator;
@@ -72,15 +73,35 @@ export class DashboardMatComponent implements OnInit {
     });
   }
 
-  // Filter Logic
+
+  toggleGeneralFilter() {
+    if (this.genFilterVisible == false) {
+      this.genFilterVisible = true;
+    } else {
+      this.genFilterVisible = false;
+    }
+  }
+
+  toggleCustomFilter() {
+    if (this.customFilterVisible == false) {
+      this.customFilterVisible = true;
+    } else {
+      this.customFilterVisible = false;
+    }
+  }
+
+  // General Filter
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  // Custom Filter Logic
   filterData(filter) {
-    console.log(filter);
 
     let filteredDataFinal; // variable to store the filtered data and the end of the filtering process
 
     // What to do if all three options are chosen
     if (filter.option1 !== '' && filter.option2 !== '' && filter.option3 !== '') {
-      console.log('Inside of 3 Options If Statement');
 
       // First: filter the data by option 1's criteria and value and store it in a variable
       let filteredData1; // Variable to store the first filtering of the Data
@@ -145,8 +166,6 @@ export class DashboardMatComponent implements OnInit {
         }
       }
 
-      console.log(filteredData1);
-
       // Second: filter the data remaining after option 1 by option 2's criteria and value and store it in a variable
       let filteredData2; // Variable to store the second filtering of the Data
 
@@ -210,7 +229,6 @@ export class DashboardMatComponent implements OnInit {
         }
       }
 
-      console.log(filteredData2);
 
       // Third: filter the data remaining after option 2 by option 3's criteria and value and assign it to the dataSource
       let filteredData3; // Variable to store the third filtering of the Data
@@ -277,14 +295,11 @@ export class DashboardMatComponent implements OnInit {
 
       // assigning the filtered data to the variable that stores it
       filteredDataFinal = filteredData3;
-      console.log(filteredData3);
     }
 
 
     // What to do if Only 2 options are chosen
     if (filter.option1 !== '' && filter.option2 !== '' && filter.option3 === '') {
-
-      console.log('Inside of 2 Options If Statement');
 
       // First: filter the data by option 1's criteria and value and store it in a variable
       let filteredData1; // Variable to store the first filtering of the Data
@@ -349,7 +364,6 @@ export class DashboardMatComponent implements OnInit {
         }
       }
 
-      console.log(filteredData1);
 
       // Second: filter the data remaining after option 1 by option 2's criteria and value and assign it to the dataSource
       let filteredData2; // Variable to store the second filtering of the Data
@@ -416,16 +430,11 @@ export class DashboardMatComponent implements OnInit {
 
       // assigning the filtered data to the variable that stores it
       filteredDataFinal = filteredData2;
-      console.log(filteredData2);
     }
-
-
 
 
     // What to do if Only 1 option is chosen
     if (filter.option1 !== '' && filter.option2 === '' && filter.option3 === '') {
-
-      console.log('Inside of 1 Option If Statement');
 
       // First: filter the data by option 1's criteria and value and assign it to the dataSource
       let filteredData1; // Variable to store the first filtering of the Data
@@ -492,15 +501,10 @@ export class DashboardMatComponent implements OnInit {
 
       // assigning the filtered data to the variable that stores it
       filteredDataFinal = filteredData1;
-      console.log(filteredData1);
     }
-
 
     // Assigning the filtered data to the dataSource
     this.dataSource.data = filteredDataFinal;
-
-    console.log(this.dataSource);
-    console.log('Data Has Been Filtered');
   }
 
   // Filter Logic
@@ -517,13 +521,6 @@ export class DashboardMatComponent implements OnInit {
       filterValue2: '',
       filterValue3: ''
     };
-
-    console.log('Data Unfiltered');
-  }
-
-  // General Filter
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

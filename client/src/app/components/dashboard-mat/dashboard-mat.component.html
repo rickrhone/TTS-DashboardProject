@@ -19,8 +19,18 @@
   <div class="row">
     <div class="col-sm main">
 
+      <!-- Filter Buttons -->
+
+      <div id="filterBtnDiv">
+        <button id="genFilterBtn" mat-raised-button color="secondary" (click)="toggleGeneralFilter()"><i
+            class="fas fa-filter"></i> General</button>
+        <button mat-raised-button color="primary" (click)="toggleCustomFilter()"><i class="fas fa-filter"></i>
+          Custom</button>
+      </div>
+
+
       <!--  General Filter -->
-      <div>
+      <div *ngIf="genFilterVisible == true">
         <mat-form-field>
           <input id="filter" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
@@ -29,7 +39,7 @@
       <!--  TODO: Add a filter Icon or button and make general filter and custom filter visible only when the appropriate
       button is clicked add a total number of items returned counter -->
       <!--  CUSTOM FILTER  -->
-      <div id="customFilter">
+      <div id="customFilter" *ngIf="customFilterVisible == true">
         <h3> Custom Filter </h3>
         <p> Select up to 3 options (columns) to filter on, the criteria for each column, and the value </p>
         <!--  Select the column(field) to filter on-->

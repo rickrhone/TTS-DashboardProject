@@ -63,6 +63,17 @@ th {
   align-items: center;
 }
 
+#filterBtnDiv {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#genFilterBtn {
+  margin-right: 10px;
+}
+
 #customFilter {
   background-color: #bdc3c7;
   border: 1px #dc3545 dashed;

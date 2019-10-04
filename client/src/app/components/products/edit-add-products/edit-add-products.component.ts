@@ -23,19 +23,6 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
   sub: Subscription; // declares a variable name sub of type Subscription
   AllCategories: Categories[]; // stores all the categories
   AllSuppliers: Suppliers[]; // stores all the suppliers
-  formData: Products; // creates and object from the products model
-
-  // attribute to store a blank category for FormReset.
-  blankCategory: Categories = {
-    categoryId: null,
-    categoryName: "hi"
-  };
-
-  // attribute to store a blank supplier for FormReset.
-  blankSupplier: Suppliers = {
-    supplierId: null,
-    supplierName: ""
-  };
 
   // Constructor that takes in the route,  router and the product/supplier/category services
   constructor(
@@ -90,21 +77,43 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  // Method to reset the form
+  // Method to reset the form bound to formData
   resetForm(form?: NgForm) {
-    // form can be nullable
-    if (form != null) {
-      form.resetForm();
-    } // if the form is not null then call the reset function
     this.productsService.formData = {
       productId: null, // default id is null
-      productName: "", // default name is empty string
-      category: this.blankCategory, // default category is empty object
+      productName: '', // default name is empty string
+      category: { // default category is empty object
+        categoryId: null,
+        categoryName: ''
+      },
       fullPrice: null, // default full price is null
       salePrice: null, // default sale price is null
       // discount: null, // default discount is null
       availability: false, // default availability is false
-      supplier: this.blankSupplier // default supplier is empty object
+      supplier: { // default supplier is empty object
+        supplierId: null,
+        supplierName: ''
+      }
+    };
+  }
+
+  // Method to reset the form bound to addProdFormData
+  resetForm2(form?: NgForm) {
+    this.productsService.addProdFormData = {
+      productId: null, // default id is null
+      productName: '', // default name is empty string
+      category: { // default category is empty object
+        categoryId: null,
+        categoryName: ''
+      },
+      fullPrice: null, // default full price is null
+      salePrice: null, // default sale price is null
+      // discount: null, // default discount is null
+      availability: false, // default availability is false
+      supplier: { // default supplier is empty object
+        supplierId: null,
+        supplierName: ''
+      }
     };
   }
 
@@ -122,6 +131,7 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
 
   // Method to insert a new product
   insertRecord(form: NgForm) {
+
     // store the last page
     const lastPage = this.productsService.totalNumOfPages - 1;
     const CategoryKeyValue: any = {};
@@ -166,14 +176,13 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
     this.productsService.postProduct(formattedFormData).subscribe(
       result => {
         this.toastr.success("Product inserted successfully", "Product Table"); // display this message on success
-        this.resetForm(form);
+        this.resetForm2(form);
         // assign the last page as a parameter for the get request
         const params = new HttpParams().set("pageNum", lastPage.toString());
         this.productsService.getCurrentPage(params); // updates the current page to the last page
         this.productsService.currentPageNum = lastPage; // set the page to the last page
         this.productsService.refreshList(params); // Refresh the products table
         this.productsService.currentPageNum = lastPage; // set the page to the last page
-
       },
       error => console.error(error)
     );

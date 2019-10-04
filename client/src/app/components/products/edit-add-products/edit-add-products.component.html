@@ -99,7 +99,7 @@
         <h4 class="modal-title">Add Product</h4>
       </div>
       <div class="modal-body">
-        <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" autocomplete="off">
+        <form #productForm2="ngForm" (ngSubmit)="onSubmit(productForm2)" autocomplete="off">
           <div class="form-group">
 
             <!-- Hidden input field for Product Id-->
@@ -166,8 +166,8 @@
                 [(ngModel)]="productsService.addProdFormData.availability" [checked]="availability"> Available
             </label>
           </div>
-          <button type="submit" class="btn btn-success" [disabled]="productForm.invalid" data-dismiss="modal"
-            routerLink="/products" (click)="onSubmit(productForm)">Submit</button>
+          <button type="submit" class="btn btn-success" [disabled]="productForm2.invalid" data-dismiss="modal"
+            routerLink="/products" (click)="onSubmit(productForm2)">Submit</button>
         </form>
       </div>
       <div class="modal-footer">

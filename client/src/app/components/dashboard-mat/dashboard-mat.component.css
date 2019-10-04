@@ -147,3 +147,50 @@ th {
 h3, p {
   color: #9ea4a8;
 }
+
+@media only screen and (max-width: 960px) {
+  #chartContainer {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    width: 30%;
+    margin-bottom: 80px;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  #chartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    width: 35%;
+    margin-bottom: 100px;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #chartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    width: 50%;
+    margin-bottom: 100px;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #chartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    width: 60%;
+    margin-bottom: 100px;
+    margin-top: 20px;
+  }
+}

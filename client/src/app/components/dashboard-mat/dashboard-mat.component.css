@@ -1,5 +1,8 @@
+.mainDiv {
+ background-color: #ecf0f1;
+}
 table {
-  width: 80%;
+  width: 100%;
 }
 
 .mat-form-field {
@@ -30,7 +33,7 @@ table {
 }
 
 #paginator {
-  width: 80%;
+  width: 100%;
 }
 
 #criteriaOptionsDiv {

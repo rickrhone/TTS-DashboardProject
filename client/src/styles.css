@@ -1,4 +1,4 @@
-@import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 /* You can add global styles to this file, and also import other style files */
 /* Styling of a dirty form input fields*/
@@ -13,7 +13,21 @@ div.validation-error {
   color: #dc3545;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
 
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
+nav a {
+  text-transform: uppercase;
+}
+
+.dashIcon {
+  font-size: 50px;
+  color: #dc3545;
+}

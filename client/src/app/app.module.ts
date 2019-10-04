@@ -20,7 +20,6 @@ import {SuppliersService} from './services/suppliers.service';
 // To get CRUD operation alerts
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardMatComponent } from './components/dashboard-mat/dashboard-mat.component';
 
 // Angular Material
@@ -41,7 +40,6 @@ import {MatButtonModule, MatSelectModule} from '@angular/material';
     SuppliersComponent,
     EditAddSuppliersComponent,
     EditAddCategoriesComponent,
-    DashboardComponent,
     DashboardMatComponent
   ],
   imports: [

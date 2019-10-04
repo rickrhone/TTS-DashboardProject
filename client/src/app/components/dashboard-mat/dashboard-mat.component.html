@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink=""> <i class="fas fa-tachometer-alt"></i> </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" routerLink=""> <i class="fas fa-tachometer-alt dashIcon"></i> </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -14,285 +15,294 @@
   </div>
 </nav>
 
-<div class="container-fluid centerAlignDiv mat-elevation-z8 ">
-    <div class="row">
-      <div class="col-sm main">
+<div class="container-fluid centerAlignDiv mat-elevation-z8 mainDiv">
+  <div class="row">
+    <div class="col-sm main">
 
-<!--  General Filter -->
-  <div>
-  <mat-form-field>
-    <input id="filter" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
-  </div>
+      <!--  General Filter -->
+      <div>
+        <mat-form-field>
+          <input id="filter" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
 
-<!--  TODO: Add a filter Icon or button and make general filter and custom filter visible only when the appropriate
+      <!--  TODO: Add a filter Icon or button and make general filter and custom filter visible only when the appropriate
       button is clicked add a total number of items returned counter -->
-<!--  CUSTOM FILTER  -->
-<div id="customFilter">
-  <h3> Custom Filter </h3>
-  <p> Select up to 3 options (columns) to filter on, the criteria for each column, and the value </p>
-<!--  Select the column(field) to filter on-->
-  <div id="filterOptionsDiv">
-    <div class="labelDiv"> Options: </div>
-    <div>
-      <!-- Option 1 -->
-      <mat-form-field class="OptionSelection">
-        <mat-select class="customFilter" [(value)]="filter.option1" placeholder="---Select---">
-          <mat-option value="productId"> ID </mat-option>
-          <mat-option value="productName"> Product Name </mat-option>
-          <mat-option value="fullPrice"> Full Price </mat-option>
-          <mat-option value="salePrice"> Sale Price </mat-option>
-          <mat-option value="discount"> Discount </mat-option>
-          <mat-option value="supplierName"> Supplier Name </mat-option>
-          <mat-option value="category"> Category </mat-option>
-          <mat-option value="availability"> Availability </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <!--  CUSTOM FILTER  -->
+      <div id="customFilter">
+        <h3> Custom Filter </h3>
+        <p> Select up to 3 options (columns) to filter on, the criteria for each column, and the value </p>
+        <!--  Select the column(field) to filter on-->
+        <div id="filterOptionsDiv">
+          <div class="labelDiv"> Options: </div>
+          <div>
+            <!-- Option 1 -->
+            <mat-form-field class="OptionSelection">
+              <mat-select class="customFilter" [(value)]="filter.option1" placeholder="---Select---">
+                <mat-option value="productId"> ID </mat-option>
+                <mat-option value="productName"> Product Name </mat-option>
+                <mat-option value="fullPrice"> Full Price </mat-option>
+                <mat-option value="salePrice"> Sale Price </mat-option>
+                <mat-option value="discount"> Discount </mat-option>
+                <mat-option value="supplierName"> Supplier Name </mat-option>
+                <mat-option value="category"> Category </mat-option>
+                <mat-option value="availability"> Availability </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-      <!-- Option 2 -->
-      <mat-form-field class="OptionSelection">
-        <mat-select class="customFilter" [(value)]="filter.option2" placeholder="---Select---">
-          <mat-option value="productId"> ID </mat-option>
-          <mat-option value="productName"> Product Name </mat-option>
-          <mat-option value="fullPrice"> Full Price </mat-option>
-          <mat-option value="salePrice"> Sale Price </mat-option>
-          <mat-option value="discount"> Discount </mat-option>
-          <mat-option value="supplierName"> Supplier Name </mat-option>
-          <mat-option value="category"> Category </mat-option>
-          <mat-option value="availability"> Availability </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <!-- Option 2 -->
+            <mat-form-field class="OptionSelection">
+              <mat-select class="customFilter" [(value)]="filter.option2" placeholder="---Select---">
+                <mat-option value="productId"> ID </mat-option>
+                <mat-option value="productName"> Product Name </mat-option>
+                <mat-option value="fullPrice"> Full Price </mat-option>
+                <mat-option value="salePrice"> Sale Price </mat-option>
+                <mat-option value="discount"> Discount </mat-option>
+                <mat-option value="supplierName"> Supplier Name </mat-option>
+                <mat-option value="category"> Category </mat-option>
+                <mat-option value="availability"> Availability </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-      <!-- Option 3 -->
-      <mat-form-field class="OptionSelection">
-        <mat-select class="customFilter" [(value)]="filter.option3" placeholder="---Select---">
-          <mat-option value="productId"> ID </mat-option>
-          <mat-option value="productName"> Product Name </mat-option>
-          <mat-option value="fullPrice"> Full Price </mat-option>
-          <mat-option value="salePrice"> Sale Price </mat-option>
-          <mat-option value="discount"> Discount </mat-option>
-          <mat-option value="supplierName"> Supplier Name </mat-option>
-          <mat-option value="category"> Category </mat-option>
-          <mat-option value="availability"> Availability </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
+            <!-- Option 3 -->
+            <mat-form-field class="OptionSelection">
+              <mat-select class="customFilter" [(value)]="filter.option3" placeholder="---Select---">
+                <mat-option value="productId"> ID </mat-option>
+                <mat-option value="productName"> Product Name </mat-option>
+                <mat-option value="fullPrice"> Full Price </mat-option>
+                <mat-option value="salePrice"> Sale Price </mat-option>
+                <mat-option value="discount"> Discount </mat-option>
+                <mat-option value="supplierName"> Supplier Name </mat-option>
+                <mat-option value="category"> Category </mat-option>
+                <mat-option value="availability"> Availability </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
 
-  <!--  Select the criteria to filter by -->
-  <div id="criteriaOptionsDiv">
-    <div class="labelDiv"> Criteria: </div>
-    <div>
-      <!-- Criteria 1 -->
-      <div class="CriteriaSelection">
-        <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
-        <mat-form-field  *ngIf="filter.option1 === 'productId' || filter.option1 === 'fullPrice'
+        <!--  Select the criteria to filter by -->
+        <div id="criteriaOptionsDiv">
+          <div class="labelDiv"> Criteria: </div>
+          <div>
+            <!-- Criteria 1 -->
+            <div class="CriteriaSelection">
+              <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
+              <mat-form-field *ngIf="filter.option1 === 'productId' || filter.option1 === 'fullPrice'
               || filter.option1 === 'salePrice' || filter.option1 === 'discount'">
-          <mat-select class="customFilter" [(value)]="filter.criteria1" placeholder="---Select---">
-            <mat-option value=">"> Greater than </mat-option>
-            <mat-option value="<"> Less than </mat-option>
-            <mat-option value="=="> Equals </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+                <mat-select class="customFilter" [(value)]="filter.criteria1" placeholder="---Select---">
+                  <mat-option value=">"> Greater than </mat-option>
+                  <mat-option value="<"> Less than </mat-option>
+                  <mat-option value="=="> Equals </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-      <!-- Criteria 2 -->
-      <div class="CriteriaSelection">
-        <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
-        <mat-form-field  *ngIf="filter.option2 === 'productId' || filter.option2 === 'fullPrice'
+            <!-- Criteria 2 -->
+            <div class="CriteriaSelection">
+              <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
+              <mat-form-field *ngIf="filter.option2 === 'productId' || filter.option2 === 'fullPrice'
               || filter.option2 === 'salePrice' || filter.option2 === 'discount'">
-          <mat-select class="customFilter" [(value)]="filter.criteria2" placeholder="---Select---">
-            <mat-option value=">"> Greater than </mat-option>
-            <mat-option value="<"> Less than </mat-option>
-            <mat-option value="=="> Equals </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+                <mat-select class="customFilter" [(value)]="filter.criteria2" placeholder="---Select---">
+                  <mat-option value=">"> Greater than </mat-option>
+                  <mat-option value="<"> Less than </mat-option>
+                  <mat-option value="=="> Equals </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-      <!-- Criteria 3 -->
-      <div class="CriteriaSelection">
-        <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
-        <mat-form-field  *ngIf="filter.option3 === 'productId' || filter.option3 === 'fullPrice'
+            <!-- Criteria 3 -->
+            <div class="CriteriaSelection">
+              <!-- Greater than and less than are only valid choices for columns with numbers everything else defaults to equals-->
+              <mat-form-field *ngIf="filter.option3 === 'productId' || filter.option3 === 'fullPrice'
               || filter.option3 === 'salePrice' || filter.option3 === 'discount'">
-          <mat-select class="customFilter" [(value)]="filter.criteria3" placeholder="---Select---">
-            <mat-option value=">"> Greater than </mat-option>
-            <mat-option value="<"> Less than </mat-option>
-            <mat-option value="=="> Equals </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+                <mat-select class="customFilter" [(value)]="filter.criteria3" placeholder="---Select---">
+                  <mat-option value=">"> Greater than </mat-option>
+                  <mat-option value="<"> Less than </mat-option>
+                  <mat-option value="=="> Equals </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-    </div>
-  </div>
+          </div>
+        </div>
 
 
 
-  <!-- Select/Enter the value to filter by-->
-  <div id="valueOptionsDiv">
-    <div class="labelDiv"> Value: </div>
-    <div id="valueInnerDiv">
-      <!-- Value 1 -->
-      <div class="valueSelection">
-        <!-- Display a dropdown to choose the category if category was chosen as the option-->
-        <mat-form-field *ngIf="filter.option1 === 'category'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
-            <mat-option name="categoryName" *ngFor="let category of AllCategories" value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the supplier name if supplier was chosen as the option-->
-        <mat-form-field *ngIf="filter.option1 === 'supplierName'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
-            <mat-option name="supplierName" *ngFor="let supplier of AllSuppliers" value="{{supplier.supplierName}}"> {{supplier.supplierName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the product name if product name was chosen as the option-->
-        <mat-form-field *ngIf="filter.option1 === 'productName'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
-            <mat-option name="productName" *ngFor="let product of AllProducts" value="{{product.productName}}"> {{product.productName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the availability if availability was chosen as the option-->
-        <mat-form-field *ngIf="filter.option1 === 'availability'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
-            <mat-option value="true"> True </mat-option>
-            <mat-option value="false"> False </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <input matInput *ngIf="filter.option1 != 'category' && filter.option1 != 'supplierName'
+        <!-- Select/Enter the value to filter by-->
+        <div id="valueOptionsDiv">
+          <div class="labelDiv"> Value: </div>
+          <div id="valueInnerDiv">
+            <!-- Value 1 -->
+            <div class="valueSelection">
+              <!-- Display a dropdown to choose the category if category was chosen as the option-->
+              <mat-form-field *ngIf="filter.option1 === 'category'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
+                  <mat-option name="categoryName" *ngFor="let category of AllCategories"
+                    value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the supplier name if supplier was chosen as the option-->
+              <mat-form-field *ngIf="filter.option1 === 'supplierName'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
+                  <mat-option name="supplierName" *ngFor="let supplier of AllSuppliers"
+                    value="{{supplier.supplierName}}"> {{supplier.supplierName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the product name if product name was chosen as the option-->
+              <mat-form-field *ngIf="filter.option1 === 'productName'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
+                  <mat-option name="productName" *ngFor="let product of AllProducts" value="{{product.productName}}">
+                    {{product.productName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the availability if availability was chosen as the option-->
+              <mat-form-field *ngIf="filter.option1 === 'availability'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue1" placeholder="---Select---">
+                  <mat-option value="true"> True </mat-option>
+                  <mat-option value="false"> False </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <input matInput *ngIf="filter.option1 != 'category' && filter.option1 != 'supplierName'
                && filter.option1 != 'productName' && filter.option1 != 'availability'" placeholder="value"
-               #filterValue1="ngModel" [(ngModel)]="filter.filterValue1">
-      </div>
+                #filterValue1="ngModel" [(ngModel)]="filter.filterValue1">
+            </div>
 
-      <!-- Value 2 -->
-      <div class="valueSelection">
-        <!-- Display a dropdown to choose the category if category was chosen as the option-->
-        <mat-form-field *ngIf="filter.option2 === 'category'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue2" placeholder="---Select---">
-            <mat-option name="categoryName" *ngFor="let category of AllCategories" value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the supplier name if supplier was chosen as the option-->
-        <mat-form-field *ngIf="filter.option2 === 'supplierName'" placeholder="---Select---">
-          <mat-select class="customFilter" [(value)]="filter.filterValue2">
-            <mat-option name="supplierName" *ngFor="let supplier of AllSuppliers" value="{{supplier.supplierName}}"> {{supplier.supplierName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the product name if product name was chosen as the option-->
-        <mat-form-field *ngIf="filter.option2 === 'productName'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue2" placeholder="---Select---">
-            <mat-option name="productName" *ngFor="let product of AllProducts" value="{{product.productName}}"> {{product.productName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the availability if availability was chosen as the option-->
-        <mat-form-field *ngIf="filter.option2 === 'availability'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue2" placeholder="---Select---">
-            <mat-option value="true"> True </mat-option>
-            <mat-option value="false"> False </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <input matInput *ngIf="filter.option2 != 'category' && filter.option2 != 'supplierName'
+            <!-- Value 2 -->
+            <div class="valueSelection">
+              <!-- Display a dropdown to choose the category if category was chosen as the option-->
+              <mat-form-field *ngIf="filter.option2 === 'category'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue2" placeholder="---Select---">
+                  <mat-option name="categoryName" *ngFor="let category of AllCategories"
+                    value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the supplier name if supplier was chosen as the option-->
+              <mat-form-field *ngIf="filter.option2 === 'supplierName'" placeholder="---Select---">
+                <mat-select class="customFilter" [(value)]="filter.filterValue2">
+                  <mat-option name="supplierName" *ngFor="let supplier of AllSuppliers"
+                    value="{{supplier.supplierName}}"> {{supplier.supplierName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the product name if product name was chosen as the option-->
+              <mat-form-field *ngIf="filter.option2 === 'productName'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue2" placeholder="---Select---">
+                  <mat-option name="productName" *ngFor="let product of AllProducts" value="{{product.productName}}">
+                    {{product.productName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the availability if availability was chosen as the option-->
+              <mat-form-field *ngIf="filter.option2 === 'availability'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue2" placeholder="---Select---">
+                  <mat-option value="true"> True </mat-option>
+                  <mat-option value="false"> False </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <input matInput *ngIf="filter.option2 != 'category' && filter.option2 != 'supplierName'
                && filter.option2 != 'productName' && filter.option2 != 'availability'" placeholder="value"
-               #filterValue2="ngModel" [(ngModel)]="filter.filterValue2">
-      </div>
+                #filterValue2="ngModel" [(ngModel)]="filter.filterValue2">
+            </div>
 
-      <!-- Value 3 -->
-      <div class="valueSelection">
-        <!-- Display a dropdown to choose the category if category was chosen as the option-->
-        <mat-form-field *ngIf="filter.option3 === 'category'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
-            <mat-option name="categoryName" *ngFor="let category of AllCategories" value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the supplier name if supplier was chosen as the option-->
-        <mat-form-field *ngIf="filter.option3 === 'supplierName'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
-            <mat-option name="supplierName" *ngFor="let supplier of AllSuppliers" value="{{supplier.supplierName}}"> {{supplier.supplierName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the product name if product name was chosen as the option-->
-        <mat-form-field *ngIf="filter.option3 === 'productName'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
-            <mat-option name="productName" *ngFor="let product of AllProducts" value="{{product.productName}}"> {{product.productName}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- Display a dropdown to choose the availability if availability was chosen as the option-->
-        <mat-form-field *ngIf="filter.option3 === 'availability'">
-          <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
-            <mat-option value="true"> True </mat-option>
-            <mat-option value="false"> False </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <input matInput *ngIf="filter.option3 != 'category' && filter.option3 != 'supplierName'
+            <!-- Value 3 -->
+            <div class="valueSelection">
+              <!-- Display a dropdown to choose the category if category was chosen as the option-->
+              <mat-form-field *ngIf="filter.option3 === 'category'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
+                  <mat-option name="categoryName" *ngFor="let category of AllCategories"
+                    value="{{category.categoryName}}"> {{category.categoryName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the supplier name if supplier was chosen as the option-->
+              <mat-form-field *ngIf="filter.option3 === 'supplierName'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
+                  <mat-option name="supplierName" *ngFor="let supplier of AllSuppliers"
+                    value="{{supplier.supplierName}}"> {{supplier.supplierName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the product name if product name was chosen as the option-->
+              <mat-form-field *ngIf="filter.option3 === 'productName'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
+                  <mat-option name="productName" *ngFor="let product of AllProducts" value="{{product.productName}}">
+                    {{product.productName}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- Display a dropdown to choose the availability if availability was chosen as the option-->
+              <mat-form-field *ngIf="filter.option3 === 'availability'">
+                <mat-select class="customFilter" [(value)]="filter.filterValue3" placeholder="---Select---">
+                  <mat-option value="true"> True </mat-option>
+                  <mat-option value="false"> False </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <input matInput *ngIf="filter.option3 != 'category' && filter.option3 != 'supplierName'
                && filter.option3 != 'productName' && filter.option3 != 'availability'" placeholder="value"
-               #filterValue3="ngModel" [(ngModel)]="filter.filterValue3">
+                #filterValue3="ngModel" [(ngModel)]="filter.filterValue3">
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Filter Button  -->
+        <button mat-raised-button (click)="filterData(filter)" color="primary"> Filter </button>
+        <!-- Un-Filter Button  -->
+        <button id="unFilterBtn" mat-raised-button (click)="unfilterData()" color="secondary"> Un-Filter </button>
+
       </div>
 
+      <!--  PRODUCT TABLE -->
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- productId Column -->
+        <ng-container matColumnDef="productId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+          <td mat-cell *matCellDef="let product"> {{product.productId}} </td>
+        </ng-container>
+
+        <!-- productName Column -->
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+          <td mat-cell *matCellDef="let product"> {{product.productName}} </td>
+        </ng-container>
+
+        <!-- fullPrice Column -->
+        <ng-container matColumnDef="fullPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Price </th>
+          <td mat-cell *matCellDef="let product"> {{product.fullPrice | currency:  'USD'}} </td>
+        </ng-container>
+
+        <!-- salePrice Column -->
+        <ng-container matColumnDef="salePrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sale Price </th>
+          <td mat-cell *matCellDef="let product"> {{product.salePrice | currency:  'USD'}} </td>
+        </ng-container>
+
+        <!-- discount Column -->
+        <ng-container matColumnDef="discount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+          <td mat-cell *matCellDef="let product"> {{product.discount | percent: '.0-1'}} </td>
+        </ng-container>
+
+        <!-- supplier Column -->
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
+          <td mat-cell *matCellDef="let product"> {{product.supplier.supplierName}} </td>
+        </ng-container>
+
+        <!-- category Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+          <td mat-cell *matCellDef="let product"> {{product.category.categoryName}} </td>
+        </ng-container>
+
+        <!-- availability Column -->
+        <ng-container matColumnDef="availability">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Availability </th>
+          <td mat-cell *matCellDef="let product"> {{product.availability}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      </table>
+
+      <mat-paginator id="paginator" [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
-
-  <!-- Filter Button  -->
-  <button mat-raised-button (click)="filterData(filter)" color="primary"> Filter </button>
-  <!-- Un-Filter Button  -->
-  <button id="unFilterBtn" mat-raised-button (click)="unfilterData()" color="secondary"> Un-Filter </button>
-
-</div>
-
-<!--  PRODUCT TABLE -->
-<table mat-table [dataSource]="dataSource" matSort>
-
-  <!-- productId Column -->
-  <ng-container matColumnDef="productId">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
-    <td mat-cell *matCellDef="let product"> {{product.productId}} </td>
-  </ng-container>
-
-  <!-- productName Column -->
-  <ng-container matColumnDef="productName">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
-    <td mat-cell *matCellDef="let product"> {{product.productName}} </td>
-  </ng-container>
-
-  <!-- fullPrice Column -->
-  <ng-container matColumnDef="fullPrice">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Price </th>
-    <td mat-cell *matCellDef="let product"> {{product.fullPrice | currency:  'USD'}} </td>
-  </ng-container>
-
-  <!-- salePrice Column -->
-  <ng-container matColumnDef="salePrice">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sale Price </th>
-    <td mat-cell *matCellDef="let product"> {{product.salePrice | currency:  'USD'}} </td>
-  </ng-container>
-
-  <!-- discount Column -->
-  <ng-container matColumnDef="discount">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
-    <td mat-cell *matCellDef="let product"> {{product.discount | percent: '.0-1'}} </td>
-  </ng-container>
-
-  <!-- supplier Column -->
-  <ng-container matColumnDef="supplier">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
-    <td mat-cell *matCellDef="let product"> {{product.supplier.supplierName}} </td>
-  </ng-container>
-
-  <!-- category Column -->
-  <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-    <td mat-cell *matCellDef="let product"> {{product.category.categoryName}} </td>
-  </ng-container>
-
-  <!-- availability Column -->
-  <ng-container matColumnDef="availability">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Availability </th>
-    <td mat-cell *matCellDef="let product"> {{product.availability}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-</table>
-
-<mat-paginator id="paginator" [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
-</div>
-    </div>
 </div>

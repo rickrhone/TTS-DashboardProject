@@ -1,5 +1,5 @@
 # TTS-DashboardProject
-- ![gif of project in action]()
+- ![gif of project in action](https://github.com/rickrhone/TTS-DashboardProject/blob/master/ProjectSpecifications/TTSDashboardProject.gif)
 
 - **OBJECTIVE:** Build a project dashboard that your company will used internally. 
 - **REQUIREMENTS:**
@@ -16,7 +16,7 @@
  >  - Angular, Bootstrap and Chart.js front end with Spring/Spring boot/ Spring Data, hibernate and MySQL on the backend. 
  >   - [Front-End](https://github.com/rickrhone/TTS-DashboardProject/tree/master/client/src)
  >   - [Back-End](https://github.com/rickrhone/TTS-DashboardProject/tree/master/ttsdashboardproject/src/main/java/com/tts/ttsdashboardproject)
-
+     - ![App FLow](https://github.com/rickrhone/TTS-DashboardProject/blob/master/ProjectSpecifications/ProjectFlow.PNG)
 
 
 **[Link to all of my work associated with this bootcamp](https://github.com/rickrhone/TTSTechTalentSelectTheHartford)**

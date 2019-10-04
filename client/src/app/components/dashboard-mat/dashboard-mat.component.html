@@ -1,4 +1,22 @@
-<div class="mat-elevation-z8 container-fluid centerAlignDiv">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink=""> <i class="fas fa-tachometer-alt"></i> </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" routerLink="">Dashboard<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" routerLink="/products">Products</a>
+      <a class="nav-item nav-link" routerLink="/suppliers">Suppliers</a>
+      <a class="nav-item nav-link" routerLink="/categories">Categories</a>
+
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid centerAlignDiv mat-elevation-z8 ">
+    <div class="row">
+      <div class="col-sm main">
 
 <!--  General Filter -->
   <div>
@@ -275,4 +293,6 @@
 </table>
 
 <mat-paginator id="paginator" [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+    </div>
 </div>

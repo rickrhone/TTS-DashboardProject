@@ -44,13 +44,9 @@ export class CategoriesService {
 
   // Method to get all categories and store them in a list - Pageable with Parameters
   refreshList(params?: HttpParams) {
-    console.log("------Inside refreshList()----");
-    console.log("refreshList Page Num at the start:" + this.currentPageNum);
-
     this.http.get<any>(this.GET_CATEGORIES, { params }).subscribe(result => {
       return (this.list = result.content);
     });
-    console.log("refreshList Page Num at the End:" + this.currentPageNum);
   }
 
   // Method to get the Total Number of categories

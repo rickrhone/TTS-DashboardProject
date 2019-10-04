@@ -122,18 +122,12 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
 
   // Method to insert a new product
   insertRecord(form: NgForm) {
-    console.log("Inside insertRecord()");
-    console.log(
-      "insertRecord Page Num at the start:" +
-        this.productsService.currentPageNum
-    );
     // store the last page
     const lastPage = this.productsService.totalNumOfPages - 1;
     const CategoryKeyValue: any = {};
     this.AllCategories.forEach(cat => {
       // add a key value pair to the CategoryKeyValue Array
       CategoryKeyValue[cat.categoryName] = cat.categoryId;
-      // console.log(cat)
     });
 
     const SupplierKeyValue: any = {};
@@ -165,12 +159,8 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
       }
     };
 
-    console.log(formattedFormData);
-
     // convert the form.value to a product
     // const newProd: Products = form.value;
-
-    // console.log('Inside of insertRecord Method Start - CatId: ' + form.value.categoryId);
 
     // Post the changes from the form and navigate to the last page
     this.productsService.postProduct(formattedFormData).subscribe(
@@ -183,12 +173,7 @@ export class EditAddProductsComponent implements OnInit, OnDestroy {
         this.productsService.currentPageNum = lastPage; // set the page to the last page
         this.productsService.refreshList(params); // Refresh the products table
         this.productsService.currentPageNum = lastPage; // set the page to the last page
-        console.log(
-          "insertRecord Page Num at the End:" +
-            this.productsService.currentPageNum
-        );
 
-        // console.log('Inside of insertRecord Method End - CatId: ' +  this.productsService.formData.category.categoryId);
       },
       error => console.error(error)
     );

@@ -32,10 +32,6 @@ export class CategoriesComponent implements OnInit {
     // Method to get the current Page number
     this.categoriesService.getCurrentPage();
 
-    console.log(
-      "OnInit Page Num at the start:" + this.categoriesService.currentPageNum
-    );
-
     // Method to get Total Number of Categories in the database
     this.categoriesService.getTotalNumCategories();
 
@@ -69,10 +65,6 @@ export class CategoriesComponent implements OnInit {
 
   // On the click of the NEXT PAGE Button
   nextPage() {
-    console.log("-----Inside nextPage()----");
-    console.log(
-      "nextPage Page Num at the start:" + this.categoriesService.currentPageNum
-    );
     // if the max page has not been reached
     if (
       this.categoriesService.currentPageNum <
@@ -99,20 +91,11 @@ export class CategoriesComponent implements OnInit {
 
       // get the Total Number of Pages
       this.categoriesService.getTotalNumPages(params);
-
-      console.log(
-        "NextPage Page Num at the End:" + this.categoriesService.currentPageNum
-      );
     }
   }
 
   // On the click of the PREVIOUS Button
   previousPage() {
-    console.log("-----Inside previousPage()----");
-    console.log(
-      "previousPage Page Num at the start:" +
-        this.categoriesService.currentPageNum
-    );
     if (this.categoriesService.currentPageNum > 0) {
       // Increment the current Page by 1 and assign it to the pageNumToNavigateTo
       this.pageNumToNavigateTo = this.categoriesService.currentPageNum - 1;
@@ -135,11 +118,6 @@ export class CategoriesComponent implements OnInit {
 
       // get the Total Number of Pages
       this.categoriesService.getTotalNumPages(params);
-
-      console.log(
-        "previousPage Page Num at the End:" +
-          this.categoriesService.currentPageNum
-      );
     }
   }
 

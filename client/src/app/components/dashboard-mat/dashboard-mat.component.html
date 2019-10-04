@@ -293,25 +293,25 @@
         <!-- Filter Display Messages  -->
         <div id="rightBody">
           <div>
-            <h5 *ngIf="this.filteredData1.length != 0">Phase 1 Results: <span class="resultsColor">
+            <h5 *ngIf="this.filteredData1.length != 0 && this.filterResultsVisibility == true">Phase 1 Results: <span class="resultsColor">
                 {{this.filteredData1.length}} products</span></h5>
             <h5
-              *ngIf="filter.filterValue1 != '' && this.filteredDataFinal.length == 0 && filter.option2 == '' && filter.option3 == ''" >
+              *ngIf="filter.filterValue1 != '' && this.filteredDataFinal.length == 0 && filter.option2 == '' && filter.option3 == '' && this.filterResultsVisibility == true" >
               Phase 1 Results: <span class="resultsColor"> there are no products matching your search criteria</span>
             </h5>
 
           </div>
           <div>
-            <h5 *ngIf="this.filteredData2.length != 0">Phase 2 Results: <span class="resultsColor">
+            <h5 *ngIf="this.filteredData2.length != 0 && this.filterResultsVisibility == true">Phase 2 Results: <span class="resultsColor">
                 {{this.filteredData2.length}} products</span></h5>
-            <h5 *ngIf="filter.filterValue2 != '' && this.filteredDataFinal.length == 0 && filter.option2 != '' && filter.option3 == ''">Phase
+            <h5 *ngIf="filter.filterValue2 != '' && this.filteredDataFinal.length == 0 && filter.option2 != '' && filter.option3 == '' && this.filterResultsVisibility == true">Phase
               2 Results: <span class="resultsColor"> there are no products matching your search criteria</span></h5>
           </div>
           <div>
-            <h5 *ngIf="this.filteredData3.length != 0">Phase 3 Results: <span class="resultsColor">
+            <h5 *ngIf="this.filteredData3.length != 0 && this.filterResultsVisibility == true">Phase 3 Results: <span class="resultsColor">
                 {{this.filteredData3.length}} products</span></h5>
             <h5
-              *ngIf="filter.filterValue3 != '' && this.filteredDataFinal.length == 0">
+              *ngIf="filter.filterValue3 != '' && this.filteredDataFinal.length == 0 && this.filterResultsVisibility == true">
               Phase 3 Results: <span class="resultsColor"> there are no products matching your search criteria</span>
             </h5>
           </div>

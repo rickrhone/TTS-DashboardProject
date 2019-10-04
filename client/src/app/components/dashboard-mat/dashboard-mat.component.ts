@@ -22,6 +22,7 @@ export class DashboardMatComponent implements OnInit {
   AllSuppliers: Suppliers[]; // stores all the suppliers
   genFilterVisible = false; // stores the state of the general filter
   customFilterVisible = false; // stores the state of the custom filter
+  filterResultsVisibility = true; // stores the state of the filter visibility
   filteredDataFinal: Allproducts[] = [ // default values set to assist with filtering logic
     {
       productId: 0,
@@ -88,9 +89,6 @@ export class DashboardMatComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log(this.filteredDataFinal.length);
-
     // Method to get all the products and assign it to the array of products called AllProducts
     this.productsService.getAll().subscribe(result => { // gets the current list of all products non-pageable
       this.AllProducts = result;
@@ -148,23 +146,8 @@ export class DashboardMatComponent implements OnInit {
     // change the state of the filter button
     if (filter.filterValue1 !== '') {
       this.filterBtnClick = true;
+      this.filterResultsVisibility = true;
     }
-
-    // if (this.filterBtnClick === true && filter.filterValue1 !== '' && filter.filterValue2 === '') {
-    //   this.filterBtnClick = false;
-    // } else {
-    //   this.filterBtnClick = true;
-    // }
-    //
-    // if (this.filterBtnClick === true && filter.filterValue1 !== '' && filter.filterValue2 !== '') {
-    //   this.filterBtnClick = false;
-    // }  else {
-    //   this.filterBtnClick = true;
-    // }
-
-
-    console.log(filter.filterValue1);
-    console.log(this.filterBtnClick);
 
 
     // What to do if all three options are chosen
@@ -574,18 +557,12 @@ export class DashboardMatComponent implements OnInit {
     // Assigning the filtered data to the dataSource
     this.dataSource.data = this.filteredDataFinal;
 
-    console.log(this.AllProducts);
-    console.log(filter);
-    console.log(this.filteredData1);
-    console.log(this.filteredData2);
-    console.log(this.filteredData3);
-    console.log(this.filteredDataFinal);
-    console.log(this.dataSource);
   }
 
   // Filter Logic
   unfilterData() {
     this.dataSource.data = this.AllProducts;
+    this.filterResultsVisibility = false;
     this.filter = {
       option1: '', // user can choose at most 3 columns to filter on (ex. category, supplier, and availability)
       option2: '',

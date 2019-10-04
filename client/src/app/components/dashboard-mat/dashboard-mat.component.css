@@ -71,10 +71,12 @@ th {
 .phaseHeading {
   margin-left: 20px;
   width: 200px;
+  color: #787e82;
 }
 
 .labelDiv {
   width: 60px;
+  color: #787e82;
 }
 
 .OptionSelection {
@@ -140,4 +142,8 @@ th {
   width: 30%;
   margin-bottom: 40px;
   margin-top: 20px;
+}
+
+h3, p {
+  color: #9ea4a8;
 }

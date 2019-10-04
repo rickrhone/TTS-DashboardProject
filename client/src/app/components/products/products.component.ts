@@ -64,10 +64,6 @@ export class ProductsComponent implements OnInit {
 
   // On the click of the NEXT PAGE Button
   nextPage() {
-    console.log('-----Inside nextPage()----');
-    console.log(
-      'nextPage Page Num at the start:' + this.productsService.currentPageNum
-    );
     // if the max page has not been reached
     if (
       this.productsService.currentPageNum < this.productsService.totalNumOfPages
@@ -93,20 +89,12 @@ export class ProductsComponent implements OnInit {
 
       // get the Total Number of Pages
       this.productsService.getTotalNumPages(params);
-
-      console.log(
-        'NextPage Page Num at the End:' + this.productsService.currentPageNum
-      );
     }
   }
 
   // On the click of the PREVIOUS Button
   previousPage() {
-    console.log('-----Inside previousPage()----');
-    console.log(
-      'previousPage Page Num at the start:' +
-        this.productsService.currentPageNum
-    );
+
     if (this.productsService.currentPageNum > 0) {
       // Increment the current Page by 1 and assign it to the pageNumToNavigateTo
       this.pageNumToNavigateTo = this.productsService.currentPageNum - 1;
@@ -129,11 +117,6 @@ export class ProductsComponent implements OnInit {
 
       // get the Total Number of Pages
       this.productsService.getTotalNumPages(params);
-
-      console.log(
-        'previousPage Page Num at the End:' +
-          this.productsService.currentPageNum
-      );
     }
   }
 

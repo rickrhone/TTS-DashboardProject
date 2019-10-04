@@ -26,8 +26,6 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
               private toastr: ToastrService) {}
 
   ngOnInit() {
-
-    console.log('Edit-Add Categories Form is Open');
     // Reset the form
     this.resetForm();
 
@@ -80,8 +78,6 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
 
   // Method to insert a new category
   insertRecord(form: NgForm) {
-    console.log('Inside insertRecord()');
-    console.log('insertRecord Page Num at the start:' + this.categoriesService.currentPageNum);
     // store the last page
     const lastPage = this.categoriesService.totalNumOfPages - 1;
 
@@ -95,7 +91,6 @@ export class EditAddCategoriesComponent implements OnInit, OnDestroy {
       this.categoriesService.currentPageNum = lastPage; // set the page to the last page
       this.categoriesService.refreshList(params); // Refresh the categories table
       this.categoriesService.currentPageNum = lastPage; // set the page to the last page
-      console.log('insertRecord Page Num at the End:' + this.categoriesService.currentPageNum);
     }, error => console.error(error));
   }
 

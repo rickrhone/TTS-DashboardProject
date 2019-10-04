@@ -101,9 +101,6 @@ export class ProductsService {
 
   // Method to update a product in the database
   putProduct(formData: any): Observable<any> {
-    console.log('Start of putProduct()');
-    console.log(formData);
-    console.log('Inside of Put Method Start - CatId: ' + formData.categoryId);
 
     // formatted form date
     const formattedFormData = {

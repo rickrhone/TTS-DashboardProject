@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Products } from "../components/products/products.model";
-import { Allproducts } from "../components/products/allproducts.model";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Products } from '../components/products/products.model';
+import { Allproducts } from '../components/products/allproducts.model';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ProductsService {
   // creating a attribute to store the data to be shared between the Products edit form and table
@@ -101,9 +101,9 @@ export class ProductsService {
 
   // Method to update a product in the database
   putProduct(formData: any): Observable<any> {
-    console.log("Start of putProduct()");
+    console.log('Start of putProduct()');
     console.log(formData);
-    console.log("Inside of Put Method Start - CatId: " + formData.categoryId);
+    console.log('Inside of Put Method Start - CatId: ' + formData.categoryId);
 
     // formatted form date
     const formattedFormData = {

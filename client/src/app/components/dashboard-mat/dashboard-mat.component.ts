@@ -22,7 +22,24 @@ export class DashboardMatComponent implements OnInit {
   AllSuppliers: Suppliers[]; // stores all the suppliers
   genFilterVisible = false; // stores the state of the general filter
   customFilterVisible = false; // stores the state of the custom filter
-  filteredDataFinal: Allproducts[] = []; // variable to store the filtered data and the end of the filtering process
+  filteredDataFinal: Allproducts[] = [ // default values set to assist with filtering logic
+    {
+      productId: 0,
+      productName: '',
+      category: {
+        categoryId: 0,
+        categoryName: '',
+      },
+      fullPrice: 0,
+      salePrice: 0,
+      discount: 0,
+      availability: false,
+      supplier: {
+        supplierId: 0,
+        supplierName: ''
+  }}];
+
+  // variable to store the filtered data and the end of the filtering process
   filteredData1: Allproducts[] = []; // Variable to store the first filtering of the Data
   filteredData2: Allproducts[] = []; // Variable to store the second filtering of the Data
   filteredData3: Allproducts[] = []; // Variable to store the third filtering of the Data
@@ -62,10 +79,6 @@ export class DashboardMatComponent implements OnInit {
   public doughnutChartType = 'doughnut';
 
 
-  public pieChartLabels1 = [];
-  public pieChartData1 = [];
-  public pieChartType1 = 'pie';
-
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productsService: ProductsService,
@@ -75,6 +88,8 @@ export class DashboardMatComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this.filteredDataFinal.length);
 
     // Method to get all the products and assign it to the array of products called AllProducts
     this.productsService.getAll().subscribe(result => { // gets the current list of all products non-pageable
@@ -93,10 +108,8 @@ export class DashboardMatComponent implements OnInit {
     // Method to get all the categories and assign it to the array of categories called AllCategories
     this.categoriesService.getAll().subscribe(result => { // gets the current list of all categories non-pageable
       this.AllCategories = result;
-      this.pieChartLabels1 = [...new Set(this.AllCategories.map(x => x.categoryName))]; // obtains a set of unique categorNames
       this.barChartData[0].data[0] = this.AllCategories.length; // adds the number of categories to the bar chart
       this.doughnutChartData[0] = this.AllCategories.length; // adds the number of categories to the doughnutChart
-      console.log(this.pieChartLabels1);
     });
 
 
@@ -107,11 +120,6 @@ export class DashboardMatComponent implements OnInit {
       this.doughnutChartData[1] = this.AllSuppliers.length; // adds the number of suppliers to the doughnut chart
     });
 
-  }
-
-// Method to filter out only unique items in an array
-  onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
   }
 
   toggleGeneralFilter() {
@@ -142,17 +150,17 @@ export class DashboardMatComponent implements OnInit {
       this.filterBtnClick = true;
     }
 
-    if (this.filterBtnClick === true && filter.filterValue1 !== '' && filter.filterValue2 === '') {
-      this.filterBtnClick = false;
-    } else {
-      this.filterBtnClick = true;
-    }
-
-    if (this.filterBtnClick === true && filter.filterValue1 !== '' && filter.filterValue2 !== '') {
-      this.filterBtnClick = false;
-    }  else {
-      this.filterBtnClick = true;
-    }
+    // if (this.filterBtnClick === true && filter.filterValue1 !== '' && filter.filterValue2 === '') {
+    //   this.filterBtnClick = false;
+    // } else {
+    //   this.filterBtnClick = true;
+    // }
+    //
+    // if (this.filterBtnClick === true && filter.filterValue1 !== '' && filter.filterValue2 !== '') {
+    //   this.filterBtnClick = false;
+    // }  else {
+    //   this.filterBtnClick = true;
+    // }
 
 
     console.log(filter.filterValue1);
